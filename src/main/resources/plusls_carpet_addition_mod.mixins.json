@@ -17,7 +17,8 @@
     "rule.pcaSyncProtocol.entity.MixinHorseBaseEntity",
     "rule.pcaSyncProtocol.entity.MixinMerchantEntity",
     "rule.pcaSyncProtocol.entity.MixinStorageMinecartEntity",
-    "rule.pcaSyncProtocol.item.MixinItemStack"
+    "rule.pcaSyncProtocol.item.MixinItemStack",
+    "rule.shulkerRenewable.MixinShulkerEntity"
   ],
   "client": [
   ],

@@ -2,7 +2,7 @@ package com.plusls.carpet.mixin.rule.pcaSyncProtocol.item;
 
 import com.plusls.carpet.PcaMod;
 import com.plusls.carpet.network.PcaSyncProtocol;
-import com.plusls.carpet.util.IItemStackMonitor;
+import com.plusls.carpet.util.rule.pcaSyncProtocol.IItemStackMonitor;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;

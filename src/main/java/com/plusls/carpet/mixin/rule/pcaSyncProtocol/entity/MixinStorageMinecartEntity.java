@@ -2,7 +2,7 @@ package com.plusls.carpet.mixin.rule.pcaSyncProtocol.entity;
 
 import com.plusls.carpet.PcaMod;
 import com.plusls.carpet.network.PcaSyncProtocol;
-import com.plusls.carpet.util.IItemStackMonitor;
+import com.plusls.carpet.util.rule.pcaSyncProtocol.IItemStackMonitor;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.StorageMinecartEntity;

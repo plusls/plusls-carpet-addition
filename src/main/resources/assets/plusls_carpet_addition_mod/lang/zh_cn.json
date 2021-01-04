@@ -12,6 +12,12 @@
   "rule.emptyShulkerBoxStackInInventory.name": "空潜影盒可在容器中堆叠",
   "rule.emptyShulkerBoxStackInInventory.desc": "空潜影盒可在容器中堆叠",
   "rule.emptyShulkerBoxStackInInventory.extra.0": "空潜影盒可以在箱子，漏斗这样的容器中自动堆叠",
-  "rule.emptyShulkerBoxStackInInventory.extra.1": "需要开启 emptyShulkerBoxStack 该功能才能生效"
+  "rule.emptyShulkerBoxStackInInventory.extra.1": "需要开启 emptyShulkerBoxStack 该功能才能生效",
+
+  "rule.shulkerRenewable.name": "潜影贝可再生",
+  "rule.shulkerRenewable.desc": "潜影贝可再生 来自 1.17",
+
+  "rule.pcaDebug.name": "PCA调试模式",
+  "rule.pcaDebug.desc": "打印更多调试信息"
 }
 

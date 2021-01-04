@@ -55,6 +55,13 @@ public class PcaSettings {
     public static boolean emptyShulkerBoxStackInInventory = false;
 
     @Rule(
+            desc = "shulkerRenewable from 1.17",
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL}
+    )
+    public static boolean shulkerRenewable = false;
+
+    // debug
+    @Rule(
             desc = "pcaDebug mode",
             category = {PCA}
     )

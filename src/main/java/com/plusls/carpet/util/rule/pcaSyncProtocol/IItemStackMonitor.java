@@ -1,4 +1,4 @@
-package com.plusls.carpet.util;
+package com.plusls.carpet.util.rule.pcaSyncProtocol;
 
 import net.minecraft.entity.Entity;
 
