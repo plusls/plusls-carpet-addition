@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.plusls.carpet.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinCrashReport",
+    "rule.emptyShulkerBoxStack.MixinItemStack",
+    "rule.pcaSyncProtocol.block.MixinAbstractFurnaceBlockEntity",
+    "rule.pcaSyncProtocol.block.MixinBarrelBlockEntity",
+    "rule.pcaSyncProtocol.block.MixinBeehiveBlockEntity",
+    "rule.pcaSyncProtocol.block.MixinBrewingStandBlockEntity",
+    "rule.pcaSyncProtocol.block.MixinChestBlockEntity",
+    "rule.pcaSyncProtocol.block.MixinDispenserBlockEntity",
+    "rule.pcaSyncProtocol.block.MixinHopperBlockEntity",
+    "rule.pcaSyncProtocol.block.MixinShulkerBoxBlockEntity",
+    "rule.pcaSyncProtocol.entity.MixinHorseBaseEntity",
+    "rule.pcaSyncProtocol.entity.MixinMerchantEntity",
+    "rule.pcaSyncProtocol.entity.MixinStorageMinecartEntity",
+    "rule.pcaSyncProtocol.item.MixinItemStack"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

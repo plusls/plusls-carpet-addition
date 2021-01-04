@@ -1,0 +1,17 @@
+{
+  "category.PCA": "PCA",
+  "category.protocol": "协议",
+  "rule.pcaSyncProtocol.name": "PCA 同步协议",
+  "rule.pcaSyncProtocol.desc": "支持同步 BlockEntity 和 Entity 到客户端",
+
+  "rule.emptyShulkerBoxStack.name": "空潜影盒可堆叠",
+  "rule.emptyShulkerBoxStack.desc": "空潜影盒可堆叠",
+  "rule.emptyShulkerBoxStack.extra.0": "空潜影盒可以在地面上，玩家的背包进行自动堆叠，同时玩家可以手动堆叠空潜影盒",
+  "rule.emptyShulkerBoxStack.extra.1": "但是空潜影盒无法在容器中自动堆叠，比如箱子，漏斗",
+
+  "rule.emptyShulkerBoxStackInInventory.name": "空潜影盒可在容器中堆叠",
+  "rule.emptyShulkerBoxStackInInventory.desc": "空潜影盒可在容器中堆叠",
+  "rule.emptyShulkerBoxStackInInventory.extra.0": "空潜影盒可以在箱子，漏斗这样的容器中自动堆叠",
+  "rule.emptyShulkerBoxStackInInventory.extra.1": "需要开启 emptyShulkerBoxStack 该功能才能生效"
+}
+
