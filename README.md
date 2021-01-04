@@ -10,6 +10,7 @@
 
 - [PCA 同步协议](#PCA同步协议-pcaSyncProtocol)
 - [空潜影盒可堆叠](#空潜影盒可堆叠-emptyShulkerBoxStack)
+- [空潜影盒在容器中可堆叠](#空潜影盒在容器中可堆叠-emptyShulkerBoxStackInInventory)
 - [PCA调试模式](#PCA调试模式-pcaDebug)
 
 ## 规则列表
