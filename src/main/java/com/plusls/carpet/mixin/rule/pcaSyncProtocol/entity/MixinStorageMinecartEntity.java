@@ -27,21 +27,21 @@ public abstract class MixinStorageMinecartEntity extends AbstractMinecartEntity 
         ((IItemStackMonitor) (Object) cir.getReturnValue()).setEntityMonitor(this);
     }
 
-    @Inject(method = "removeStack(II)Lnet/minecraft/item/ItemStack;", at = @At(value = "HEAD"))
+    @Inject(method = "removeStack(II)Lnet/minecraft/item/ItemStack;", at = @At(value = "RETURN"))
     private void preRemoveStack(int slot, int amount, CallbackInfoReturnable<ItemStack> cir) {
         if (PcaSyncProtocol.syncEntityToClient(this)) {
             PcaMod.LOGGER.debug("update StorageMinecartEntity inventory: removeStack(II).");
         }
     }
 
-    @Inject(method = "removeStack(I)Lnet/minecraft/item/ItemStack;", at = @At(value = "HEAD"))
+    @Inject(method = "removeStack(I)Lnet/minecraft/item/ItemStack;", at = @At(value = "RETURN"))
     private void preRemoveStack(int slot, CallbackInfoReturnable<ItemStack> cir) {
         if (PcaSyncProtocol.syncEntityToClient(this)) {
             PcaMod.LOGGER.debug("update StorageMinecartEntity inventory: removeStack(I).");
         }
     }
 
-    @Inject(method = "setStack", at = @At(value = "HEAD"))
+    @Inject(method = "setStack", at = @At(value = "RETURN"))
     void preSetStack(int slot, ItemStack stack, CallbackInfo ci) {
         if (PcaSyncProtocol.syncEntityToClient(this)) {
             PcaMod.LOGGER.debug("update StorageMinecartEntity inventory: setStack.");

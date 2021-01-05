@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinItemStack implements IItemStackMonitor {
     private Entity entityMonitor = null;
 
-    @Inject(method = "setCount", at = @At("HEAD"))
+    @Inject(method = "setCount", at = @At("RETURN"))
     public void preSetCount(int count, CallbackInfo ci) {
         if (entityMonitor != null && count != ((ItemStack)(Object)this).getCount()) {
             if (PcaSyncProtocol.syncEntityToClient(entityMonitor)) {
