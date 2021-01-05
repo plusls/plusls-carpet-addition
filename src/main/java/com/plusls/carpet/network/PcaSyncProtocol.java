@@ -306,7 +306,9 @@ public class PcaSyncProtocol {
 
     // 启用 PcaSyncProtocol
     public static void enablePcaSyncProtocolGlobal() {
-
+        if (PcaMod.server == null) {
+            return;
+        }
         for (ServerPlayerEntity player : PcaMod.server.getPlayerManager().getPlayerList()) {
             enablePcaSyncProtocol(player);
         }

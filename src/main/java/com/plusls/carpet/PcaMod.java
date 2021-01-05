@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -27,6 +28,7 @@ import java.util.Objects;
 public class PcaMod implements CarpetExtension {
     public static final String MODID = "plusls_carpet_addition_mod";
     public static final Logger LOGGER = LogManager.getLogger("PcAMod");
+    @Nullable
     public static MinecraftServer server = null;
 
     public static void noop() {
