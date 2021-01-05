@@ -208,6 +208,9 @@ public class PcaSyncProtocol {
     }
 
     public static boolean syncEntityToClient(@NotNull Entity entity) {
+        if (entity.getEntityWorld().isClient()) {
+            return false;
+        }
         lock.lock();
         Set<ServerPlayerEntity> playerList = getWatchPlayerList(entity);
         boolean ret = false;
@@ -227,7 +230,9 @@ public class PcaSyncProtocol {
         BlockPos pos = blockEntity.getPos();
         // 在生成世界时可能会产生空指针
         if (world != null) {
-
+            if (world.isClient()) {
+                return false;
+            }
             BlockState blockState = world.getBlockState(pos);
             lock.lock();
             Set<ServerPlayerEntity> playerList = getWatchPlayerList(world, blockEntity.getPos());

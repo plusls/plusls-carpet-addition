@@ -15,7 +15,10 @@
   "rule.emptyShulkerBoxStackInInventory.extra.1": "需要开启 emptyShulkerBoxStack 该功能才能生效",
 
   "rule.shulkerRenewable.name": "潜影贝可再生",
-  "rule.shulkerRenewable.desc": "潜影贝可再生 来自 1.17",
+  "rule.shulkerRenewable.desc": "潜影贝可再生，来自 1.17",
+
+  "rule.shulkerBoxQuickUnpack.name": "潜影盒快速拆包",
+  "rule.shulkerBoxQuickUnpack.desc": "物品状态下的潜影盒在被摧毁时，盒中的物品会自动掉落，来自 1.17",
 
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"

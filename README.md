@@ -4,6 +4,10 @@
 
 跟同 Minecraft 版本的 carpet mod 一起使用即可。尽可能地使用较新的 carpet mod
 
+## 依赖
+
+fabric-api >= 0.28
+
 ## 索引
 
 ### [规则](#规则列表)
@@ -57,6 +61,15 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 ### 潜影贝可再生 (shulkerRenewable)
 
 本功能移植自 1.17
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
+
+### 潜影盒快速拆包 (shulkerBoxQuickUnpack)
+
+物品状态下的潜影盒在被摧毁时，盒中的物品会自动掉落，来自 1.17
 
 - 类型: `boolean`
 - 默认值: `false`

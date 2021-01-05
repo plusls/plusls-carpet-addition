@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinCrashReport",
+    "rule.shulkerBoxQuickUnpack.MixinItemEntity",
     "rule.emptyShulkerBoxStack.MixinItemStack",
     "rule.pcaSyncProtocol.block.MixinAbstractFurnaceBlockEntity",
     "rule.pcaSyncProtocol.block.MixinBarrelBlockEntity",

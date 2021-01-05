@@ -60,6 +60,12 @@ public class PcaSettings {
     )
     public static boolean shulkerRenewable = false;
 
+    @Rule(
+            desc = "shulker box items will now drop their items when destroyed. From 1.17",
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL}
+    )
+    public static boolean shulkerBoxQuickUnpack = false;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",
