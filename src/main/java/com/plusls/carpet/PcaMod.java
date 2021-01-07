@@ -98,9 +98,7 @@ public class PcaMod implements CarpetExtension {
 
     @Override
     public void onPlayerLoggedIn(ServerPlayerEntity player) {
-        if (PcaSettings.pcaSyncProtocol) {
-            PcaSyncProtocol.enablePcaSyncProtocol(player);
-        }
+        // 在这写如果是在 BC 端的情况下，ServerPlayNetworking.canSend 在这个时机调用会出现错误
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.plusls.carpet.PcaMod;
 import com.plusls.carpet.PcaSettings;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
@@ -40,18 +41,22 @@ public class PcaSyncProtocol {
 
     // 通知客户端服务器已启用 PcaSyncProtocol
     public static void enablePcaSyncProtocol(@NotNull ServerPlayerEntity player) {
-        if (ServerPlayNetworking.canSend(player, ENABLE_PCA_SYNC_PROTOCOL)) {
-            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            ServerPlayNetworking.send(player, ENABLE_PCA_SYNC_PROTOCOL, buf);
-            PcaMod.LOGGER.debug("send enablePcaSyncProtocol to {}!", player);
-        }
+        // 在这写如果是在 BC 端的情况下，ServerPlayNetworking.canSend 在这个时机调用会出现错误
+        PcaMod.LOGGER.debug("Try enablePcaSyncProtocol: {}", player.getName().asString());
+        // bc 端比较奇怪，canSend 工作不正常
+        // if (ServerPlayNetworking.canSend(player, ENABLE_PCA_SYNC_PROTOCOL)) {
+        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        ServerPlayNetworking.send(player, ENABLE_PCA_SYNC_PROTOCOL, buf);
+        PcaMod.LOGGER.debug("send enablePcaSyncProtocol to {}!", player.getName().asString());
+        lock.lock();
+        lock.unlock();
     }
 
     // 通知客户端服务器已停用 PcaSyncProtocol
     public static void disablePcaSyncProtocol(@NotNull ServerPlayerEntity player) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         ServerPlayNetworking.send(player, DISABLE_PCA_SYNC_PROTOCOL, buf);
-        PcaMod.LOGGER.debug("send disablePcaSyncProtocol to {}!", player);
+        PcaMod.LOGGER.debug("send disablePcaSyncProtocol to {}!", player.getName().asString());
     }
 
     // 通知客户端更新 Entity
@@ -95,7 +100,7 @@ public class PcaSyncProtocol {
 
     private static final Map<Pair<Identifier, BlockPos>, Set<ServerPlayerEntity>> blockPosWatchPlayerSet = new HashMap<>();
     private static final Map<Pair<Identifier, Entity>, Set<ServerPlayerEntity>> entityWatchPlayerSet = new HashMap<>();
-
+    private static final Set<ServerPlayerEntity> playerSet = new HashSet<>();
     public static final ReentrantLock lock = new ReentrantLock(true);
 
     public static void init() {
@@ -103,6 +108,23 @@ public class PcaSyncProtocol {
         ServerPlayNetworking.registerGlobalReceiver(SYNC_ENTITY, PcaSyncProtocol::syncEntityHandler);
         ServerPlayNetworking.registerGlobalReceiver(CANCEL_SYNC_BLOCK_ENTITY, PcaSyncProtocol::cancelSyncBlockEntityHandler);
         ServerPlayNetworking.registerGlobalReceiver(CANCEL_SYNC_ENTITY, PcaSyncProtocol::cancelSyncEntityHandler);
+        ServerPlayConnectionEvents.JOIN.register(PcaSyncProtocol::onJoin);
+        ServerPlayConnectionEvents.DISCONNECT.register(PcaSyncProtocol::onDisconnect);
+    }
+
+    private static void onDisconnect(ServerPlayNetworkHandler serverPlayNetworkHandler, MinecraftServer minecraftServer) {
+        if (PcaSettings.pcaSyncProtocol) {
+            PcaMod.LOGGER.debug("onDisconnect remove: {}", serverPlayNetworkHandler.player.getName().asString());
+            lock.lock();
+            playerSet.remove(serverPlayNetworkHandler.player);
+            lock.unlock();
+        }
+    }
+
+    private static void onJoin(ServerPlayNetworkHandler serverPlayNetworkHandler, PacketSender packetSender, MinecraftServer minecraftServer) {
+        if (PcaSettings.pcaSyncProtocol) {
+            enablePcaSyncProtocol(serverPlayNetworkHandler.player);
+        }
     }
 
     // 客户端通知服务端取消 BlockEntity 同步
@@ -163,6 +185,7 @@ public class PcaSyncProtocol {
 
         Pair<Identifier, BlockPos> pair = new ImmutablePair<>(player.getEntityWorld().getRegistryKey().getValue(), pos);
         lock.lock();
+        playerSet.add(player);
         playerWatchBlockPos.put(player, pair);
         if (!blockPosWatchPlayerSet.containsKey(pair)) {
             blockPosWatchPlayerSet.put(pair, new HashSet<>());
@@ -177,6 +200,9 @@ public class PcaSyncProtocol {
     private static void syncEntityHandler(MinecraftServer server, ServerPlayerEntity player,
                                           ServerPlayNetworkHandler handler, PacketByteBuf buf,
                                           PacketSender responseSender) {
+        if (!PcaSettings.pcaSyncProtocol) {
+            return;
+        }
         int entityId = buf.readInt();
         ServerWorld world = player.getServerWorld();
         Entity entity = world.getEntityById(entityId);
@@ -189,6 +215,7 @@ public class PcaSyncProtocol {
 
             Pair<Identifier, Entity> pair = new ImmutablePair<>(entity.getEntityWorld().getRegistryKey().getValue(), entity);
             lock.lock();
+            playerSet.add(player);
             playerWatchEntity.put(player, pair);
             if (!entityWatchPlayerSet.containsKey(pair)) {
                 entityWatchPlayerSet.put(pair, new HashSet<>());
@@ -268,7 +295,6 @@ public class PcaSyncProtocol {
         Pair<Identifier, Entity> pair = playerWatchEntity.get(player);
         if (pair != null) {
             Set<ServerPlayerEntity> playerSet = entityWatchPlayerSet.get(pair);
-            playerSet.remove(player);
             if (playerSet.isEmpty()) {
                 entityWatchPlayerSet.remove(pair);
             }
@@ -282,7 +308,6 @@ public class PcaSyncProtocol {
         Pair<Identifier, BlockPos> pair = playerWatchBlockPos.get(player);
         if (pair != null) {
             Set<ServerPlayerEntity> playerSet = blockPosWatchPlayerSet.get(pair);
-            playerSet.remove(player);
             if (playerSet.isEmpty()) {
                 blockPosWatchPlayerSet.remove(pair);
             }
@@ -293,20 +318,16 @@ public class PcaSyncProtocol {
 
     // 停用 PcaSyncProtocol
     public static void disablePcaSyncProtocolGlobal() {
-        Set<ServerPlayerEntity> allPlayerSet = new HashSet<>();
-
         lock.lock();
-        allPlayerSet.addAll(playerWatchBlockPos.keySet());
-        allPlayerSet.addAll(playerWatchEntity.keySet());
         playerWatchBlockPos.clear();
         playerWatchEntity.clear();
         blockPosWatchPlayerSet.clear();
         entityWatchPlayerSet.clear();
-        lock.unlock();
-
-        for (ServerPlayerEntity player : allPlayerSet) {
+        for (ServerPlayerEntity player : playerSet) {
             disablePcaSyncProtocol(player);
         }
+        playerSet.clear();
+        lock.unlock();
     }
 
     // 启用 PcaSyncProtocol
