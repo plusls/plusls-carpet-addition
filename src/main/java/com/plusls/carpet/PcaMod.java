@@ -26,7 +26,7 @@ import java.util.Objects;
 
 
 public class PcaMod implements CarpetExtension {
-    public static final String MODID = "plusls_carpet_addition_mod";
+    public static final String MODID = "pca";
     public static final Logger LOGGER = LogManager.getLogger("PcAMod");
     @Nullable
     public static MinecraftServer server = null;
@@ -114,7 +114,7 @@ public class PcaMod implements CarpetExtension {
         try {
             dataJSON = IOUtils.toString(
                     Objects.requireNonNull(Translations.class.getClassLoader().getResourceAsStream(
-                            String.format("assets/plusls_carpet_addition_mod/lang/%s.json", lang))),
+                            String.format("assets/pca/lang/%s.json", lang))),
                     StandardCharsets.UTF_8);
         } catch (NullPointerException | IOException e) {
             return null;

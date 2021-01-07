@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "plusls_carpet_addition_mod",
+  "id": "pca",
   "version": "${version}",
 
   "name": "Plusls carpet addition mod",
@@ -14,7 +14,7 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/plusls_carpet_addition_mod/icon.png",
+  "icon": "assets/pca/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -22,7 +22,7 @@
     ]
   },
   "mixins": [
-    "plusls_carpet_addition_mod.mixins.json"
+    "pca.mixins.json"
   ],
 
   "depends": {
