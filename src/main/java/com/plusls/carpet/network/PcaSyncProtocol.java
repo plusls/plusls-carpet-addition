@@ -295,6 +295,7 @@ public class PcaSyncProtocol {
         Pair<Identifier, Entity> pair = playerWatchEntity.get(player);
         if (pair != null) {
             Set<ServerPlayerEntity> playerSet = entityWatchPlayerSet.get(pair);
+            playerSet.remove(player);
             if (playerSet.isEmpty()) {
                 entityWatchPlayerSet.remove(pair);
             }
@@ -308,6 +309,7 @@ public class PcaSyncProtocol {
         Pair<Identifier, BlockPos> pair = playerWatchBlockPos.get(player);
         if (pair != null) {
             Set<ServerPlayerEntity> playerSet = blockPosWatchPlayerSet.get(pair);
+            playerSet.remove(player);
             if (playerSet.isEmpty()) {
                 blockPosWatchPlayerSet.remove(pair);
             }
