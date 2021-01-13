@@ -30,7 +30,7 @@ public abstract class MixinItemEntity extends Entity {
     @Shadow
     public abstract ItemStack getStack();
 
-    @Inject(method = "damage", at=@At(value = "INVOKE", target = "Lnet/minecraft/entity/ItemEntity;remove()V", ordinal = 0))
+    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ItemEntity;remove()V", ordinal = 0))
     private void shulkerBoxItemUnpack(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (this.world.isClient()) {
             return;
@@ -40,14 +40,14 @@ public abstract class MixinItemEntity extends Entity {
         }
         ItemStack itemStack = getStack();
         Item item = itemStack.getItem();
-        if (item instanceof BlockItem && ((BlockItem)item).getBlock() instanceof ShulkerBoxBlock) {
-                CompoundTag lv = itemStack.getTag();
-                if (lv != null) {
-                    ListTag itemList = lv.getCompound("BlockEntityTag").getList("Items", 10);
-                    dropItems(itemList.stream().map(CompoundTag.class::cast).map(ItemStack::fromTag));
-                }
+        if (item instanceof BlockItem && ((BlockItem) item).getBlock() instanceof ShulkerBoxBlock) {
+            CompoundTag lv = itemStack.getTag();
+            if (lv != null) {
+                ListTag itemList = lv.getCompound("BlockEntityTag").getList("Items", 10);
+                dropItems(itemList.stream().map(CompoundTag.class::cast).map(ItemStack::fromTag));
             }
         }
+    }
 
     public void dropItems(Stream<ItemStack> stream) {
         if (this.world.isClient())

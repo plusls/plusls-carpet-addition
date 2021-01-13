@@ -1,5 +1,6 @@
 package com.plusls.carpet.network;
 
+import carpet.patches.EntityPlayerMPFake;
 import com.plusls.carpet.PcaMod;
 import com.plusls.carpet.PcaSettings;
 import io.netty.buffer.Unpooled;
@@ -11,6 +12,7 @@ import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
@@ -210,6 +212,12 @@ public class PcaSyncProtocol {
             PcaMod.LOGGER.debug("Can't find entity {}.", entityId);
         } else {
             clearPlayerWatchData(player);
+            // 判断 op 只有 op 才能看玩家信息
+            if (entity instanceof PlayerEntity && !(entity instanceof EntityPlayerMPFake)) {
+                if (server.getPermissionLevel(player.getGameProfile()) < 2) {
+                    return;
+                }
+            }
             PcaMod.LOGGER.debug("{} watch entity {}: {}", player.getName().asString(), entityId, entity);
             updateEntity(player, entity);
 

@@ -20,6 +20,9 @@
   "rule.shulkerBoxQuickUnpack.name": "潜影盒快速拆包",
   "rule.shulkerBoxQuickUnpack.desc": "物品状态下的潜影盒在被摧毁时，盒中的物品会自动掉落，来自 1.17",
 
+  "rule.useDyeOnShulkerBox.name": "潜影盒使用染料染色",
+  "rule.useDyeOnShulkerBox.desc": "可以使用染料直接对地上的潜影盒染色",
+
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }

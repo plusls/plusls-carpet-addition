@@ -66,6 +66,12 @@ public class PcaSettings {
     )
     public static boolean shulkerBoxQuickUnpack = false;
 
+    @Rule(
+            desc = "use dye on shulker box",
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL}
+    )
+    public static boolean useDyeOnShulkerBox = false;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",

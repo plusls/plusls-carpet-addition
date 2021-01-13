@@ -33,7 +33,6 @@ public abstract class MixinItemStack {
         if (this.getItem() instanceof BlockItem &&
                 ((BlockItem) item).getBlock() instanceof ShulkerBoxBlock &&
                 !shulkerBoxHasItems((ItemStack) (Object) this)) {
-            // new Exception().printStackTrace(System.out);
             // 效率很低 但是 it works
             // 通过栈帧判断调用者来过滤返回值
             StackTraceElement[] steArray = Thread.currentThread().getStackTrace();
