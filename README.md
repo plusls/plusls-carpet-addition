@@ -15,6 +15,9 @@ fabric-api >= 0.28
 - [PCA 同步协议](#PCA同步协议-pcaSyncProtocol)
 - [空潜影盒可堆叠](#空潜影盒可堆叠-emptyShulkerBoxStack)
 - [空潜影盒在容器中可堆叠](#空潜影盒在容器中可堆叠-emptyShulkerBoxStackInInventory)
+- [潜影贝可再生](#潜影贝可再生-shulkerRenewable)
+- [潜影盒快速拆包](#潜影盒快速拆包-shulkerBoxQuickUnpack)
+- [潜影盒使用染料染色](#潜影盒使用染料染色-useDyeOnShulkerBox)
 - [PCA调试模式](#PCA调试模式-pcaDebug)
 
 ## 规则列表
@@ -70,6 +73,15 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 ### 潜影盒快速拆包 (shulkerBoxQuickUnpack)
 
 物品状态下的潜影盒在被摧毁时，盒中的物品会自动掉落，来自 1.17
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
+
+### 潜影盒使用染料染色 (useDyeOnShulkerBox)
+
+可以使用染料直接对地上的潜影盒染色
 
 - 类型: `boolean`
 - 默认值: `false`
