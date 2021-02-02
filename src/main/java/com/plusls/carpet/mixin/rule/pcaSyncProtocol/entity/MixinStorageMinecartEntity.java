@@ -1,6 +1,7 @@
 package com.plusls.carpet.mixin.rule.pcaSyncProtocol.entity;
 
 import com.plusls.carpet.PcaMod;
+import com.plusls.carpet.PcaSettings;
 import com.plusls.carpet.network.PcaSyncProtocol;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
@@ -21,7 +22,7 @@ public abstract class MixinStorageMinecartEntity extends AbstractMinecartEntity 
 
     @Inject(method = "markDirty", at = @At(value = "RETURN"))
     private void updateInventory(CallbackInfo ci) {
-        if (PcaSyncProtocol.syncEntityToClient(this)) {
+        if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncEntityToClient(this)) {
             PcaMod.LOGGER.debug("update StorageMinecartEntity inventory.");
         }
     }

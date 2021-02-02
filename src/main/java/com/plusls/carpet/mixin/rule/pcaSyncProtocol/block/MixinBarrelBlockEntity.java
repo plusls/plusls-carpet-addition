@@ -1,6 +1,7 @@
 package com.plusls.carpet.mixin.rule.pcaSyncProtocol.block;
 
 import com.plusls.carpet.PcaMod;
+import com.plusls.carpet.PcaSettings;
 import com.plusls.carpet.network.PcaSyncProtocol;
 import net.minecraft.block.entity.BarrelBlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -18,7 +19,7 @@ public abstract class MixinBarrelBlockEntity extends LootableContainerBlockEntit
     public void markDirty() {
         super.markDirty();
 
-        if (PcaSyncProtocol.syncBlockEntityToClient(this)) {
+        if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
             PcaMod.LOGGER.debug("update BarrelBlockEntity: {}", this.pos);
         }
     }

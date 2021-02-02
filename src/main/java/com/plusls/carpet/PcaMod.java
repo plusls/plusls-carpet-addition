@@ -28,6 +28,7 @@ import java.util.Objects;
 public class PcaMod implements CarpetExtension {
     public static final String MODID = "pca";
     public static final Logger LOGGER = LogManager.getLogger("PcAMod");
+    public static Thread thread;
     @Nullable
     public static MinecraftServer server = null;
 
@@ -47,6 +48,7 @@ public class PcaMod implements CarpetExtension {
         // let's /carpet handle our few simple settings
         // CarpetServer.settingsManager.parseSettingsClass(ExampleSimpleSettings.class);
         // Lets have our own settings class independent from carpet.conf
+        PcaMod.thread = Thread.currentThread();
         CarpetServer.settingsManager.parseSettingsClass(PcaSettings.class);
 
 

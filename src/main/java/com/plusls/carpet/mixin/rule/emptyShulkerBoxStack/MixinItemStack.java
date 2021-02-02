@@ -1,5 +1,6 @@
 package com.plusls.carpet.mixin.rule.emptyShulkerBoxStack;
 
+import com.plusls.carpet.PcaMod;
 import com.plusls.carpet.PcaSettings;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.block.ShulkerBoxBlock;
@@ -33,19 +34,24 @@ public abstract class MixinItemStack {
         if (this.getItem() instanceof BlockItem &&
                 ((BlockItem) item).getBlock() instanceof ShulkerBoxBlock &&
                 !shulkerBoxHasItems((ItemStack) (Object) this)) {
-            // 效率很低 但是 it works
-            // 通过栈帧判断调用者来过滤返回值
-            StackTraceElement[] steArray = Thread.currentThread().getStackTrace();
-            if (checkStackTrace(steArray, InventoryChangedCriterion.class.getName(), "method_8950", new int[]{3}) || // method_8950 -> InventoryChangedCriterion.trigger
-                    checkStackTrace(steArray, PlayerInventory.class.getName(), "method_7393", new int[]{3, 4}) || // method_7393-> PlayerInventory.canStackAddMore
-                    checkStackTrace(steArray, PlayerInventory.class.getName(), "method_7385", new int[]{3, 4}) || // method_7385 -> PlayerInventory.addStack
-                    checkStackTrace(steArray, ScreenHandler.class.getName(), "method_7616", new int[]{3, 4}) || // method_7616 -> ScreenHandler.insertItem
-                    checkStackTrace(steArray, ScreenHandler.class.getName(), "method_30010", new int[]{3}) // method_30010 -> ScreenHandler.method_30010
-            ) {
+            if (Thread.currentThread() != PcaMod.thread) {
                 ci.setReturnValue(SHULKERBOX_MAX_STACK_AMOUNT);
             } else if (PcaSettings.emptyShulkerBoxStackInInventory) {
                 ci.setReturnValue(SHULKERBOX_MAX_STACK_AMOUNT);
             }
+            // 效率很低 但是 it works
+            // 通过栈帧判断调用者来过滤返回值
+//            StackTraceElement[] steArray = Thread.currentThread().getStackTrace();
+//            if (checkStackTrace(steArray, InventoryChangedCriterion.class.getName(), "method_8950", new int[]{3}) || // method_8950 -> InventoryChangedCriterion.trigger
+//                    checkStackTrace(steArray, PlayerInventory.class.getName(), "method_7393", new int[]{3, 4}) || // method_7393-> PlayerInventory.canStackAddMore
+//                    checkStackTrace(steArray, PlayerInventory.class.getName(), "method_7385", new int[]{3, 4}) || // method_7385 -> PlayerInventory.addStack
+//                    checkStackTrace(steArray, ScreenHandler.class.getName(), "method_7616", new int[]{3, 4}) || // method_7616 -> ScreenHandler.insertItem
+//                    checkStackTrace(steArray, ScreenHandler.class.getName(), "method_30010", new int[]{3}) // method_30010 -> ScreenHandler.method_30010
+//            ) {
+//                ci.setReturnValue(SHULKERBOX_MAX_STACK_AMOUNT);
+//            } else if (PcaSettings.emptyShulkerBoxStackInInventory) {
+//                ci.setReturnValue(SHULKERBOX_MAX_STACK_AMOUNT);
+//            }
         }
     }
 

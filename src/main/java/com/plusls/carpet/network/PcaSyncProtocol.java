@@ -23,6 +23,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -233,13 +234,33 @@ public class PcaSyncProtocol {
         }
     }
 
+    private static final MutablePair<Identifier, Entity> identifierEntityPair = new MutablePair<>();
+    private static final MutablePair<Identifier, BlockPos> identifierBlockPosPair = new MutablePair<>();
+    public static final ReentrantLock pairLock = new ReentrantLock(true);
+
+    private static MutablePair<Identifier, Entity> getIdentifierEntityPair(Identifier identifier, Entity entity) {
+        pairLock.lock();
+        identifierEntityPair.setLeft(identifier);
+        identifierEntityPair.setRight(entity);
+        pairLock.unlock();
+        return identifierEntityPair;
+    }
+
+    private static MutablePair<Identifier, BlockPos> getIdentifierBlockPosPair(Identifier identifier, BlockPos pos) {
+        pairLock.lock();
+        identifierBlockPosPair.setLeft(identifier);
+        identifierBlockPosPair.setRight(pos);
+        pairLock.unlock();
+        return identifierBlockPosPair;
+    }
+
     // 工具
     private static @Nullable Set<ServerPlayerEntity> getWatchPlayerList(@NotNull Entity entity) {
-        return entityWatchPlayerSet.get(new ImmutablePair<>(entity.getEntityWorld().getRegistryKey().getValue(), entity));
+        return entityWatchPlayerSet.get(getIdentifierEntityPair(entity.getEntityWorld().getRegistryKey().getValue(), entity));
     }
 
     private static @Nullable Set<ServerPlayerEntity> getWatchPlayerList(@NotNull World world, @NotNull BlockPos blockPos) {
-        return blockPosWatchPlayerSet.get(new ImmutablePair<>(world.getRegistryKey().getValue(), blockPos));
+        return blockPosWatchPlayerSet.get(getIdentifierBlockPosPair(world.getRegistryKey().getValue(), blockPos));
     }
 
     public static boolean syncEntityToClient(@NotNull Entity entity) {

@@ -1,6 +1,7 @@
 package com.plusls.carpet.mixin.rule.pcaSyncProtocol.block;
 
 import com.plusls.carpet.PcaMod;
+import com.plusls.carpet.PcaSettings;
 import com.plusls.carpet.network.PcaSyncProtocol;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
@@ -20,7 +21,7 @@ public abstract class MixinChestBlockEntity extends LootableContainerBlockEntity
     @Override
     public void markDirty() {
         super.markDirty();
-        if (PcaSyncProtocol.syncBlockEntityToClient(this)) {
+        if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
             PcaMod.LOGGER.debug("update ChestBlockEntity: {}", this.pos);
         }
     }
