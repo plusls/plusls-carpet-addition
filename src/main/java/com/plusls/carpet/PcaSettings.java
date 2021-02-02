@@ -35,39 +35,39 @@ public class PcaSettings {
 
     // feature
     @Rule(
-            desc = "Empty shulkerBox can stack",
+            desc = "Empty shulker boxes stack",
             extra = {
-                    "empty shulkerBox can stack on ground, player's inventory, hand",
-                    "but empty shulkerBox will not stack in inventory such as Chest, Hopper"
+                    "empty shulker boxes can stack on the ground and in a player's inventory or hand",
+                    "empty shulker boxes will not stack in other inventories, such as chests or hoppers"
             },
             category = {PCA, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL}
     )
     public static boolean emptyShulkerBoxStack = false;
 
     @Rule(
-            desc = "Empty shulkerBox can stack in inventory",
+            desc = "Empty shulker boxes stack in inventories",
             extra = {
-                    "empty shulkerBox can stack in inventory like Chest, Hopper",
-                    "need enable emptyShulkerBoxStack"
+                    "empty shulker boxes can stack in inventories like chests or hoppers",
+                    "this feature requires emptyShulkerBoxStack to be enabled"
             },
             category = {PCA, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL}
     )
     public static boolean emptyShulkerBoxStackInInventory = false;
 
     @Rule(
-            desc = "shulkerRenewable from 1.17",
+            desc = "Shulker boxes are renewable; 1.17 feature (backported)",
             category = {PCA, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL}
     )
     public static boolean shulkerRenewable = false;
 
     @Rule(
-            desc = "shulker box items will now drop their items when destroyed. From 1.17",
+            desc = "Shulker box items will now drop their items when destroyed; 1.17 feature (backported)",
             category = {PCA, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL}
     )
     public static boolean shulkerBoxQuickUnpack = false;
 
     @Rule(
-            desc = "use dye on shulker box",
+            desc = "Dyes can be used on shulker boxes",
             category = {PCA, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL}
     )
     public static boolean useDyeOnShulkerBox = false;
