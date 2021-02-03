@@ -13,11 +13,12 @@ fabric-api >= 0.28
 ### [规则](#规则列表)
 
 - [PCA 同步协议](#PCA同步协议-pcaSyncProtocol)
+- [PCA 同步协议可同步玩家数据](#PCA同步协议可同步玩家数据-pcaSyncPlayerEntity)
 - [空潜影盒可堆叠](#空潜影盒可堆叠-emptyShulkerBoxStack)
-- [空潜影盒在容器中可堆叠](#空潜影盒在容器中可堆叠-emptyShulkerBoxStackInInventory)
 - [潜影贝可再生](#潜影贝可再生-shulkerRenewable)
 - [潜影盒快速拆包](#潜影盒快速拆包-shulkerBoxQuickUnpack)
 - [潜影盒使用染料染色](#潜影盒使用染料染色-useDyeOnShulkerBox)
+- [不死图腾扳手](#不死图腾扳手-flippingTotemOfUndying)
 - [PCA调试模式](#PCA调试模式-pcaDebug)
 
 ## 规则列表
@@ -31,6 +32,25 @@ PCA 同步协议是一个用于在服务端和客户端之间同步 Entity，Blo
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `true`, `false`
+- 分类: `PCA`, `protocal`
+
+### PCA同步协议可同步玩家数据 (pcaSyncPlayerEntity)
+
+该选项能决定哪些玩家的数据将会被 PCA 同步协议同步
+
+NOBODY：所有玩家数据都无法同步
+
+BOT：地毯 mod 召唤出的 bot 的数据可以被同步
+
+OPS：地毯 mod 召唤出的 bot 的数据可以被同步， op 可以同步所有玩家的数据
+
+OPS_AND_SELF：地毯 mod 召唤出的 bot 和玩家自己的数据可以被同步，op 可以同步所有玩家的数据
+
+EVERYONE：所有人的数据都可以被同步
+
+- 类型: `enum`
+- 默认值: `OPS`
+- 参考选项: `nobody`, `bot`, `ops`, `ops_and_self`, `everyone`
 - 分类: `PCA`, `protocal`
 
 ### 空潜影盒可堆叠 (emptyShulkerBoxStack)
@@ -50,17 +70,6 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`
 
-### 空潜影盒在容器中可堆叠 (emptyShulkerBoxStackInInventory)
-
-该功能是 emptyShulkerBoxStack 的强化版，它会导致空潜影盒在容器中自动堆叠并影响比较器和漏斗的逻辑
-
-本功能只有在 emptyShulkerBoxStack 时才能生效
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `true`, `false`
-- 分类: `PCA`, `feature`
-
 ### 潜影贝可再生 (shulkerRenewable)
 
 本功能移植自 1.17
@@ -68,7 +77,7 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `true`, `false`
-- 分类: `PCA`, `feature`
+- 分类: `PCA`, `feature`, `experimental`
 
 ### 潜影盒快速拆包 (shulkerBoxQuickUnpack)
 
@@ -77,11 +86,31 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`, `experimental`
+
+### 潜影盒使用染料染色 (useDyeOnShulkerBox)
+
+可以使用染料直接对地上的潜影盒染色，用水瓶右键洗去地上潜影盒的颜色
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`
 
 ### 潜影盒使用染料染色 (useDyeOnShulkerBox)
 
-可以使用染料直接对地上的潜影盒染色
+可以使用染料直接对地上的潜影盒染色，用水瓶右键洗去地上潜影盒的颜色
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
+
+### 不死图腾扳手 (flippingTotemOfUndying)
+
+允许使用不死图腾调整方块朝向，并且不会产生方块更新
+
+主手图腾副手为空则则会翻转方块，主手图腾副手不为空且为方块则放出的方块会被反转
 
 - 类型: `boolean`
 - 默认值: `false`

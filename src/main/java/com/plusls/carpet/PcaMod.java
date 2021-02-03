@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.brigadier.CommandDispatcher;
 import com.plusls.carpet.network.PcaSyncProtocol;
+import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -28,7 +29,6 @@ import java.util.Objects;
 public class PcaMod implements CarpetExtension {
     public static final String MODID = "pca";
     public static final Logger LOGGER = LogManager.getLogger("PcAMod");
-    public static Thread thread;
     @Nullable
     public static MinecraftServer server = null;
 
@@ -48,9 +48,7 @@ public class PcaMod implements CarpetExtension {
         // let's /carpet handle our few simple settings
         // CarpetServer.settingsManager.parseSettingsClass(ExampleSimpleSettings.class);
         // Lets have our own settings class independent from carpet.conf
-        PcaMod.thread = Thread.currentThread();
         CarpetServer.settingsManager.parseSettingsClass(PcaSettings.class);
-
 
         // set-up a snooper to observe how rules are changing in carpet
         CarpetServer.settingsManager.addRuleObserver((serverCommandSource, currentRuleState, originalUserTest) ->
@@ -82,6 +80,7 @@ public class PcaMod implements CarpetExtension {
     @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
         PcaSyncProtocol.init();
+        FlipCooldown.init();
         PcaMod.server = server;
         if (PcaSettings.pcaDebug) {
             Configurator.setLevel(LOGGER.getName(), Level.toLevel("DEBUG"));
@@ -106,6 +105,7 @@ public class PcaMod implements CarpetExtension {
     @Override
     public void onPlayerLoggedOut(ServerPlayerEntity player) {
         PcaSyncProtocol.clearPlayerWatchData(player);
+        FlipCooldown.removePlayer(player);
     }
 
     @Override

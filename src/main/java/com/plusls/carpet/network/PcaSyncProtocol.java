@@ -213,9 +213,28 @@ public class PcaSyncProtocol {
             PcaMod.LOGGER.debug("Can't find entity {}.", entityId);
         } else {
             clearPlayerWatchData(player);
-            // 判断 op 只有 op 才能看玩家信息
-            if (entity instanceof PlayerEntity && !(entity instanceof EntityPlayerMPFake)) {
-                if (server.getPermissionLevel(player.getGameProfile()) < 2) {
+            if (entity instanceof PlayerEntity) {
+                if (PcaSettings.pcaSyncPlayerEntity == PcaSettings.PCA_SYNC_PLAYER_ENTITY_OPTIONS.NOBODY) {
+                    return;
+                } else if (PcaSettings.pcaSyncPlayerEntity == PcaSettings.PCA_SYNC_PLAYER_ENTITY_OPTIONS.BOT) {
+                    if (!(entity instanceof EntityPlayerMPFake)) {
+                        return;
+                    }
+                } else if (PcaSettings.pcaSyncPlayerEntity == PcaSettings.PCA_SYNC_PLAYER_ENTITY_OPTIONS.OPS) {
+                    if (!(entity instanceof EntityPlayerMPFake) && server.getPermissionLevel(player.getGameProfile()) < 2) {
+                        return;
+                    }
+                } else if (PcaSettings.pcaSyncPlayerEntity == PcaSettings.PCA_SYNC_PLAYER_ENTITY_OPTIONS.OPS_AND_SELF) {
+                    if (!(entity instanceof EntityPlayerMPFake) &&
+                            server.getPermissionLevel(player.getGameProfile()) < 2 &&
+                            entity != player) {
+                        return;
+                    }
+                } else if (PcaSettings.pcaSyncPlayerEntity == PcaSettings.PCA_SYNC_PLAYER_ENTITY_OPTIONS.EVERYONE) {
+
+                } else {
+                    // wtf????
+                    PcaMod.LOGGER.warn("syncEntityHandler wtf???");
                     return;
                 }
             }

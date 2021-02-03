@@ -3,16 +3,18 @@
   "category.protocol": "协议",
   "rule.pcaSyncProtocol.name": "PCA 同步协议",
   "rule.pcaSyncProtocol.desc": "支持同步 BlockEntity 和 Entity 到客户端",
+  "rule.pcaSyncPlayerEntity.name": "PCA 同步协议可同步玩家数据",
+  "rule.pcaSyncPlayerEntity.desc": "决定哪些玩家的数据将会被同步",
+  "rule.pcaSyncPlayerEntity.extra.0": "NOBODY：所有玩家数据都无法同步",
+  "rule.pcaSyncPlayerEntity.extra.1": "BOT：地毯 mod 召唤出的 bot 的数据可以被同步",
+  "rule.pcaSyncPlayerEntity.extra.2": "OPS：地毯 mod 召唤出的 bot 的数据可以被同步， op 可以同步所有玩家的数据",
+  "rule.pcaSyncPlayerEntity.extra.3": "OPS_AND_SELF：地毯 mod 召唤出的 bot 和玩家自己的数据可以被同步，op 可以同步所有玩家的数据",
+  "rule.pcaSyncPlayerEntity.extra.4": "EVERYONE：所有人的数据都可以被同步",
 
   "rule.emptyShulkerBoxStack.name": "空潜影盒可堆叠",
-  "rule.emptyShulkerBoxStack.desc": "空潜影盒可堆叠",
-  "rule.emptyShulkerBoxStack.extra.0": "空潜影盒可以在地面上，玩家的背包进行自动堆叠，同时玩家可以手动堆叠空潜影盒",
+  "rule.emptyShulkerBoxStack.desc": "空潜影盒可堆叠，但是不会改变比较器的输出",
+  "rule.emptyShulkerBoxStack.extra.0": "空潜影盒可以在玩家的背包进行自动堆叠，同时玩家可以手动堆叠空潜影盒",
   "rule.emptyShulkerBoxStack.extra.1": "但是空潜影盒无法在容器中自动堆叠，比如箱子，漏斗",
-
-  "rule.emptyShulkerBoxStackInInventory.name": "空潜影盒可在容器中堆叠",
-  "rule.emptyShulkerBoxStackInInventory.desc": "空潜影盒可在容器中堆叠",
-  "rule.emptyShulkerBoxStackInInventory.extra.0": "空潜影盒可以在箱子，漏斗这样的容器中自动堆叠",
-  "rule.emptyShulkerBoxStackInInventory.extra.1": "需要开启 emptyShulkerBoxStack 该功能才能生效",
 
   "rule.shulkerRenewable.name": "潜影贝可再生",
   "rule.shulkerRenewable.desc": "潜影贝可再生，来自 1.17",
@@ -21,7 +23,13 @@
   "rule.shulkerBoxQuickUnpack.desc": "物品状态下的潜影盒在被摧毁时，盒中的物品会自动掉落，来自 1.17",
 
   "rule.useDyeOnShulkerBox.name": "潜影盒使用染料染色",
-  "rule.useDyeOnShulkerBox.desc": "可以使用染料直接对地上的潜影盒染色",
+  "rule.useDyeOnShulkerBox.desc": "可以使用染料直接对地上的潜影盒染色，用水瓶可以洗掉潜影盒的颜色",
+
+  "rule.flippingTotemOfUndying.name": "不死图腾扳手",
+  "rule.flippingTotemOfUndying.desc": "允许使用不死图腾调整方块朝向",
+  "rule.flippingTotemOfUndying.extra.0": "不会产生方块更新",
+  "rule.flippingTotemOfUndying.extra.1": "主手图腾副手为空则则会翻转方块",
+  "rule.flippingTotemOfUndying.extra.2": "主手图腾副手不为空且为方块则放出的方块会被反转",
 
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"

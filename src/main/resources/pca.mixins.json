@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinCrashReport",
-    "rule.emptyShulkerBoxStack.MixinItemStack",
+    "rule.emptyShulkerBoxStack.MixinPlayerInventory",
+    "rule.emptyShulkerBoxStack.MixinScreenHandler",
+    "rule.flippingTotemOfUndying.MixinBlockRotator",
     "rule.pcaSyncProtocol.block.MixinAbstractFurnaceBlockEntity",
     "rule.pcaSyncProtocol.block.MixinBarrelBlockEntity",
     "rule.pcaSyncProtocol.block.MixinBeehiveBlockEntity",
@@ -17,9 +19,10 @@
     "rule.pcaSyncProtocol.entity.MixinHorseBaseEntity",
     "rule.pcaSyncProtocol.entity.MixinMerchantEntity",
     "rule.pcaSyncProtocol.entity.MixinStorageMinecartEntity",
-    "rule.useDyeOnShulkerBox.MixinDyeItem",
     "rule.shulkerBoxQuickUnpack.MixinItemEntity",
-    "rule.shulkerRenewable.MixinShulkerEntity"
+    "rule.shulkerRenewable.MixinShulkerEntity",
+    "rule.useDyeOnShulkerBox.MixinDyeItem",
+    "rule.useDyeOnShulkerBox.MixinPotionItem"
   ],
   "client": [
   ],
