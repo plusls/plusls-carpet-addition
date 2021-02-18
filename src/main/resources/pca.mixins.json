@@ -19,6 +19,7 @@
     "rule.pcaSyncProtocol.entity.MixinHorseBaseEntity",
     "rule.pcaSyncProtocol.entity.MixinMerchantEntity",
     "rule.pcaSyncProtocol.entity.MixinStorageMinecartEntity",
+    "rule.railNoBrokenByFluid.MixinFlowableFluid",
     "rule.shulkerBoxQuickUnpack.MixinItemEntity",
     "rule.shulkerRenewable.MixinShulkerEntity",
     "rule.useDyeOnShulkerBox.MixinDyeItem",
