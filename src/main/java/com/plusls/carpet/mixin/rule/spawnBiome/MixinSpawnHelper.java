@@ -19,7 +19,7 @@ import java.util.List;
 @Mixin(SpawnHelper.class)
 public class MixinSpawnHelper {
     @Redirect(method = "method_29950",
-            at=@At(value = "INVOKE",
+            at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/world/gen/chunk/ChunkGenerator;getEntitySpawnList(Lnet/minecraft/world/biome/Biome;Lnet/minecraft/world/gen/StructureAccessor;Lnet/minecraft/entity/SpawnGroup;Lnet/minecraft/util/math/BlockPos;)Ljava/util/List;"))
     private static List<SpawnSettings.SpawnEntry> modifyBiome(ChunkGenerator chunkGenerator, Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos) {
         if (PcaSettings.spawnBiome != PcaSettings.PCA_SPAWN_BIOME.DEFAULT) {

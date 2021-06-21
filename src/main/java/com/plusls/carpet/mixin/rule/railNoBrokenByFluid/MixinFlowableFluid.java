@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FlowableFluid.class)
-public abstract class MixinFlowableFluid  extends Fluid {
-    @Inject(method = "canFill", at=@At(value = "RETURN"), cancellable = true)
+public abstract class MixinFlowableFluid extends Fluid {
+    @Inject(method = "canFill", at = @At(value = "RETURN"), cancellable = true)
     private void checkRail(BlockView world, BlockPos pos, BlockState state, Fluid fluid, CallbackInfoReturnable<Boolean> cir) {
         if (PcaSettings.railNoBrokenByFluid && cir.getReturnValue() && state.getBlock() instanceof AbstractRailBlock) {
             cir.setReturnValue(false);
