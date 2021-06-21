@@ -14,7 +14,7 @@ public class MixinSpawnHelper {
     @Redirect(method = "getSpawnPos", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;nextBetween(Ljava/util/Random;II)I", ordinal = 0))
     private static int modifySpawnY(Random random, int min, int max) {
         if (PcaSettings.spawnYMax != PcaSettings.INT_DISABLE) {
-            max = PcaSettings.spawnYMax + 1;
+            max = PcaSettings.spawnYMax;
         }
         if (PcaSettings.spawnYMin != PcaSettings.INT_DISABLE) {
             min = PcaSettings.spawnYMin;
