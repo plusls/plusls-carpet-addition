@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(HopperBlockEntity.class)
-public abstract class MixinHopperBlockEntity extends LootableContainerBlockEntity implements Hopper{
+public abstract class MixinHopperBlockEntity extends LootableContainerBlockEntity implements Hopper {
 
     protected MixinHopperBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);

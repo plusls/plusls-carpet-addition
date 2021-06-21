@@ -112,7 +112,6 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`
 
-
 ### 不死图腾扳手 (flippingTotemOfUndying)
 
 允许使用不死图腾调整方块朝向，并且不会产生方块更新
@@ -159,7 +158,6 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 默认值: `false`
 - 参考选项: `true`, `false`
 - 分类: `PCA`
-
 
 ## License
 
