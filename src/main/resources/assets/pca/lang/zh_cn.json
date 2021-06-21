@@ -34,7 +34,16 @@
   "rule.flippingTotemOfUndying.extra.1": "主手图腾副手为空则则会翻转方块",
   "rule.flippingTotemOfUndying.extra.2": "主手图腾副手不为空且为方块则放出的方块会被反转",
 
-  "rule.pcaDebug.name": "PCA调试模式",
+  "rule.spawnYMax.name": "刷怪的最大 Y 值",
+  "rule.spawnYMax.desc": "刷怪的最大 Y 值，会影响刷怪塔效率，114514 为默认",
+
+  "rule.spawnYMin.name": "刷怪的最小 Y 值",
+  "rule.spawnYMin.desc": "刷怪的最小 Y 值，会影响刷怪塔效率，114514 为默认",
+
+  "rule.spawnBiome.name": "全局刷怪群系",
+  "rule.spawnBiome.desc": "全局刷怪群系，会影响整个游戏，DEFAULT 为默认",
+
+"rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }
 

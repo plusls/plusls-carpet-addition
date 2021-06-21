@@ -20,6 +20,9 @@ fabric-api >= 0.28
 - [铁轨不被液体破坏](#铁轨不被液体破坏-railNoBrokenByFluid)
 - [潜影盒使用染料染色](#潜影盒使用染料染色-useDyeOnShulkerBox)
 - [不死图腾扳手](#不死图腾扳手-flippingTotemOfUndying)
+- [刷怪的最大Y值](#刷怪的最大Y值-spawnYMax)
+- [刷怪的最小Y值](#刷怪的最小Y值-spawnYMin)
+- [全局刷怪群系](#全局刷怪群系-spawnBiome)
 - [PCA调试模式](#PCA调试模式-pcaDebug)
 
 ## 规则列表
@@ -117,6 +120,33 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
+
+### 刷怪的最大Y值 (spawnYMax)
+
+刷怪的最大 Y 值，会影响刷怪塔效率，114514 为默认
+
+- 类型: `int`
+- 默认值: `114514`
+- 参考选项: `114514`, `1919810`
+- 分类: `PCA`, `feature`
+
+### 刷怪的最小Y值 (spawnYMin)
+
+刷怪的最小 Y 值，会影响刷怪塔效率，114514 为默认
+
+- 类型: `int`
+- 默认值: `114514`
+- 参考选项: `114514`, `1919810`
+- 分类: `PCA`, `feature`
+
+### 全局刷怪群系 (spawnBiome)
+
+全局刷怪群系，会影响整个游戏，DEFAULT 为默认
+
+- 类型: `enum`
+- 默认值: `DEFAULT`
+- 参考选项: `DESERT`, `PLAINS`
 - 分类: `PCA`, `feature`
 
 ### PCA调试模式 (pcaDebug)

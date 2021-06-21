@@ -92,6 +92,30 @@ public class PcaSettings {
     )
     public static boolean flippingTotemOfUndying = false;
 
+    final public static int INT_DISABLE = 114514;
+
+    @Rule(
+            desc = "spawn Y Max, 114514 to close",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static int spawnYMax = INT_DISABLE;
+
+    @Rule(
+            desc = "spawn Y Min, 114514 to close",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static int spawnYMin = INT_DISABLE;
+
+    public enum PCA_SPAWN_BIOME {
+        DEFAULT, DESERT, PLAINS
+    }
+
+    @Rule(
+            desc = "spawn biome",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static PCA_SPAWN_BIOME spawnBiome = PCA_SPAWN_BIOME.DEFAULT;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",
