@@ -8,7 +8,7 @@ import net.minecraft.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
@@ -44,7 +44,7 @@ public abstract class MixinDyeItem extends Item {
                     ShulkerBoxBlockEntity newBlockEntity = (ShulkerBoxBlockEntity) world.getBlockEntity(pos);
                     assert blockEntity != null;
                     assert newBlockEntity != null;
-                    newBlockEntity.deserializeInventory(blockEntity.serializeInventory(new CompoundTag()));
+                    newBlockEntity.readInventoryNbt(blockEntity.writeInventoryNbt(new NbtCompound()));
                     newBlockEntity.setCustomName(blockEntity.getCustomName());
                     newBlockEntity.markDirty();
                     context.getStack().decrement(1);

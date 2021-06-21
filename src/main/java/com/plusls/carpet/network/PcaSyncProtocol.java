@@ -13,7 +13,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -69,7 +69,7 @@ public class PcaSyncProtocol {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeIdentifier(entity.getEntityWorld().getRegistryKey().getValue());
         buf.writeInt(entity.getEntityId());
-        buf.writeCompoundTag(entity.toTag(new CompoundTag()));
+        buf.writeNbt(entity.writeNbt(new NbtCompound()));
         ServerPlayNetworking.send(player, UPDATE_ENTITY, buf);
     }
 
@@ -87,7 +87,7 @@ public class PcaSyncProtocol {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeIdentifier(world.getRegistryKey().getValue());
         buf.writeBlockPos(blockEntity.getPos());
-        buf.writeCompoundTag(blockEntity.toTag(new CompoundTag()));
+        buf.writeNbt(blockEntity.writeNbt(new NbtCompound()));
         ServerPlayNetworking.send(player, UPDATE_BLOCK_ENTITY, buf);
     }
 
