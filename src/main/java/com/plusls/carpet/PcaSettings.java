@@ -98,6 +98,12 @@ public class PcaSettings {
     )
     public static PCA_SPAWN_BIOME spawnBiome = PCA_SPAWN_BIOME.DEFAULT;
 
+    @Rule(
+            desc = "quick leaf decay",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean quickLeafDecay = false;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",
