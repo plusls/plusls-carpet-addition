@@ -17,7 +17,7 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v2
         with:
-          ref: ${{ branch }}
+          ref: ${{ matrix.branch }}
       - name: validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
       - name: setup jdk ${{ matrix.java }}
