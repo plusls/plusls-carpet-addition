@@ -150,6 +150,15 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 参考选项: `DESERT`, `PLAINS`
 - 分类: `PCA`, `feature`
 
+### 快速叶子腐烂 (quickLeafDecay)
+
+在砍树后树叶会快速掉落
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
+
 ### PCA调试模式 (pcaDebug)
 
 开启后会打印调试信息

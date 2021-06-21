@@ -22,6 +22,7 @@
     "rule.railNoBrokenByFluid.MixinFlowableFluid",
     "rule.shulkerBoxQuickUnpack.MixinItemEntity",
     "rule.shulkerRenewable.MixinShulkerEntity",
+    "rule.quickLeafDecay.MixinLeavesBlock",
     "rule.spawnBiome.MixinSpawnHelper",
     "rule.spawnYRange.MixinSpawnHelper",
     "rule.useDyeOnShulkerBox.MixinDyeItem",
