@@ -21,10 +21,11 @@
   "mixins": [
     "pca.mixins.json"
   ],
+  "accessWidener": "pca.accesswidener",
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": ">=0.28.0",
-    "minecraft": ">=1.16.2",
+    "minecraft": ">=1.17",
     "carpet": "*"
   },
   "suggests": {

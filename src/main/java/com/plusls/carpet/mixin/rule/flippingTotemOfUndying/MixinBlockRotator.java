@@ -31,14 +31,14 @@ public class MixinBlockRotator {
         if (!cir.getReturnValue() && PcaSettings.flippingTotemOfUndying &&
                 world.getTime() != FlipCooldown.getCoolDown(player)) {
             // 能修改世界且副手为空
-            if (!player.abilities.allowModifyWorld ||
+            if (!player.getAbilities().allowModifyWorld ||
                     !player_holds_totemOfUndying_mainhand(player) ||
                     !player.getOffHandStack().isEmpty()) {
                 return;
             }
-            CarpetSettings.impendingFillSkipUpdates = true;
+            CarpetSettings.impendingFillSkipUpdates.set(true);
             boolean ret = BlockRotator.flip_block(state, world, player, hand, hit);
-            CarpetSettings.impendingFillSkipUpdates = false;
+            CarpetSettings.impendingFillSkipUpdates.set(false);
             if (ret) {
                 FlipCooldown.setCoolDown(player, world.getTime());
             }
@@ -49,8 +49,7 @@ public class MixinBlockRotator {
     @Inject(method = "flippinEligibility", at = @At(value = "RETURN"), cancellable = true, remap = false)
     private static void postFlippinEligibility(Entity entity, CallbackInfoReturnable<Boolean> cir) {
 
-        if (!cir.getReturnValue() && PcaSettings.flippingTotemOfUndying && (entity instanceof PlayerEntity)) {
-            PlayerEntity player = (PlayerEntity) entity;
+        if (!cir.getReturnValue() && PcaSettings.flippingTotemOfUndying && (entity instanceof PlayerEntity player)) {
             // 副手不为空，主手为图腾
             boolean ret = !player.getOffHandStack().isEmpty() && player_holds_totemOfUndying_mainhand(player);
             cir.setReturnValue(ret);

@@ -68,7 +68,7 @@ public class PcaSyncProtocol {
     public static void updateEntity(@NotNull ServerPlayerEntity player, @NotNull Entity entity) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeIdentifier(entity.getEntityWorld().getRegistryKey().getValue());
-        buf.writeInt(entity.getEntityId());
+        buf.writeInt(entity.getId());
         buf.writeNbt(entity.writeNbt(new NbtCompound()));
         ServerPlayNetworking.send(player, UPDATE_ENTITY, buf);
     }

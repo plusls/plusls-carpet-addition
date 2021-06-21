@@ -58,24 +58,6 @@ public class PcaSettings {
     public static boolean emptyShulkerBoxStack = false;
 
     @Rule(
-            desc = "Shulker boxes are renewable; 1.17 feature (backported)",
-            category = {PCA, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL}
-    )
-    public static boolean shulkerRenewable = false;
-
-    @Rule(
-            desc = "Shulker box items will now drop their items when destroyed; 1.17 feature (backported)",
-            category = {PCA, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL}
-    )
-    public static boolean shulkerBoxQuickUnpack = false;
-
-    @Rule(
-            desc = "Rail no broken by fluid; 1.17 feature (backported)",
-            category = {PCA, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL}
-    )
-    public static boolean railNoBrokenByFluid = false;
-
-    @Rule(
             desc = "Dyes can be used on shulker boxes, empty potion will clean color",
             category = {PCA, RuleCategory.FEATURE}
     )

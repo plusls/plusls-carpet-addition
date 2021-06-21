@@ -54,7 +54,7 @@ public abstract class MixinPotionItem extends Item {
                     newBlockEntity.markDirty();
                     if (!player.isCreative()) {
                         context.getStack().decrement(1);
-                        Objects.requireNonNull(context.getPlayer()).inventory.insertStack(new ItemStack(Items.GLASS_BOTTLE));
+                        Objects.requireNonNull(context.getPlayer()).getInventory().insertStack(new ItemStack(Items.GLASS_BOTTLE));
                     }
                 }
             }

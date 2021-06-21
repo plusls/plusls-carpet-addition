@@ -31,9 +31,9 @@ public abstract class MixinPlayerInventory implements Inventory, Nameable {
     }
 
     // 避免死循环
-    @Redirect(method = "offerOrDrop",
+    @Redirect(method = "offer",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxCount()I", ordinal = 0))
-    private int offerOrDropGetMaxCount0(ItemStack itemStack) {
+    private int offerGetMaxCount(ItemStack itemStack) {
         return ShulkerBoxItemUtil.getMaxCount(itemStack);
     }
 }

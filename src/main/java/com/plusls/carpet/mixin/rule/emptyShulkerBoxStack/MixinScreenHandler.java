@@ -21,7 +21,7 @@ public class MixinScreenHandler {
         return ShulkerBoxItemUtil.getMaxCount(itemStack);
     }
 
-    @Redirect(method = "method_30010", // removeStack
+    @Redirect(method = "internalOnSlotClick",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxCount()I", ordinal = -1))
     private int removeStackGetMaxCount(ItemStack itemStack) {
         return ShulkerBoxItemUtil.getMaxCount(itemStack);
