@@ -20,6 +20,7 @@
     "rule.pcaSyncProtocol.entity.MixinHorseBaseEntity",
     "rule.pcaSyncProtocol.entity.MixinMerchantEntity",
     "rule.pcaSyncProtocol.entity.MixinStorageMinecartEntity",
+    "rule.quickLeafDecay.MixinLeavesBlock",
     "rule.spawnBiome.MixinSpawnHelper",
     "rule.spawnYRange.MixinSpawnHelper",
     "rule.useDyeOnShulkerBox.MixinDyeItem",
