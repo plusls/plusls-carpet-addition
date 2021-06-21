@@ -1,6 +1,7 @@
 package com.plusls.carpet.mixin.rule.spawnYRange;
 
 import com.plusls.carpet.PcaSettings;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.SpawnHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -10,9 +11,8 @@ import java.util.Random;
 
 @Mixin(SpawnHelper.class)
 public class MixinSpawnHelper {
-    @Redirect(method = "getSpawnPos", at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 0))
-    private static int modifySpawnY(Random random, int bound) {
-        int max = bound, min = 0;
+    @Redirect(method = "getSpawnPos", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;nextBetween(Ljava/util/Random;II)I", ordinal = 0))
+    private static int modifySpawnY(Random random, int min, int max) {
         if (PcaSettings.spawnYMax != PcaSettings.INT_DISABLE) {
             max = PcaSettings.spawnYMax + 1;
         }
@@ -20,9 +20,8 @@ public class MixinSpawnHelper {
             min = PcaSettings.spawnYMin;
         }
         if (min >= max) {
-            return 0;
+            max = min + 1;
         }
-        int newBound = max - min;
-        return random.nextInt(newBound) + min;
+        return MathHelper.nextBetween(random, min, max);
     }
 }
