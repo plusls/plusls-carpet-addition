@@ -33,6 +33,8 @@
   "rule.spawnYMin.desc": "刷怪的最小 Y 值，会影响刷怪塔效率，114514 为默认",
   "rule.spawnBiome.name": "全局刷怪群系",
   "rule.spawnBiome.desc": "全局刷怪群系，会影响整个游戏，DEFAULT 为默认",
+  "rule.xaeroWorldName.name": "Xaero 小地图世界名",
+  "rule.xaeroWorldName.desc": "设置 Xaero 世界名来同步世界 ID,\"#none\" 表示不同步",
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }

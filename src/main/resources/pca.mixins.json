@@ -26,7 +26,8 @@
     "rule.spawnBiome.MixinSpawnHelper",
     "rule.spawnYRange.MixinSpawnHelper",
     "rule.useDyeOnShulkerBox.MixinDyeItem",
-    "rule.useDyeOnShulkerBox.MixinPotionItem"
+    "rule.useDyeOnShulkerBox.MixinPotionItem",
+    "rule.xaeroWorldName.MixinPlayerManager"
   ],
   "client": [
   ],
