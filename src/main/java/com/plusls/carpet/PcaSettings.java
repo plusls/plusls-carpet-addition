@@ -104,6 +104,15 @@ public class PcaSettings {
     )
     public static boolean quickLeafDecay = false;
 
+    public static final String xaeroWorldNameNone = "#none";
+    @Rule(
+            desc = "set xaero world name to sync word id to xaerominimap, \"#none\" is disable.",
+            category = {PCA, PROTOCOL},
+            strict = false,
+            options = {xaeroWorldNameNone}
+    )
+    public static String xaeroWorldName = xaeroWorldNameNone;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",

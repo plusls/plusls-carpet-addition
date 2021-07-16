@@ -23,6 +23,7 @@ fabric-api >= 0.28
 - [刷怪的最大Y值](#刷怪的最大Y值-spawnYMax)
 - [刷怪的最小Y值](#刷怪的最小Y值-spawnYMin)
 - [全局刷怪群系](#全局刷怪群系-spawnBiome)
+- [Xaero小地图世界名](#Xaero小地图世界名-xaeroWorldName)
 - [PCA调试模式](#PCA调试模式-pcaDebug)
 
 ## 规则列表
@@ -158,6 +159,15 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 默认值: `false`
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`
+
+### Xaero小地图世界名 (xaeroWorldName)
+
+设置 Xaero 世界名来同步世界 ID,"#none" 表示不同步
+
+- 类型: `String`
+- 默认值: `#none`
+- 参考选项: `#none`
+- 分类: `PCA`, `PROTOCOL`
 
 ### PCA调试模式 (pcaDebug)
 
