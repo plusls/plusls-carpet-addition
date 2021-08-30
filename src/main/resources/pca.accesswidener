@@ -1,2 +1,3 @@
 accessWidener v1 named
 accessible class net/minecraft/block/entity/BeehiveBlockEntity$Bee
+accessible method net/minecraft/entity/player/PlayerEntity vanishCursedItems ()V

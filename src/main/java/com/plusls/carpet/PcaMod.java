@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import com.mojang.brigadier.CommandDispatcher;
 import com.plusls.carpet.network.PcaSyncProtocol;
 import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
+import com.plusls.carpet.util.rule.gravestone.GravestoneUtil;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -48,8 +49,8 @@ public class PcaMod implements CarpetExtension {
         // let's /carpet handle our few simple settings
         // CarpetServer.settingsManager.parseSettingsClass(ExampleSimpleSettings.class);
         // Lets have our own settings class independent from carpet.conf
+        GravestoneUtil.init();
         CarpetServer.settingsManager.parseSettingsClass(PcaSettings.class);
-
         // set-up a snooper to observe how rules are changing in carpet
         CarpetServer.settingsManager.addRuleObserver((serverCommandSource, currentRuleState, originalUserTest) ->
         {

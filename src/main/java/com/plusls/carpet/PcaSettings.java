@@ -122,6 +122,12 @@ public class PcaSettings {
     )
     public static boolean quickLeafDecay = false;
 
+    @Rule(
+            desc = "place gravestone after player dead.",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean gravestone = false;
+
     public static final String xaeroWorldNameNone = "#none";
     @Rule(
             desc = "set xaero world name to sync word id to xaerominimap, \"#none\" is disable.",

@@ -20,7 +20,7 @@ public abstract class MixinLeavesBlock extends Block {
         super(settings);
     }
 
-    @Inject(method = "scheduledTick", at=@At("RETURN"))
+    @Inject(method = "scheduledTick", at = @At("RETURN"))
     private void postScheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         if (PcaSettings.quickLeafDecay) {
             this.randomTick(state, world, pos, random);
