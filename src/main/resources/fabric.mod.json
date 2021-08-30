@@ -26,7 +26,7 @@
     "fabricloader": ">=0.7.4",
     "fabric": ">=0.28.0",
     "minecraft": ">=1.17",
-    "carpet": "*"
+    "carpet": ">=1.4.45+v210811"
   },
   "suggests": {
     "another-mod": "*"

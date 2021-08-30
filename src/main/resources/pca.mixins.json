@@ -9,6 +9,8 @@
     "rule.emptyShulkerBoxStack.MixinScreenHandler",
     "rule.emptyShulkerBoxStack.MixinSlot",
     "rule.flippingTotemOfUndying.MixinBlockRotator",
+    "rule.gravestone.MixinPlayerSkullBlock",
+    "rule.gravestone.MixinSkullBlockEntity",
     "rule.pcaSyncProtocol.block.MixinAbstractFurnaceBlockEntity",
     "rule.pcaSyncProtocol.block.MixinBarrelBlockEntity",
     "rule.pcaSyncProtocol.block.MixinBeehiveBlockEntity",

@@ -7,6 +7,7 @@
 ## 依赖
 
 fabric-api >= 0.28
+carpet >= 1.4.45+v210811 
 
 ## 索引
 
@@ -23,6 +24,8 @@ fabric-api >= 0.28
 - [刷怪的最大Y值](#刷怪的最大Y值-spawnYMax)
 - [刷怪的最小Y值](#刷怪的最小Y值-spawnYMin)
 - [全局刷怪群系](#全局刷怪群系-spawnBiome)
+- [快速叶子腐烂](#快速叶子腐烂-quickLeafDecay)
+- [墓碑](#墓碑-gravestone)
 - [Xaero小地图世界名](#Xaero小地图世界名-xaeroWorldName)
 - [PCA调试模式](#PCA调试模式-pcaDebug)
 
@@ -154,6 +157,15 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 ### 快速叶子腐烂 (quickLeafDecay)
 
 在砍树后树叶会快速掉落
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
+
+### 墓碑 (gravestone)
+
+玩家死亡后会在死亡附近的位置生成墓碑，其中将保留玩家身上的物品以及一半的经验
 
 - 类型: `boolean`
 - 默认值: `false`
