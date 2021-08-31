@@ -4,7 +4,7 @@
   "package": "com.plusls.carpet.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinCrashReport",
+    "rule.avoidAnvilTooExpensive.MixinAnvilScreenHandler",
     "rule.emptyShulkerBoxStack.MixinPlayerInventory",
     "rule.emptyShulkerBoxStack.MixinScreenHandler",
     "rule.emptyShulkerBoxStack.MixinSlot",
@@ -33,6 +33,7 @@
     "rule.xaeroWorldName.MixinPlayerManager"
   ],
   "client": [
+    "rule.avoidAnvilTooExpensive.MixinAnvilScreen"
   ],
   "injectors": {
     "defaultRequire": 1

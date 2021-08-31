@@ -10,6 +10,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.plusls.carpet.network.PcaSyncProtocol;
 import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
 import com.plusls.carpet.util.rule.gravestone.GravestoneUtil;
+import net.fabricmc.api.ModInitializer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -27,7 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class PcaMod implements CarpetExtension {
+public class PcaMod implements CarpetExtension, ModInitializer {
     public static final String MODID = "pca";
     public static final Logger LOGGER = LogManager.getLogger("PcAMod");
     @Nullable
@@ -123,5 +124,10 @@ public class PcaMod implements CarpetExtension {
         Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
         return gson.fromJson(dataJSON, new TypeToken<Map<String, String>>() {
         }.getType());
+    }
+
+    @Override
+    public void onInitialize() {
+
     }
 }

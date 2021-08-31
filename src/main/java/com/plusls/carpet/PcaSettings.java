@@ -21,6 +21,7 @@ public class PcaSettings {
 //    public static String stringSetting = "foo";
     public static final String PCA = "PCA";
     public static final String PROTOCOL = "protocol";
+    public static final String NEED_CLIENT = "need_client";
 
     // protocol
     @Rule(
@@ -53,7 +54,7 @@ public class PcaSettings {
                     "empty shulker boxes can stack in a player's inventory or hand",
                     "empty shulker boxes will not stack in other inventories, such as chests or hoppers"
             },
-            category = {PCA, RuleCategory.FEATURE}
+            category = {PCA, RuleCategory.FEATURE, NEED_CLIENT}
     )
     public static boolean emptyShulkerBoxStack = false;
 
@@ -127,9 +128,15 @@ public class PcaSettings {
 
     @Rule(
             desc = "Leash villagers and mobs by lead.",
-            category = {PCA, RuleCategory.FEATURE}
+            category = {PCA, RuleCategory.FEATURE, NEED_CLIENT}
     )
     public static boolean superLead = false;
+
+    @Rule(
+            desc = "Allow anvil level cost above 40 (If the client is not installed mod, it will be too expensive but can be used in practice).",
+            category = {PCA, RuleCategory.FEATURE, NEED_CLIENT}
+    )
+    public static boolean avoidAnvilTooExpensive = false;
 
     // debug
     @Rule(

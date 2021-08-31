@@ -16,6 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
+      "com.plusls.carpet.PcaMod"
     ]
   },
   "mixins": [
@@ -27,9 +28,6 @@
     "fabric": ">=0.28.0",
     "minecraft": ">=1.17",
     "carpet": ">=1.4.45+v210811"
-  },
-  "suggests": {
-    "another-mod": "*"
   },
   "custom": {
     "modmenu": {
