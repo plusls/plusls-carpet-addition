@@ -41,6 +41,8 @@
   "rule.xaeroWorldName.desc": "设置 Xaero 世界名来同步世界 ID,\"#none\" 表示不同步",
   "rule.villagersAttractedByEmeraldBlock.name": "村民被绿宝石块吸引",
   "rule.villagersAttractedByEmeraldBlock.desc": "村民会被玩家手中的绿宝石块吸引",
+  "rule.superLead.name": "超级拴绳",
+  "rule.superLead.desc": "村民和怪物可以被拴绳拴住（拴怪物需要客户端也安装 PCA）",
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }

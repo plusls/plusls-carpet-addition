@@ -28,6 +28,7 @@ carpet >= 1.4.45+v210811
 - [墓碑](#墓碑-gravestone)
 - [Xaero小地图世界名](#Xaero小地图世界名-xaeroWorldName)
 - [村民被绿宝石块吸引](#村民被绿宝石块吸引-villagersAttractedByEmeraldBlock)
+- [超级拴绳](#超级拴绳-superLead)
 - [PCA调试模式](#PCA调试模式-pcaDebug)
 
 ## 规则列表
@@ -185,6 +186,15 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 ### 村民被绿宝石块吸引 (villagersAttractedByEmeraldBlock)
 
 村民会被玩家手中的绿宝石块吸引
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
+
+### 超级拴绳 (superLead)
+
+村民和怪物可以被拴绳拴住（拴怪物需要客户端也安装 PCA）
 
 - 类型: `boolean`
 - 默认值: `false`

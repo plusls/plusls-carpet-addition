@@ -25,6 +25,8 @@
     "rule.quickLeafDecay.MixinLeavesBlock",
     "rule.spawnBiome.MixinSpawnHelper",
     "rule.spawnYRange.MixinSpawnHelper",
+    "rule.superLead.MixinMerchantEntity",
+    "rule.superLead.MixinMobEntity",
     "rule.useDyeOnShulkerBox.MixinDyeItem",
     "rule.useDyeOnShulkerBox.MixinPotionItem",
     "rule.villagersAttractedByEmeraldBlock.MixinVillagerEntity",

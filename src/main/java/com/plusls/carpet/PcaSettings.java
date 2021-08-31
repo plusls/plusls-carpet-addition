@@ -125,6 +125,12 @@ public class PcaSettings {
     )
     public static boolean villagersAttractedByEmeraldBlock = false;
 
+    @Rule(
+            desc = "Leash villagers and mobs by lead.",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean superLead = false;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",
