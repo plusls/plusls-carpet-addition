@@ -39,6 +39,8 @@
   "rule.gravestone.desc": "玩家死亡后会在死亡附近的位置生成墓碑，其中将保留玩家身上的物品以及一半的经验",
   "rule.xaeroWorldName.name": "Xaero 小地图世界名",
   "rule.xaeroWorldName.desc": "设置 Xaero 世界名来同步世界 ID,\"#none\" 表示不同步",
+  "rule.villagersAttractedByEmeraldBlock.name": "村民被绿宝石块吸引",
+  "rule.villagersAttractedByEmeraldBlock.desc": "村民会被玩家手中的绿宝石块吸引",
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }

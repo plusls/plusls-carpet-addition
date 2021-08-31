@@ -27,6 +27,7 @@
     "rule.spawnYRange.MixinSpawnHelper",
     "rule.useDyeOnShulkerBox.MixinDyeItem",
     "rule.useDyeOnShulkerBox.MixinPotionItem",
+    "rule.villagersAttractedByEmeraldBlock.MixinVillagerEntity",
     "rule.xaeroWorldName.MixinPlayerManager"
   ],
   "client": [

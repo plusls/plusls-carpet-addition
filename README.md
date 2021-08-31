@@ -27,6 +27,7 @@ carpet >= 1.4.45+v210811
 - [快速叶子腐烂](#快速叶子腐烂-quickLeafDecay)
 - [墓碑](#墓碑-gravestone)
 - [Xaero小地图世界名](#Xaero小地图世界名-xaeroWorldName)
+- [村民被绿宝石块吸引](#村民被绿宝石块吸引-villagersAttractedByEmeraldBlock)
 - [PCA调试模式](#PCA调试模式-pcaDebug)
 
 ## 规则列表
@@ -180,6 +181,15 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 默认值: `#none`
 - 参考选项: `#none`
 - 分类: `PCA`, `PROTOCOL`
+
+### 村民被绿宝石块吸引 (villagersAttractedByEmeraldBlock)
+
+村民会被玩家手中的绿宝石块吸引
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
 
 ### PCA调试模式 (pcaDebug)
 

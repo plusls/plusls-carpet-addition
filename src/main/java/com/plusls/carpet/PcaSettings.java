@@ -119,6 +119,12 @@ public class PcaSettings {
     )
     public static String xaeroWorldName = xaeroWorldNameNone;
 
+    @Rule(
+            desc = "Villagers are attracted by emerald block.",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean villagersAttractedByEmeraldBlock = false;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",
