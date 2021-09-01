@@ -16,9 +16,6 @@ carpet >= 1.4.45+v210811
 - [PCA 同步协议](#PCA同步协议-pcaSyncProtocol)
 - [PCA 同步协议可同步玩家数据](#PCA同步协议可同步玩家数据-pcaSyncPlayerEntity)
 - [空潜影盒可堆叠](#空潜影盒可堆叠-emptyShulkerBoxStack)
-- [潜影贝可再生](#潜影贝可再生-shulkerRenewable)
-- [潜影盒快速拆包](#潜影盒快速拆包-shulkerBoxQuickUnpack)
-- [铁轨不被液体破坏](#铁轨不被液体破坏-railNoBrokenByFluid)
 - [潜影盒使用染料染色](#潜影盒使用染料染色-useDyeOnShulkerBox)
 - [不死图腾扳手](#不死图腾扳手-flippingTotemOfUndying)
 - [刷怪的最大Y值](#刷怪的最大Y值-spawnYMax)
@@ -26,7 +23,7 @@ carpet >= 1.4.45+v210811
 - [全局刷怪群系](#全局刷怪群系-spawnBiome)
 - [快速叶子腐烂](#快速叶子腐烂-quickLeafDecay)
 - [墓碑](#墓碑-gravestone)
-- [Xaero小地图世界名](#Xaero小地图世界名-xaeroWorldName)
+- [Xaero 小地图世界名](#Xaero小地图世界名-xaeroWorldName)
 - [村民被绿宝石块吸引](#村民被绿宝石块吸引-villagersAttractedByEmeraldBlock)
 - [超级拴绳](#超级拴绳-superLead)
 - [增强骨粉](#增强骨粉-powerfulBoneMeal)
@@ -34,7 +31,7 @@ carpet >= 1.4.45+v210811
 
 ## 规则列表
 
-### PCA同步协议 (pcaSyncProtocol)
+### PCA 同步协议 (pcaSyncProtocol)
 
 plusls carpet addition sync protocol
 
@@ -45,7 +42,7 @@ PCA 同步协议是一个用于在服务端和客户端之间同步 Entity，Blo
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `protocal`
 
-### PCA同步协议可同步玩家数据 (pcaSyncPlayerEntity)
+### PCA 同步协议可同步玩家数据 (pcaSyncPlayerEntity)
 
 该选项能决定哪些玩家的数据将会被 PCA 同步协议同步
 
@@ -82,33 +79,6 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 默认值: `false`
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`, `need_client`
-
-### 潜影贝可再生 (shulkerRenewable)
-
-本功能移植自 1.17
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `true`, `false`
-- 分类: `PCA`, `feature`, `experimental`
-
-### 潜影盒快速拆包 (shulkerBoxQuickUnpack)
-
-物品状态下的潜影盒在被摧毁时，盒中的物品会自动掉落，来自 1.17
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `true`, `false`
-- 分类: `PCA`, `feature`, `experimental`
-
-### 铁轨不被液体破坏 (railNoBrokenByFluid)
-
-1.17 引入了含水铁轨，考虑到改动可能会比较大，因此只引入了其不被液体破坏的特性
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `true`, `false`
-- 分类: `PCA`, `feature`, `experimental`
 
 ### 潜影盒使用染料染色 (useDyeOnShulkerBox)
 
@@ -175,9 +145,9 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`
 
-### Xaero小地图世界名 (xaeroWorldName)
+### Xaero 小地图世界名 (xaeroWorldName)
 
-设置 Xaero 世界名来同步世界 ID,"#none" 表示不同步
+设置 Xaero 世界名来同步世界 ID，“#none”表示不同步
 
 - 类型: `String`
 - 默认值: `#none`
