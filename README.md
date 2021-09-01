@@ -27,7 +27,7 @@ carpet >= 1.4.45+v210811
 - [村民被绿宝石块吸引](#村民被绿宝石块吸引-villagersAttractedByEmeraldBlock)
 - [超级拴绳](#超级拴绳-superLead)
 - [增强骨粉](#增强骨粉-powerfulBoneMeal)
-- [PCA调试模式](#PCA-调试模式-pcaDebug)
+- [PCA 调试模式](#PCA-调试模式-pcaDebug)
 
 ## 规则列表
 
