@@ -140,7 +140,7 @@ public class PcaSettings {
 
     @Rule(
             desc = "Allow use bone meal in cactus, sugar cane, chorus flower.",
-            category = {PCA, RuleCategory.FEATURE}
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
     )
     public static boolean powerfulBoneMeal = false;
 
@@ -149,6 +149,12 @@ public class PcaSettings {
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean sleepingDuringTheDay = false;
+
+    @Rule(
+            desc = "Dispenser can fix iron golem.",
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
+    )
+    public static boolean dispenserFixIronGolem = false;
 
     // debug
     @Rule(

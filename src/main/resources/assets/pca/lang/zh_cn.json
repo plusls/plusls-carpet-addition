@@ -50,6 +50,8 @@
   "rule.powerfulBoneMeal.desc": "骨粉可以催熟甘蔗，仙人掌，紫颂花",
   "rule.sleepingDuringTheDay.name": "白天睡觉",
   "rule.sleepingDuringTheDay.desc": "玩家白天睡觉时时间会切换到晚上",
+  "rule.dispenserFixIronGolem.name": "发射器修复铁傀儡",
+  "rule.dispenserFixIronGolem.desc": "发射器可以使用铁锭来修复铁傀儡",
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }

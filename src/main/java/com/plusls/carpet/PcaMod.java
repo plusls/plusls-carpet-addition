@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.brigadier.CommandDispatcher;
 import com.plusls.carpet.network.PcaSyncProtocol;
+import com.plusls.carpet.util.rule.dispenserFixIronGolem.IronIngotDispenserBehavior;
 import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
 import com.plusls.carpet.util.rule.gravestone.GravestoneUtil;
 import com.plusls.carpet.util.rule.sleepingDuringTheDay.SleepUtil;
@@ -51,8 +52,6 @@ public class PcaMod implements CarpetExtension, ModInitializer {
         // let's /carpet handle our few simple settings
         // CarpetServer.settingsManager.parseSettingsClass(ExampleSimpleSettings.class);
         // Lets have our own settings class independent from carpet.conf
-        GravestoneUtil.init();
-        SleepUtil.init();
         CarpetServer.settingsManager.parseSettingsClass(PcaSettings.class);
         // set-up a snooper to observe how rules are changing in carpet
         CarpetServer.settingsManager.addRuleObserver((serverCommandSource, currentRuleState, originalUserTest) ->
@@ -130,6 +129,8 @@ public class PcaMod implements CarpetExtension, ModInitializer {
 
     @Override
     public void onInitialize() {
-
+        GravestoneUtil.init();
+        SleepUtil.init();
+        IronIngotDispenserBehavior.init();
     }
 }
