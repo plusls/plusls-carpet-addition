@@ -138,6 +138,12 @@ public class PcaSettings {
     )
     public static boolean avoidAnvilTooExpensive = false;
 
+    @Rule(
+            desc = "Allow use bone meal in cactus, sugar cane, chorus flower",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean powerfulBoneMeal = false;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",

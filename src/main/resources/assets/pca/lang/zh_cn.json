@@ -46,6 +46,8 @@
   "rule.superLead.desc": "村民和怪物可以被拴绳拴住（拴怪物需要客户端也安装 PCA）",
   "rule.avoidAnvilTooExpensive.name": "防止铁砧过于昂贵",
   "rule.avoidAnvilTooExpensive.desc": "铁砧修复花费可以高于 40 并且不会因为过于昂贵无法使用（如果客户端不安装此 mod 则会显示过于昂贵，但是实际上可以使用）",
+  "rule.powerfulBoneMeal.name": "增强骨粉",
+  "rule.powerfulBoneMeal.desc": "骨粉可以催熟甘蔗，仙人掌，紫颂花",
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }
