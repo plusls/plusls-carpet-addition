@@ -139,10 +139,16 @@ public class PcaSettings {
     public static boolean avoidAnvilTooExpensive = false;
 
     @Rule(
-            desc = "Allow use bone meal in cactus, sugar cane, chorus flower",
+            desc = "Allow use bone meal in cactus, sugar cane, chorus flower.",
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean powerfulBoneMeal = false;
+
+    @Rule(
+            desc = "World will switch to night when player sleep during the day.",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean sleepingDuringTheDay = false;
 
     // debug
     @Rule(

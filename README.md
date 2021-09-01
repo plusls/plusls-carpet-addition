@@ -27,6 +27,7 @@ carpet >= 1.4.45+v210811
 - [村民被绿宝石块吸引](#村民被绿宝石块吸引-villagersAttractedByEmeraldBlock)
 - [超级拴绳](#超级拴绳-superLead)
 - [增强骨粉](#增强骨粉-powerfulBoneMeal)
+- [白天睡觉](#白天睡觉-sleepingDuringTheDay)
 - [PCA 调试模式](#PCA-调试模式-pcaDebug)
 
 ## 规则列表
@@ -184,6 +185,15 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 ### 增强骨粉 (powerfulBoneMeal)
 
 骨粉可以催熟甘蔗，仙人掌，紫颂花
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
+
+### 白天睡觉 (sleepingDuringTheDay)
+
+玩家白天睡觉时时间会切换到晚上
 
 - 类型: `boolean`
 - 默认值: `false`

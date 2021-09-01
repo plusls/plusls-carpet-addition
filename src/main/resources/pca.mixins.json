@@ -24,6 +24,7 @@
     "rule.pcaSyncProtocol.entity.MixinStorageMinecartEntity",
     "rule.powerBoneMeal.MixinBoneMealItem",
     "rule.quickLeafDecay.MixinLeavesBlock",
+    "rule.sleepingDuringTheDay.MixinServerWorld",
     "rule.spawnBiome.MixinSpawnHelper",
     "rule.spawnYRange.MixinSpawnHelper",
     "rule.superLead.MixinMerchantEntity",

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BoneMealItem.class)
 public class MixinBoneMealItem {
 
-    @Inject(method = "useOnFertilizable", at=@At(value = "RETURN"), cancellable = true)
+    @Inject(method = "useOnFertilizable", at = @At(value = "RETURN"), cancellable = true)
     private static void postUseOnFertilizable(ItemStack stack, World world, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
         if (!info.getReturnValueZ() && world instanceof ServerWorld && PcaSettings.powerfulBoneMeal) {
             BlockState blockState = world.getBlockState(pos);
