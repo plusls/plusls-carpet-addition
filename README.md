@@ -13,8 +13,8 @@ carpet >= 1.4.45+v210811
 
 ### [规则](#规则列表)
 
-- [PCA 同步协议](#PCA同步协议-pcaSyncProtocol)
-- [PCA 同步协议可同步玩家数据](#PCA同步协议可同步玩家数据-pcaSyncPlayerEntity)
+- [PCA 同步协议](#PCA-同步协议-pcaSyncProtocol)
+- [PCA 同步协议可同步玩家数据](#PCA-同步协议可同步玩家数据-pcaSyncPlayerEntity)
 - [空潜影盒可堆叠](#空潜影盒可堆叠-emptyShulkerBoxStack)
 - [潜影盒使用染料染色](#潜影盒使用染料染色-useDyeOnShulkerBox)
 - [不死图腾扳手](#不死图腾扳手-flippingTotemOfUndying)
@@ -23,11 +23,11 @@ carpet >= 1.4.45+v210811
 - [全局刷怪群系](#全局刷怪群系-spawnBiome)
 - [快速叶子腐烂](#快速叶子腐烂-quickLeafDecay)
 - [墓碑](#墓碑-gravestone)
-- [Xaero 小地图世界名](#Xaero小地图世界名-xaeroWorldName)
+- [Xaero 小地图世界名](#Xaero-小地图世界名-xaeroWorldName)
 - [村民被绿宝石块吸引](#村民被绿宝石块吸引-villagersAttractedByEmeraldBlock)
 - [超级拴绳](#超级拴绳-superLead)
 - [增强骨粉](#增强骨粉-powerfulBoneMeal)
-- [PCA调试模式](#PCA调试模式-pcaDebug)
+- [PCA调试模式](#PCA-调试模式-pcaDebug)
 
 ## 规则列表
 
@@ -190,7 +190,7 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`
 
-### PCA调试模式 (pcaDebug)
+### PCA 调试模式 (pcaDebug)
 
 开启后会打印调试信息
 
