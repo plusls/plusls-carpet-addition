@@ -4,9 +4,11 @@
 
 跟同 Minecraft 版本的 carpet mod 一起使用即可。尽可能地使用较新的 carpet mod
 
+该 mod 给 carpet 添加了 multiconnect 支持
+
 ## 依赖
 
-fabric-api >= 0.28
+fabric-api >= 0.39.2
 
 ## 索引
 

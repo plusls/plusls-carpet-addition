@@ -17,6 +17,9 @@
   "entrypoints": {
     "main": [
       "com.plusls.carpet.PcaMod"
+    ],
+    "client": [
+      "com.plusls.carpet.PcaMod"
     ]
   },
   "mixins": [
