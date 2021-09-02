@@ -15,8 +15,6 @@ import com.plusls.carpet.util.rule.dispenserFixIronGolem.IronIngotDispenserBehav
 import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
 import com.plusls.carpet.util.rule.gravestone.GravestoneUtil;
 import com.plusls.carpet.util.rule.sleepingDuringTheDay.SleepUtil;
-import net.earthcomputer.multiconnect.api.ICustomPayloadEvent;
-import net.earthcomputer.multiconnect.api.ICustomPayloadListener;
 import net.earthcomputer.multiconnect.api.MultiConnectAPI;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
