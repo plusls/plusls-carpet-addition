@@ -151,6 +151,15 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`
 
+死亡时生成墓碑：
+
+![player_dead.gif](./docs/player_dead.gif)
+
+挖开墓碑掉落物品：
+
+![break_gravestone.gif](./docs/break_gravestone.gif)
+
+
 ### Xaero 小地图世界名 (xaeroWorldName)
 
 设置 Xaero 世界名来同步世界 ID，“#none”表示不同步
