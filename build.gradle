@@ -30,6 +30,10 @@ dependencies {
 
     // fabric-carpet
     modImplementation "curse.maven:carpet-349239:${project.carpet_core_version}"
+
+    // multiconnect
+    modImplementation "net.earthcomputer.multiconnect:multiconnect-api:${project.multiconnect_version}"
+    include "net.earthcomputer.multiconnect:multiconnect-api:${project.multiconnect_version}"
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
 }
