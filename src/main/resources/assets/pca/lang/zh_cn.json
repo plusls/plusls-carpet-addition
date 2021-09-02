@@ -52,6 +52,8 @@
   "rule.sleepingDuringTheDay.desc": "玩家白天睡觉时时间会切换到晚上",
   "rule.dispenserFixIronGolem.name": "发射器修复铁傀儡",
   "rule.dispenserFixIronGolem.desc": "发射器可以使用铁锭来修复铁傀儡",
+  "rule.dispenserCollectXp.name": "发射器修复铁傀儡",
+  "rule.dispenserCollectXp.desc": "发射器消耗玻璃瓶来收集经验，产出附魔之瓶",
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }

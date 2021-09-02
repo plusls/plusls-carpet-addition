@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.brigadier.CommandDispatcher;
 import com.plusls.carpet.network.PcaSyncProtocol;
+import com.plusls.carpet.util.rule.dispenserCollectXp.GlassBottleDispenserBehavior;
 import com.plusls.carpet.util.rule.dispenserFixIronGolem.IronIngotDispenserBehavior;
 import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
 import com.plusls.carpet.util.rule.gravestone.GravestoneUtil;
@@ -132,5 +133,6 @@ public class PcaMod implements CarpetExtension, ModInitializer {
         GravestoneUtil.init();
         SleepUtil.init();
         IronIngotDispenserBehavior.init();
+        GlassBottleDispenserBehavior.init();
     }
 }

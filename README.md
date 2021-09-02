@@ -29,6 +29,7 @@ carpet >= 1.4.45+v210811
 - [增强骨粉](#增强骨粉-powerfulBoneMeal)
 - [白天睡觉](#白天睡觉-sleepingDuringTheDay)
 - [发射器修复铁傀儡](#发射器修复铁傀儡-dispenserFixIronGolem)
+- [发射器收集经验](#发射器收集经验-dispenserCollectXp)
 - [PCA 调试模式](#PCA-调试模式-pcaDebug)
 
 ## 规则列表
@@ -204,6 +205,15 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 ### 发射器修复铁傀儡 (dispenserFixIronGolem)
 
 发射器会消耗铁锭来修复铁傀儡
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`, `dispenser`
+
+### 发射器收集经验 (dispenserCollectXp)
+
+发射器消耗玻璃瓶来收集经验，产出附魔之瓶
 
 - 类型: `boolean`
 - 默认值: `false`

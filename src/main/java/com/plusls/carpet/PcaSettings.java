@@ -156,6 +156,12 @@ public class PcaSettings {
     )
     public static boolean dispenserFixIronGolem = false;
 
+    @Rule(
+            desc = "Dispenser use bottle to collect xp.",
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
+    )
+    public static boolean dispenserCollectXp = false;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",
