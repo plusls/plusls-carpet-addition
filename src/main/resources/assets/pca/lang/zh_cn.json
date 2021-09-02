@@ -1,6 +1,7 @@
 {
   "category.PCA": "PCA",
   "category.protocol": "协议",
+  "category.need_client": "需要客户端支持",
   "rule.pcaSyncProtocol.name": "PCA 同步协议",
   "rule.pcaSyncProtocol.desc": "支持同步 BlockEntity 和 Entity 到客户端",
   "rule.pcaSyncPlayerEntity.name": "PCA 同步协议可同步玩家数据",
@@ -39,6 +40,20 @@
   "rule.gravestone.desc": "玩家死亡后会在死亡附近的位置生成墓碑，其中将保留玩家身上的物品以及一半的经验",
   "rule.xaeroWorldName.name": "Xaero 小地图世界名",
   "rule.xaeroWorldName.desc": "设置 Xaero 世界名来同步世界 ID,\"#none\" 表示不同步",
+  "rule.villagersAttractedByEmeraldBlock.name": "村民被绿宝石块吸引",
+  "rule.villagersAttractedByEmeraldBlock.desc": "村民会被玩家手中的绿宝石块吸引",
+  "rule.superLead.name": "超级拴绳",
+  "rule.superLead.desc": "村民和怪物可以被拴绳拴住（拴怪物需要客户端也安装 PCA）",
+  "rule.avoidAnvilTooExpensive.name": "防止铁砧过于昂贵",
+  "rule.avoidAnvilTooExpensive.desc": "铁砧修复花费可以高于 40 并且不会因为过于昂贵无法使用（如果客户端不安装此 mod 则会显示过于昂贵，但是实际上可以使用）",
+  "rule.powerfulBoneMeal.name": "增强骨粉",
+  "rule.powerfulBoneMeal.desc": "骨粉可以催熟甘蔗，仙人掌，紫颂花",
+  "rule.sleepingDuringTheDay.name": "白天睡觉",
+  "rule.sleepingDuringTheDay.desc": "玩家白天睡觉时时间会切换到晚上",
+  "rule.dispenserFixIronGolem.name": "发射器修复铁傀儡",
+  "rule.dispenserFixIronGolem.desc": "发射器可以使用铁锭来修复铁傀儡",
+  "rule.dispenserCollectXp.name": "发射器修复铁傀儡",
+  "rule.dispenserCollectXp.desc": "发射器消耗玻璃瓶来收集经验，产出附魔之瓶",
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }

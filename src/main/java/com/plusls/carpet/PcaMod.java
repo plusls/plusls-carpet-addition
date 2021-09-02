@@ -8,8 +8,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.brigadier.CommandDispatcher;
 import com.plusls.carpet.network.PcaSyncProtocol;
+import com.plusls.carpet.util.rule.dispenserCollectXp.GlassBottleDispenserBehavior;
+import com.plusls.carpet.util.rule.dispenserFixIronGolem.IronIngotDispenserBehavior;
 import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
 import com.plusls.carpet.util.rule.gravestone.GravestoneUtil;
+import com.plusls.carpet.util.rule.sleepingDuringTheDay.SleepUtil;
+import net.fabricmc.api.ModInitializer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -27,7 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class PcaMod implements CarpetExtension {
+public class PcaMod implements CarpetExtension, ModInitializer {
     public static final String MODID = "pca";
     public static final Logger LOGGER = LogManager.getLogger("PcAMod");
     @Nullable
@@ -49,7 +53,6 @@ public class PcaMod implements CarpetExtension {
         // let's /carpet handle our few simple settings
         // CarpetServer.settingsManager.parseSettingsClass(ExampleSimpleSettings.class);
         // Lets have our own settings class independent from carpet.conf
-        GravestoneUtil.init();
         CarpetServer.settingsManager.parseSettingsClass(PcaSettings.class);
         // set-up a snooper to observe how rules are changing in carpet
         CarpetServer.settingsManager.addRuleObserver((serverCommandSource, currentRuleState, originalUserTest) ->
@@ -123,5 +126,13 @@ public class PcaMod implements CarpetExtension {
         Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
         return gson.fromJson(dataJSON, new TypeToken<Map<String, String>>() {
         }.getType());
+    }
+
+    @Override
+    public void onInitialize() {
+        GravestoneUtil.init();
+        SleepUtil.init();
+        IronIngotDispenserBehavior.init();
+        GlassBottleDispenserBehavior.init();
     }
 }

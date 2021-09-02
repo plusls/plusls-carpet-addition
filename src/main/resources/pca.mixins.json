@@ -4,7 +4,7 @@
   "package": "com.plusls.carpet.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinCrashReport",
+    "rule.avoidAnvilTooExpensive.MixinAnvilScreenHandler",
     "rule.emptyShulkerBoxStack.MixinPlayerInventory",
     "rule.emptyShulkerBoxStack.MixinScreenHandler",
     "rule.flippingTotemOfUndying.MixinBlockRotator",
@@ -21,17 +21,23 @@
     "rule.pcaSyncProtocol.entity.MixinHorseBaseEntity",
     "rule.pcaSyncProtocol.entity.MixinMerchantEntity",
     "rule.pcaSyncProtocol.entity.MixinStorageMinecartEntity",
+    "rule.powerBoneMeal.MixinBoneMealItem",
     "rule.quickLeafDecay.MixinLeavesBlock",
     "rule.railNoBrokenByFluid.MixinFlowableFluid",
     "rule.shulkerBoxQuickUnpack.MixinItemEntity",
     "rule.shulkerRenewable.MixinShulkerEntity",
+    "rule.sleepingDuringTheDay.MixinServerWorld",
     "rule.spawnBiome.MixinSpawnHelper",
     "rule.spawnYRange.MixinSpawnHelper",
+    "rule.superLead.MixinMerchantEntity",
+    "rule.superLead.MixinMobEntity",
     "rule.useDyeOnShulkerBox.MixinDyeItem",
     "rule.useDyeOnShulkerBox.MixinPotionItem",
+    "rule.villagersAttractedByEmeraldBlock.MixinVillagerEntity",
     "rule.xaeroWorldName.MixinPlayerManager"
   ],
   "client": [
+    "rule.avoidAnvilTooExpensive.MixinAnvilScreen"
   ],
   "injectors": {
     "defaultRequire": 1

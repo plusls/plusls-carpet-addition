@@ -21,6 +21,7 @@ public class PcaSettings {
 //    public static String stringSetting = "foo";
     public static final String PCA = "PCA";
     public static final String PROTOCOL = "protocol";
+    public static final String NEED_CLIENT = "need_client";
 
     // protocol
     @Rule(
@@ -53,7 +54,7 @@ public class PcaSettings {
                     "empty shulker boxes can stack in a player's inventory or hand",
                     "empty shulker boxes will not stack in other inventories, such as chests or hoppers"
             },
-            category = {PCA, RuleCategory.FEATURE}
+            category = {PCA, RuleCategory.FEATURE, NEED_CLIENT}
     )
     public static boolean emptyShulkerBoxStack = false;
 
@@ -136,6 +137,48 @@ public class PcaSettings {
             options = {xaeroWorldNameNone}
     )
     public static String xaeroWorldName = xaeroWorldNameNone;
+
+    @Rule(
+            desc = "Villagers are attracted by emerald block.",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean villagersAttractedByEmeraldBlock = false;
+
+    @Rule(
+            desc = "Leash villagers and mobs by lead.",
+            category = {PCA, RuleCategory.FEATURE, NEED_CLIENT}
+    )
+    public static boolean superLead = false;
+
+    @Rule(
+            desc = "Allow anvil level cost above 40 (If the client is not installed mod, it will be too expensive but can be used in practice).",
+            category = {PCA, RuleCategory.FEATURE, NEED_CLIENT}
+    )
+    public static boolean avoidAnvilTooExpensive = false;
+
+    @Rule(
+            desc = "Allow use bone meal in cactus, sugar cane, chorus flower.",
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
+    )
+    public static boolean powerfulBoneMeal = false;
+
+    @Rule(
+            desc = "World will switch to night when player sleep during the day.",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean sleepingDuringTheDay = false;
+
+    @Rule(
+            desc = "Dispenser can fix iron golem.",
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
+    )
+    public static boolean dispenserFixIronGolem = false;
+
+    @Rule(
+            desc = "Dispenser use bottle to collect xp.",
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
+    )
+    public static boolean dispenserCollectXp = false;
 
     // debug
     @Rule(
