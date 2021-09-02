@@ -15,7 +15,6 @@ import com.plusls.carpet.util.rule.dispenserFixIronGolem.IronIngotDispenserBehav
 import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
 import com.plusls.carpet.util.rule.gravestone.GravestoneUtil;
 import com.plusls.carpet.util.rule.sleepingDuringTheDay.SleepUtil;
-import net.earthcomputer.multiconnect.api.MultiConnectAPI;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
@@ -36,7 +35,7 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class PcaMod implements CarpetExtension, ModInitializer, ClientModInitializer {
+public class PcaMod implements CarpetExtension, ModInitializer {
     public static final String MODID = "pca";
     public static final Logger LOGGER = LogManager.getLogger("PcAMod");
     @Nullable
@@ -136,21 +135,5 @@ public class PcaMod implements CarpetExtension, ModInitializer, ClientModInitial
         SleepUtil.init();
         IronIngotDispenserBehavior.init();
         GlassBottleDispenserBehavior.init();
-    }
-
-    @Override
-    public void onInitializeClient() {
-        MultiConnectAPI.instance().addClientboundIdentifierCustomPayloadListener(event -> {
-            Identifier channel = event.getChannel();
-            if (channel.equals(CarpetClient.CARPET_CHANNEL)) {
-                ClientNetworkHandler.handleData(event.getData(), MinecraftClient.getInstance().player);
-            }
-        });
-        MultiConnectAPI.instance().addServerboundIdentifierCustomPayloadListener(event -> {
-            Identifier channel = event.getChannel();
-            if (channel.equals(CarpetClient.CARPET_CHANNEL)) {
-                MultiConnectAPI.instance().forceSendCustomPayload(event.getNetworkHandler(), event.getChannel(), event.getData());
-            }
-        });
     }
 }

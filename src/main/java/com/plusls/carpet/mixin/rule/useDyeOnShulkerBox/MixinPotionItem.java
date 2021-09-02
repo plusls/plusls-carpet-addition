@@ -8,7 +8,7 @@ import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.util.ActionResult;
@@ -49,7 +49,7 @@ public abstract class MixinPotionItem extends Item {
                     ShulkerBoxBlockEntity newBlockEntity = (ShulkerBoxBlockEntity) world.getBlockEntity(pos);
                     assert blockEntity != null;
                     assert newBlockEntity != null;
-                    newBlockEntity.readInventoryNbt(blockEntity.writeInventoryNbt(new NbtCompound()));
+                    newBlockEntity.deserializeInventory(blockEntity.serializeInventory(new CompoundTag()));
                     newBlockEntity.setCustomName(blockEntity.getCustomName());
                     newBlockEntity.markDirty();
                     if (!player.isCreative()) {

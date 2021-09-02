@@ -8,7 +8,7 @@
 
 ## 依赖
 
-fabric-api >= 0.39.2
+fabric-api >= 0.28.5
 
 ## 索引
 

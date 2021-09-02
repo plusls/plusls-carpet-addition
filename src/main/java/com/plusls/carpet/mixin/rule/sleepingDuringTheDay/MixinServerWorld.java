@@ -3,21 +3,22 @@ package com.plusls.carpet.mixin.rule.sleepingDuringTheDay;
 import com.plusls.carpet.PcaSettings;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.profiler.Profiler;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.MutableWorldProperties;
-import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.ChunkManager;
+import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.level.LevelProperties;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import java.util.function.Supplier;
+import java.util.function.BiFunction;
 
 @Mixin(ServerWorld.class)
-public abstract class MixinServerWorld extends World implements StructureWorldAccess {
-    protected MixinServerWorld(MutableWorldProperties properties, RegistryKey<World> registryRef, DimensionType dimensionType, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long seed) {
-        super(properties, registryRef, dimensionType, profiler, isClient, debugWorld, seed);
+public abstract class MixinServerWorld extends World {
+
+    protected MixinServerWorld(LevelProperties levelProperties, DimensionType dimensionType, BiFunction<World, Dimension, ChunkManager> chunkManagerProvider, Profiler profiler, boolean isClient) {
+        super(levelProperties, dimensionType, chunkManagerProvider, profiler, isClient);
     }
 
     // 根据当前时间设置夜晚和白天

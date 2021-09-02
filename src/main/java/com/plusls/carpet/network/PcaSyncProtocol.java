@@ -13,13 +13,13 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -69,7 +69,7 @@ public class PcaSyncProtocol {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeIdentifier(entity.getEntityWorld().getRegistryKey().getValue());
         buf.writeInt(entity.getEntityId());
-        buf.writeNbt(entity.writeNbt(new NbtCompound()));
+        buf.writeNbt(entity.writeNbt(new CompoundTag()));
         ServerPlayNetworking.send(player, UPDATE_ENTITY, buf);
     }
 
@@ -87,7 +87,7 @@ public class PcaSyncProtocol {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeIdentifier(world.getRegistryKey().getValue());
         buf.writeBlockPos(blockEntity.getPos());
-        buf.writeNbt(blockEntity.writeNbt(new NbtCompound()));
+        buf.writeCompoundTag(blockEntity.toTag(new CompoundTag()));
         ServerPlayNetworking.send(player, UPDATE_BLOCK_ENTITY, buf);
     }
 

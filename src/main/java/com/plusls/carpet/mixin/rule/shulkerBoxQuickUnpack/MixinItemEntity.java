@@ -9,8 +9,8 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,10 +41,10 @@ public abstract class MixinItemEntity extends Entity {
         ItemStack itemStack = getStack();
         Item item = itemStack.getItem();
         if (item instanceof BlockItem && ((BlockItem) item).getBlock() instanceof ShulkerBoxBlock) {
-            NbtCompound lv = itemStack.getTag();
+            CompoundTag lv = itemStack.getTag();
             if (lv != null) {
-                NbtList itemList = lv.getCompound("BlockEntityTag").getList("Items", 10);
-                dropItems(itemList.stream().map(NbtCompound.class::cast).map(ItemStack::fromNbt));
+                ListTag itemList = lv.getCompound("BlockEntityTag").getList("Items", 10);
+                dropItems(itemList.stream().map(CompoundTag.class::cast).map(ItemStack::fromTag));
             }
         }
     }

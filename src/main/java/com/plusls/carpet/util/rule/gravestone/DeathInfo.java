@@ -1,7 +1,7 @@
 package com.plusls.carpet.util.rule.gravestone;
 
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.CompoundTag;
 
 public class DeathInfo {
     public final long deathTime;
@@ -14,15 +14,15 @@ public class DeathInfo {
         this.inventory = inv;
     }
 
-    public NbtCompound toTag() {
-        NbtCompound tag = new NbtCompound();
+    public CompoundTag toTag() {
+        CompoundTag tag = new CompoundTag();
         tag.putLong("DeathTime", this.deathTime);
         tag.putInt("XP", this.xp);
         tag.put("Items", this.inventory.toNbtList());
         return tag;
     }
 
-    public static DeathInfo fromTag(NbtCompound tag) {
+    public static DeathInfo fromTag(CompoundTag tag) {
         long deathTime = tag.getLong("DeathTime");
         int xp = tag.getInt("XP");
         SimpleInventory inventory = new SimpleInventory(GravestoneUtil.PLAYER_INVENTORY_SIZE);
