@@ -10,7 +10,7 @@ import java.util.Random;
 
 @Mixin(SpawnHelper.class)
 public class MixinSpawnHelper {
-    @Redirect(method = "getSpawnPos", at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 2))
+    @Redirect(method = "method_8657", at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 2))
     private static int modifySpawnY(Random random, int bound) {
         int max = bound, min = 0;
         if (PcaSettings.spawnYMax != PcaSettings.INT_DISABLE) {

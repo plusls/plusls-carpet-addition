@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,10 +21,10 @@ public abstract class MixinLeavesBlock extends Block {
         super(settings);
     }
 
-    @Inject(method = "scheduledTick", at = @At("RETURN"))
-    private void postScheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+    @Inject(method = "onScheduledTick", at = @At("RETURN"))
+    private void postScheduledTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
         if (PcaSettings.quickLeafDecay) {
-            this.randomTick(state, world, pos, random);
+            this.onRandomTick(state, world, pos, random);
         }
     }
 }

@@ -13,7 +13,6 @@
     "rule.gravestone.MixinSkullBlockEntity",
     "rule.pcaSyncProtocol.block.MixinAbstractFurnaceBlockEntity",
     "rule.pcaSyncProtocol.block.MixinBarrelBlockEntity",
-    "rule.pcaSyncProtocol.block.MixinBeehiveBlockEntity",
     "rule.pcaSyncProtocol.block.MixinBrewingStandBlockEntity",
     "rule.pcaSyncProtocol.block.MixinChestBlockEntity",
     "rule.pcaSyncProtocol.block.MixinDispenserBlockEntity",

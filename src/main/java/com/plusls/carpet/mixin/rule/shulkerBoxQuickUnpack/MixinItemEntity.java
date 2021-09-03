@@ -52,6 +52,6 @@ public abstract class MixinItemEntity extends Entity {
     public void dropItems(Stream<ItemStack> stream) {
         if (this.world.isClient())
             return;
-        stream.forEach(itemStack -> this.world.spawnEntity(new ItemEntity(this.world, this.getX(), this.getY(), this.getZ(), itemStack)));
+        stream.forEach(itemStack -> this.world.spawnEntity(new ItemEntity(this.world, this.x, this.y, this.z, itemStack)));
     }
 }

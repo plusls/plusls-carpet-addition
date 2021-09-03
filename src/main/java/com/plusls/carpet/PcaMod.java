@@ -2,10 +2,6 @@ package com.plusls.carpet;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
-import carpet.utils.Translations;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.mojang.brigadier.CommandDispatcher;
 import com.plusls.carpet.network.PcaSyncProtocol;
 import com.plusls.carpet.util.rule.dispenserCollectXp.GlassBottleDispenserBehavior;
@@ -16,17 +12,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.Objects;
 
 
 public class PcaMod implements CarpetExtension, ModInitializer {
@@ -74,9 +64,9 @@ public class PcaMod implements CarpetExtension, ModInitializer {
     public void onServerLoaded(MinecraftServer server) {
         // reloading of /carpet settings is handled by carpet
         // reloading of own settings is handled as an extension, since we claim own settings manager
+        onServerLoadedWorlds(server);
     }
 
-    @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
         PcaSyncProtocol.init();
         FlipCooldown.init();
@@ -107,6 +97,8 @@ public class PcaMod implements CarpetExtension, ModInitializer {
         FlipCooldown.removePlayer(player);
     }
 
+    /*
+    not work in 1.14
     @Override
     public Map<String, String> canHasTranslations(String lang) {
         String dataJSON;
@@ -122,6 +114,7 @@ public class PcaMod implements CarpetExtension, ModInitializer {
         return gson.fromJson(dataJSON, new TypeToken<Map<String, String>>() {
         }.getType());
     }
+    */
 
     @Override
     public void onInitialize() {

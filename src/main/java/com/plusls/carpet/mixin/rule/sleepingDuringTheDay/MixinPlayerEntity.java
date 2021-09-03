@@ -11,10 +11,10 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class MixinPlayerEntity {
     // 白天不会被叫醒
     @Redirect(method = "tick()V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;wakeUp(ZZ)V", ordinal = 0))
-    void redirectWakeUp(PlayerEntity player, boolean updateSleepTimer, boolean updateSleepingPlayers) {
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;wakeUp(ZZZ)V", ordinal = 0))
+    void redirectWakeUp(PlayerEntity playerEntity, boolean bl, boolean bl2, boolean setSpawn) {
         if (!PcaSettings.sleepingDuringTheDay) {
-            player.wakeUp(updateSleepTimer, updateSleepingPlayers);
+            playerEntity.wakeUp(bl, bl2, setSpawn);
         }
     }
 
