@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.8-SNAPSHOT'
+    id 'fabric-loom' version '0.9-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -39,7 +39,7 @@ dependencies {
 }
 
 loom {
-    accessWidener "src/main/resources/pca.accesswidener"
+    accessWidenerPath = file("src/main/resources/pca.accesswidener")
 }
 
 processResources {
