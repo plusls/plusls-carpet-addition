@@ -29,10 +29,10 @@ public abstract class MixinShulkerEntity extends GolemEntity implements Monster,
     protected static TrackedData<Byte> COLOR;
 
     @Shadow
-    protected abstract boolean isClosed();
+    protected abstract boolean method_7124();
 
     @Shadow
-    protected abstract boolean tryTeleport();
+    protected abstract boolean method_7127();
 
     protected MixinShulkerEntity(EntityType<? extends GolemEntity> entityType, World world) {
         super(entityType, world);
@@ -43,9 +43,9 @@ public abstract class MixinShulkerEntity extends GolemEntity implements Monster,
     private void spawnNewShulker() {
         Vec3d lv = getPos();
         Box lv2 = getBoundingBox();
-        if (isClosed() || !tryTeleport())
+        if (method_7124() || !method_7127())
             return;
-        int i = this.world.getEntitiesByType(EntityType.SHULKER, lv2.expand(8.0D), Entity::isAlive).size();
+        int i = this.world.getEntities(EntityType.SHULKER, lv2.expand(8.0D), Entity::isAlive).size();
         float f = (i - 1) / 5.0F;
         if (this.world.random.nextFloat() < f)
             return;
@@ -56,11 +56,11 @@ public abstract class MixinShulkerEntity extends GolemEntity implements Monster,
         DyeColor lv4 = getColor();
         if (lv4 != null)
             ((INewShulkerEntity) lv3).setColor(lv4);
-        lv3.refreshPositionAfterTeleport(lv);
+        lv3.refreshPositionAndAngles(lv.x, lv.y, lv.z, this.yaw, this.pitch);
         this.world.spawnEntity(lv3);
     }
 
-    @Inject(method = "tryTeleport", at = @At(value = "HEAD"))
+    @Inject(method = "method_7127", at = @At(value = "HEAD"))
     private void setTpFlag(CallbackInfoReturnable<Boolean> cir) {
         tp = true;
     }

@@ -36,9 +36,9 @@ public class MixinBlockRotator {
                     !player.getOffHandStack().isEmpty()) {
                 return;
             }
-            CarpetSettings.impendingFillSkipUpdates.set(true);
+            CarpetSettings.impendingFillSkipUpdates = true;
             boolean ret = BlockRotator.flip_block(state, world, player, hand, hit);
-            CarpetSettings.impendingFillSkipUpdates.set(false);
+            CarpetSettings.impendingFillSkipUpdates = false;
             if (ret) {
                 FlipCooldown.setCoolDown(player, world.getTime());
             }

@@ -44,7 +44,7 @@ public class GlassBottleDispenserBehavior extends MyFallibleItemDispenserBehavio
         }
         BlockPos faceBlockPos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
 
-        List<ExperienceOrbEntity> xpEntityList = pointer.getWorld().getEntitiesByClass(ExperienceOrbEntity.class,
+        List<ExperienceOrbEntity> xpEntityList = pointer.getWorld().getEntities(ExperienceOrbEntity.class,
                 new Box(faceBlockPos), Entity::isAlive);
 
         int currentXp = 0;

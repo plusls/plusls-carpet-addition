@@ -2,8 +2,6 @@ package com.plusls.carpet;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
-import carpet.network.CarpetClient;
-import carpet.network.ClientNetworkHandler;
 import carpet.utils.Translations;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,11 +11,7 @@ import com.plusls.carpet.network.PcaSyncProtocol;
 import com.plusls.carpet.util.rule.dispenserCollectXp.GlassBottleDispenserBehavior;
 import com.plusls.carpet.util.rule.dispenserFixIronGolem.IronIngotDispenserBehavior;
 import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
-import com.plusls.carpet.util.rule.gravestone.GravestoneUtil;
-import com.plusls.carpet.util.rule.sleepingDuringTheDay.SleepUtil;
-import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -131,8 +125,6 @@ public class PcaMod implements CarpetExtension, ModInitializer {
 
     @Override
     public void onInitialize() {
-        GravestoneUtil.init();
-        SleepUtil.init();
         IronIngotDispenserBehavior.init();
         GlassBottleDispenserBehavior.init();
     }

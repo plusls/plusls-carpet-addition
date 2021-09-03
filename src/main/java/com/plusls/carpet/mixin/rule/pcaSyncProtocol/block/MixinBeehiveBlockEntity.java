@@ -8,7 +8,7 @@ import net.minecraft.block.entity.BeehiveBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tickable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,7 +41,7 @@ public abstract class MixinBeehiveBlockEntity extends BlockEntity implements Tic
 
 
     @Inject(method = "fromTag", at = @At(value = "RETURN"))
-    public void postFromTag(BlockState state, NbtCompound tag, CallbackInfo ci) {
+    public void postFromTag(CompoundTag tag, CallbackInfo ci) {
         if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
             PcaMod.LOGGER.debug("update BeehiveBlockEntity: {}", this.pos);
         }

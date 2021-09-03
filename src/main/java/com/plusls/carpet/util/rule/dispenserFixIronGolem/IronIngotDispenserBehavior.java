@@ -33,7 +33,7 @@ public class IronIngotDispenserBehavior extends MyFallibleItemDispenserBehavior 
         }
         BlockPos faceBlockPos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
 
-        List<IronGolemEntity> ironGolemEntityList = pointer.getWorld().getEntitiesByClass(IronGolemEntity.class,
+        List<IronGolemEntity> ironGolemEntityList = pointer.getWorld().getEntities(IronGolemEntity.class,
                 new Box(faceBlockPos), LivingEntity::isAlive);
 
         for (IronGolemEntity ironGolemEntity : ironGolemEntityList) {

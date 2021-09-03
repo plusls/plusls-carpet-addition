@@ -8,7 +8,7 @@ import net.minecraft.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +34,7 @@ public abstract class MixinDyeItem extends Item {
         BlockPos pos = context.getBlockPos();
         BlockState blockState = world.getBlockState(pos);
 
-        if (blockState.isOf(Blocks.SHULKER_BOX)) {
+        if (blockState.getBlock() == Blocks.SHULKER_BOX) {
             if (!world.isClient()) {
                 ShulkerBoxBlockEntity blockEntity = (ShulkerBoxBlockEntity) world.getBlockEntity(pos);
                 BlockState newBlockState = ShulkerBoxBlock.get(getColor()).getDefaultState().
@@ -44,13 +44,13 @@ public abstract class MixinDyeItem extends Item {
                     ShulkerBoxBlockEntity newBlockEntity = (ShulkerBoxBlockEntity) world.getBlockEntity(pos);
                     assert blockEntity != null;
                     assert newBlockEntity != null;
-                    newBlockEntity.readInventoryNbt(blockEntity.writeInventoryNbt(new NbtCompound()));
+                    newBlockEntity.deserializeInventory(blockEntity.serializeInventory(new CompoundTag()));
                     newBlockEntity.setCustomName(blockEntity.getCustomName());
                     newBlockEntity.markDirty();
                     context.getStack().decrement(1);
                 }
             }
-            return ActionResult.success(world.isClient);
+            return world.isClient ? ActionResult.SUCCESS : ActionResult.PASS;
         }
         return ActionResult.PASS;
     }

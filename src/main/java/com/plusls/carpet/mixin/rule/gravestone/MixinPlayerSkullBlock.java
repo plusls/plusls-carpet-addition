@@ -35,7 +35,7 @@ public abstract class MixinPlayerSkullBlock extends SkullBlock {
                 player.incrementStat(Stats.MINED.getOrCreateStat(this));
                 player.addExhaustion(0.005F);
                 // Drop item
-                for (ItemStack itemStack : deathInfo.inventory.clearToList()) {
+                for (ItemStack itemStack : deathInfo.inventory) {
                     dropStack(world, pos, itemStack);
                 }
 

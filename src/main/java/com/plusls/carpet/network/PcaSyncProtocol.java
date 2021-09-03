@@ -22,6 +22,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -67,9 +68,9 @@ public class PcaSyncProtocol {
     // 传输 World 是为了通知客户端该 Entity 属于哪个 World
     public static void updateEntity(@NotNull ServerPlayerEntity player, @NotNull Entity entity) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        buf.writeIdentifier(entity.getEntityWorld().getRegistryKey().getValue());
+        buf.writeIdentifier(DimensionType.getId(entity.getEntityWorld().getDimension().getType()));
         buf.writeInt(entity.getEntityId());
-        buf.writeNbt(entity.writeNbt(new CompoundTag()));
+        buf.writeCompoundTag(entity.toTag(new CompoundTag()));
         ServerPlayNetworking.send(player, UPDATE_ENTITY, buf);
     }
 
@@ -85,7 +86,7 @@ public class PcaSyncProtocol {
         }
 
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        buf.writeIdentifier(world.getRegistryKey().getValue());
+        buf.writeIdentifier(DimensionType.getId(world.getDimension().getType()));
         buf.writeBlockPos(blockEntity.getPos());
         buf.writeCompoundTag(blockEntity.toTag(new CompoundTag()));
         ServerPlayNetworking.send(player, UPDATE_BLOCK_ENTITY, buf);
@@ -186,7 +187,7 @@ public class PcaSyncProtocol {
             updateBlockEntity(player, blockEntity);
         }
 
-        Pair<Identifier, BlockPos> pair = new ImmutablePair<>(player.getEntityWorld().getRegistryKey().getValue(), pos);
+        Pair<Identifier, BlockPos> pair = new ImmutablePair<>(DimensionType.getId(player.getEntityWorld().getDimension().getType()), pos);
         lock.lock();
         playerSet.add(player);
         playerWatchBlockPos.put(player, pair);
@@ -241,7 +242,7 @@ public class PcaSyncProtocol {
             PcaMod.LOGGER.debug("{} watch entity {}: {}", player.getName().asString(), entityId, entity);
             updateEntity(player, entity);
 
-            Pair<Identifier, Entity> pair = new ImmutablePair<>(entity.getEntityWorld().getRegistryKey().getValue(), entity);
+            Pair<Identifier, Entity> pair = new ImmutablePair<>(DimensionType.getId(entity.getEntityWorld().getDimension().getType()), entity);
             lock.lock();
             playerSet.add(player);
             playerWatchEntity.put(player, pair);
@@ -275,11 +276,11 @@ public class PcaSyncProtocol {
 
     // 工具
     private static @Nullable Set<ServerPlayerEntity> getWatchPlayerList(@NotNull Entity entity) {
-        return entityWatchPlayerSet.get(getIdentifierEntityPair(entity.getEntityWorld().getRegistryKey().getValue(), entity));
+        return entityWatchPlayerSet.get(getIdentifierEntityPair(DimensionType.getId(entity.getEntityWorld().getDimension().getType()), entity));
     }
 
     private static @Nullable Set<ServerPlayerEntity> getWatchPlayerList(@NotNull World world, @NotNull BlockPos blockPos) {
-        return blockPosWatchPlayerSet.get(getIdentifierBlockPosPair(world.getRegistryKey().getValue(), blockPos));
+        return blockPosWatchPlayerSet.get(getIdentifierBlockPosPair(DimensionType.getId(world.getDimension().getType()), blockPos));
     }
 
     public static boolean syncEntityToClient(@NotNull Entity entity) {

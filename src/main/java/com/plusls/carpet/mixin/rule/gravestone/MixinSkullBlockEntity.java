@@ -2,7 +2,6 @@ package com.plusls.carpet.mixin.rule.gravestone;
 
 import com.plusls.carpet.util.rule.gravestone.DeathInfo;
 import com.plusls.carpet.util.rule.gravestone.MySkullBlockEntity;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.SkullBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,7 +25,7 @@ public class MixinSkullBlockEntity implements MySkullBlockEntity {
     }
 
     @Inject(method = "fromTag", at = @At(value = "RETURN"))
-    private void postReadNbt(BlockState state, CompoundTag tag, CallbackInfo ci) {
+    private void postReadNbt(CompoundTag tag, CallbackInfo ci) {
         // COMPOUND_TYPE
         if (tag.contains("DeathInfo", 10)) {
             deathInfo = DeathInfo.fromTag(tag.getCompound("DeathInfo"));

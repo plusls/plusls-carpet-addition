@@ -4,8 +4,8 @@ import com.plusls.carpet.PcaSettings;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 
 public class ShulkerBoxItemUtil {
     public static final int SHULKERBOX_MAX_STACK_AMOUNT = 64;
@@ -13,11 +13,11 @@ public class ShulkerBoxItemUtil {
     public static boolean isEmptyShulkerBoxItem(ItemStack itemStack) {
         if (itemStack.getItem() instanceof BlockItem &&
                 ((BlockItem) itemStack.getItem()).getBlock() instanceof ShulkerBoxBlock) {
-            NbtCompound nbt = itemStack.getTag();
+            CompoundTag nbt = itemStack.getTag();
             if (nbt != null && nbt.contains("BlockEntityTag", 10)) {
-                NbtCompound tag = nbt.getCompound("BlockEntityTag");
+                CompoundTag tag = nbt.getCompound("BlockEntityTag");
                 if (tag.contains("Items", 9)) {
-                    NbtList tagList = tag.getList("Items", 10);
+                    ListTag tagList = tag.getList("Items", 10);
                     return tagList.size() <= 0;
                 }
             }

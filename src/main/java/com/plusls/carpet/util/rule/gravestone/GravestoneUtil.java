@@ -2,11 +2,9 @@ package com.plusls.carpet.util.rule.gravestone;
 
 import com.plusls.carpet.PcaMod;
 import com.plusls.carpet.PcaSettings;
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.SkullBlockEntity;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.AutomaticItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.ServerTask;
@@ -16,38 +14,25 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 
 public class GravestoneUtil {
     public static final int NETHER_BEDROCK_MAX_Y = 127;
     public static final int SEARCH_RANGE = 5;
-    public static final int PLAYER_INVENTORY_SIZE = 41;
 
-    public static void init() {
-        ServerPlayerEvents.ALLOW_DEATH.register((player, damageSource, damageAmount) -> {
-            deathHandle(player);
-            return true;
-        });
-    }
-
-    private static void deathHandle(ServerPlayerEntity player) {
+    public static void deathHandle(ServerPlayerEntity player) {
         World world = player.world;
         if (PcaSettings.gravestone && !world.getGameRules().getBoolean(GameRules.KEEP_INVENTORY)) {
             player.vanishCursedItems();
-            SimpleInventory inventory = new SimpleInventory(PLAYER_INVENTORY_SIZE);
-            for (ItemStack itemStack : player.inventory.main) {
-                inventory.addStack(itemStack);
-            }
+            ArrayList<ItemStack> inventory = new ArrayList<>();
+            inventory.addAll(player.inventory.main);
+            inventory.addAll(player.inventory.armor);
+            inventory.addAll(player.inventory.offHand);
 
-            for (ItemStack itemStack : player.inventory.armor) {
-                inventory.addStack(itemStack);
-            }
-
-            for (ItemStack itemStack : player.inventory.offHand) {
-                inventory.addStack(itemStack);
-            }
             int xp = player.totalExperience / 2;
             player.inventory.clear();
 
@@ -64,7 +49,7 @@ public class GravestoneUtil {
 
     // find pos to place gravestone
     public static BlockPos findGravePos(ServerPlayerEntity player) {
-        BlockPos.Mutable playerPos = new BlockPos((player.getPos())).mutableCopy();
+        BlockPos.Mutable playerPos = new BlockPos.Mutable(new BlockPos(player.getPos()));
         playerPos.setY(clampY(player, playerPos.getY()));
         if (canPlaceGrave(player, playerPos)) {
             return playerPos;
@@ -95,7 +80,7 @@ public class GravestoneUtil {
     // make sure to spawn graves on the suitable place
     public static int clampY(ServerPlayerEntity player, int y) {
         //don't spawn on nether ceiling, unless the player is already there.
-        if (player.world.getRegistryKey() == World.NETHER && y < NETHER_BEDROCK_MAX_Y) {
+        if (player.world.getDimension().getType() == DimensionType.THE_NETHER && y < NETHER_BEDROCK_MAX_Y) {
             //clamp to 1 -- don't spawn graves the layer right above the void, so players can actually recover their items.
             return MathHelper.clamp(y, 1, NETHER_BEDROCK_MAX_Y - 1);
         } else {
@@ -143,7 +128,7 @@ public class GravestoneUtil {
                         pos.getX(), pos.getY(), pos.getZ()));
             }
             SkullBlockEntity graveEntity = (SkullBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos));
-            graveEntity.setOwner(player.getGameProfile());
+            graveEntity.setOwnerAndType(player.getGameProfile());
             ((MySkullBlockEntity) graveEntity).setDeathInfo(deathInfo);
             graveEntity.markDirty();
         };

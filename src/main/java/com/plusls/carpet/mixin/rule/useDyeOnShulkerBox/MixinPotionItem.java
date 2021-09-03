@@ -58,7 +58,7 @@ public abstract class MixinPotionItem extends Item {
                     }
                 }
             }
-            return ActionResult.success(world.isClient);
+            return world.isClient ? ActionResult.SUCCESS : ActionResult.PASS;
         }
         return ActionResult.PASS;
     }

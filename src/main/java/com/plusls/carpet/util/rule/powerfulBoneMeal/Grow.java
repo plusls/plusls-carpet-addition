@@ -23,7 +23,7 @@ public class Grow {
         int height = 1;
         // 计算上层空气坐标
         while (!world.isAir(upPos)) {
-            if (world.getBlockState(upPos).isOf(Blocks.SUGAR_CANE)) {
+            if (world.getBlockState(upPos).getBlock() == Blocks.SUGAR_CANE) {
                 upPos = upPos.up();
                 height++;
             } else {
@@ -32,7 +32,7 @@ public class Grow {
         }
 
         // 计算底部坐标
-        while (world.getBlockState(downPos).isOf(Blocks.SUGAR_CANE)) {
+        while (world.getBlockState(downPos).getBlock() == Blocks.SUGAR_CANE) {
             downPos = downPos.down();
             height++;
         }

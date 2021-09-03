@@ -1,14 +1,11 @@
 package com.plusls.carpet.mixin.rule.spawnBiome;
 
 import com.plusls.carpet.PcaSettings;
-import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.EntityCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BuiltinBiomes;
-import net.minecraft.world.biome.SpawnSettings;
-import net.minecraft.world.gen.StructureAccessor;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,18 +15,17 @@ import java.util.List;
 
 @Mixin(SpawnHelper.class)
 public class MixinSpawnHelper {
-    @Redirect(method = "method_29950",
+    @Redirect(method = "pickRandomSpawnEntry",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/gen/chunk/ChunkGenerator;getEntitySpawnList(Lnet/minecraft/world/biome/Biome;Lnet/minecraft/world/gen/StructureAccessor;Lnet/minecraft/entity/SpawnGroup;Lnet/minecraft/util/math/BlockPos;)Ljava/util/List;"))
-    private static List<SpawnSettings.SpawnEntry> modifyBiome(ChunkGenerator chunkGenerator, Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos) {
+                    target = "Lnet/minecraft/world/gen/chunk/ChunkGenerator;getEntitySpawnList(Lnet/minecraft/entity/EntityCategory;Lnet/minecraft/util/math/BlockPos;)Ljava/util/List;", ordinal = 0))
+    private static List<Biome.SpawnEntry> modifyBiome(ChunkGenerator<?> chunkGenerator, EntityCategory category, BlockPos pos) {
         if (PcaSettings.spawnBiome != PcaSettings.PCA_SPAWN_BIOME.DEFAULT) {
             if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.DESERT) {
-                biome = BuiltinRegistries.BIOME.get(BuiltinBiomes.fromRawId(2));
+                return Biomes.DESERT.getEntitySpawnList(category);
             } else if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.PLAINS) {
-                // BuiltinBiomes
-                biome = BuiltinRegistries.BIOME.get(BuiltinBiomes.fromRawId(1));
+                return Biomes.PLAINS.getEntitySpawnList(category);
             }
         }
-        return chunkGenerator.getEntitySpawnList(biome, accessor, group, pos);
+        return chunkGenerator.getEntitySpawnList(category, pos);
     }
 }

@@ -36,7 +36,7 @@ public abstract class MyFallibleItemDispenserBehavior extends MyDispenserBehavio
     }
 
     protected void spawnParticles(BlockPointer pointer, Direction side) {
-        pointer.getWorld().syncWorldEvent(2000, pointer.getBlockPos(), side.getId());
+        pointer.getWorld().playLevelEvent(2000, pointer.getBlockPos(), side.getId());
     }
 
     public boolean isSuccess() {
@@ -48,6 +48,6 @@ public abstract class MyFallibleItemDispenserBehavior extends MyDispenserBehavio
     }
 
     protected void playSound(BlockPointer pointer) {
-        pointer.getWorld().syncWorldEvent(this.isSuccess() ? 1000 : 1001, pointer.getBlockPos(), 0);
+        pointer.getWorld().playLevelEvent(this.success ? 1000 : 1001, pointer.getBlockPos(), 0);
     }
 }

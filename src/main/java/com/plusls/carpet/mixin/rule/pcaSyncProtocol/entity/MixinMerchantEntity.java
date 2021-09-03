@@ -6,12 +6,10 @@ import com.plusls.carpet.network.PcaSyncProtocol;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Npc;
 import net.minecraft.entity.passive.AbstractTraderEntity;
-import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.inventory.BasicInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.InventoryChangedListener;
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.village.Merchant;
+import net.minecraft.inventory.InventoryListener;
 import net.minecraft.village.Trader;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -23,10 +21,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 
 @Mixin(AbstractTraderEntity.class)
-public abstract class MixinMerchantEntity extends PassiveEntity implements Npc, Trader {
+public abstract class MixinMerchantEntity extends PassiveEntity implements Npc, Trader, InventoryListener {
     @Final
     @Shadow
-    private SimpleInventory inventory;
+    private BasicInventory inventory;
 
     protected MixinMerchantEntity(EntityType<? extends PassiveEntity> entityType, World world) {
         super(entityType, world);
@@ -42,7 +40,7 @@ public abstract class MixinMerchantEntity extends PassiveEntity implements Npc, 
     }
 
     @Override
-    public void onInventoryChanged(Inventory inventory) {
+    public void onInvChange(Inventory inventory) {
         if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncEntityToClient(this)) {
             PcaMod.LOGGER.debug("update villager inventory: onInventoryChanged.");
         }
