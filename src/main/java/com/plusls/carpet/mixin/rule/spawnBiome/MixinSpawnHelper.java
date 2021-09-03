@@ -18,6 +18,33 @@ public class MixinSpawnHelper {
     @Redirect(method = "pickRandomSpawnEntry",
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/world/gen/chunk/ChunkGenerator;getEntitySpawnList(Lnet/minecraft/entity/EntityCategory;Lnet/minecraft/util/math/BlockPos;)Ljava/util/List;", ordinal = 0))
+    private static List<Biome.SpawnEntry> modifyBiome0(ChunkGenerator<?> chunkGenerator, EntityCategory category, BlockPos pos) {
+        return modifyBiome(chunkGenerator, category, pos);
+    }
+
+    @Redirect(method = "containsSpawnEntry",
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/world/gen/chunk/ChunkGenerator;getEntitySpawnList(Lnet/minecraft/entity/EntityCategory;Lnet/minecraft/util/math/BlockPos;)Ljava/util/List;", ordinal = 0))
+    private static List<Biome.SpawnEntry> modifyBiome1(ChunkGenerator<?> chunkGenerator, EntityCategory category, BlockPos pos) {
+        return modifyBiome(chunkGenerator, category, pos);
+    }
+
+    @Redirect(method = "populateEntities",
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/world/biome/Biome;getEntitySpawnList(Lnet/minecraft/entity/EntityCategory;)Ljava/util/List;", ordinal = 0))
+    private static List<Biome.SpawnEntry> modifyBiome2(Biome biome, EntityCategory category) {
+        if (PcaSettings.spawnBiome != PcaSettings.PCA_SPAWN_BIOME.DEFAULT) {
+            if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.DESERT) {
+                biome = Biomes.DESERT;
+            } else if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.PLAINS) {
+                biome = Biomes.DESERT;
+            }
+        }
+        return biome.getEntitySpawnList(category);
+    }
+
+
+
     private static List<Biome.SpawnEntry> modifyBiome(ChunkGenerator<?> chunkGenerator, EntityCategory category, BlockPos pos) {
         if (PcaSettings.spawnBiome != PcaSettings.PCA_SPAWN_BIOME.DEFAULT) {
             if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.DESERT) {
@@ -28,4 +55,5 @@ public class MixinSpawnHelper {
         }
         return chunkGenerator.getEntitySpawnList(category, pos);
     }
+
 }
