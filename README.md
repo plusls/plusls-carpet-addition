@@ -33,6 +33,7 @@ carpet >= 1.4.45+v210811
 - [白天睡觉](#白天睡觉-sleepingDuringTheDay)
 - [发射器修复铁傀儡](#发射器修复铁傀儡-dispenserFixIronGolem)
 - [发射器收集经验](#发射器收集经验-dispenserCollectXp)
+- [玩家操作限制器](#玩家操作限制器-playerOperationLimiter)
 - [PCA 调试模式](#PCA-调试模式-pcaDebug)
 
 ## 规则列表
@@ -232,6 +233,15 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`, `dispenser`
 
+### 玩家操作限制器 (playerOperationLimiter)
+
+每 gt 玩家可以放置 2 个方块，秒破 1 个方块，这两个操作每 gt 只能做一种（用于防人肉盾构机和玩家自动破基岩 mod）
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
+  
 ### PCA 调试模式 (pcaDebug)
 
 开启后会打印调试信息

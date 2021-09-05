@@ -11,7 +11,7 @@ jobs:
         java: [ 16 ]
         # and run on both Linux and Windows
         os: [ ubuntu-20.04 ]
-        branch: [1.18.x, 1.17.x, 1.16.x, 1.15.x]
+        branch: [1.18.x, 1.17.x, 1.16.x, 1.15.x, 1.14.x]
     runs-on: ${{ matrix.os }}
     steps:
       - name: checkout repository
