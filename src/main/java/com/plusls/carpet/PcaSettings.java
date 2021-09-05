@@ -162,6 +162,12 @@ public class PcaSettings {
     )
     public static boolean dispenserCollectXp = false;
 
+    @Rule(
+            desc = "One tick player can place 2 block, insta break 1 block, can't do it at the same tick",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean playerOperationLimiter = false;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",
