@@ -54,6 +54,8 @@
   "rule.dispenserFixIronGolem.desc": "发射器可以使用铁锭来修复铁傀儡",
   "rule.dispenserCollectXp.name": "发射器收集经验",
   "rule.dispenserCollectXp.desc": "发射器消耗玻璃瓶来收集经验，产出附魔之瓶",
+  "rule.playerOperationLimiter.name": "玩家操作限制器",
+  "rule.playerOperationLimiter.desc": "每 gt 玩家可以放置 2 个方块，秒破 1 个方块，这两个操作每 gt 只能做一种（用于防人肉盾构机和玩家自动破基岩 mod）",
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }
