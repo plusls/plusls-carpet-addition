@@ -23,6 +23,19 @@ public class PcaSettings {
     public static final String PROTOCOL = "protocol";
     public static final String NEED_CLIENT = "need_client";
 
+
+
+
+    @Rule(
+            desc = "",
+            category = {RuleCategory.FEATURE}
+    )
+    public static boolean noDamegeCD = false;
+    @Rule(
+            desc = "",
+            category = {RuleCategory.FEATURE}
+    )
+    public static boolean noPlayerAttackCD = false;
     // protocol
     @Rule(
             desc = "Support sync entity and blockEntity from server",
