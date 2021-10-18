@@ -4,6 +4,8 @@
   "package": "com.plusls.carpet.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "rule.FuzzyOffsetBiome.MixinFuzzyOffsetBiome",
+    "rule.FuzzyOffsetBiome.MixinConstantColumnBiome",
     "rule.noDamegeCD.MixinNoDamageCD",
     "rule.noDamegeCD.MixinNoPlayerAttackCD",
     "rule.avoidAnvilTooExpensive.MixinAnvilScreenHandler",
