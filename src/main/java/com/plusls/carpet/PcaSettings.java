@@ -28,6 +28,11 @@ public class PcaSettings {
 
     
     @Rule(
+            desc = "挖掘速度改变可能需要客户端也安装",
+            category = {RuleCategory.SURVIVAL,NEED_CLIENT}
+    )
+    public static boolean dbSlabsGotBrokenRespectively = false; 
+    @Rule(
             desc = "",
             category = {RuleCategory.SURVIVAL}
     )
