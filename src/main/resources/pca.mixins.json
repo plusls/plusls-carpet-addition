@@ -4,7 +4,9 @@
   "package": "com.plusls.carpet.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "rule.villagerInventoryDrop.MixinVillagerInventoryDrop",
     "rule.dbslabBroken.MixinDbslab",
+    "rule.dbslabBroken.MixinItem",
     "rule.playersDropInventory.MixinPlayerDropInventory",
     "rule.FuzzyOffsetBiome.MixinFuzzyOffsetBiome",
     "rule.FuzzyOffsetBiome.MixinConstantColumnBiome",

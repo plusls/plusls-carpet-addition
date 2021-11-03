@@ -15,7 +15,7 @@ public class MixinPlayerDropInventory {
 
 	@Inject(method ="dropItem(Lnet/minecraft/item/ItemStack;ZZ)Lnet/minecraft/entity/ItemEntity;", at = @At("HEAD"), cancellable = true)
 	public void injected(ItemStack stack, boolean throwRandomly, boolean retainOwnership,CallbackInfoReturnable<ItemEntity> cir) {
-		if(throwRandomly && PcaSettings.standardizePlayerDropInventoryOnDeath){
+		if(throwRandomly && PcaSettings.normalizePlayerLootSpread){
             PlayerEntity ts=(PlayerEntity)(Object)this;
             ItemEntity lv = ts.dropStack(stack);
             lv.setPickupDelay(40);

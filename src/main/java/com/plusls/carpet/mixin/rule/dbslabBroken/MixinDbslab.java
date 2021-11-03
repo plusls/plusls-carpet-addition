@@ -31,11 +31,11 @@ public class MixinDbslab extends Block {
 	}
 
 	public float calcBlockBreakingDelta(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
-		return super.calcBlockBreakingDelta( state,  player,  world,  pos)*(PcaSettings.dbSlabsGotBrokenRespectively?2.0f:1.0f);
+		return super.calcBlockBreakingDelta( state,  player,  world,  pos)*(PcaSettings.separateSlabBreaking?2.0f:1.0f);
 	}
 	public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state,
 			@Nullable BlockEntity blockEntity, ItemStack stack) {
-		if (PcaSettings.dbSlabsGotBrokenRespectively && state.get(SlabBlock.TYPE) == net.minecraft.block.enums.SlabType.DOUBLE) {
+		if (PcaSettings.separateSlabBreaking && state.get(SlabBlock.TYPE) == net.minecraft.block.enums.SlabType.DOUBLE) {
 			world.setBlockState(pos, Blocks.BARRIER.getDefaultState(),Block.SKIP_LIGHTING_UPDATES,0);
 			float f = player.getPitch();
 			float g = player.getYaw();

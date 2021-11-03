@@ -28,15 +28,20 @@ public class PcaSettings {
 
     
     @Rule(
+            desc = "",
+            category = {RuleCategory.SURVIVAL}
+    )
+    public static boolean villagerDropInventory = false;
+    @Rule(
             desc = "挖掘速度改变可能需要客户端也安装",
             category = {RuleCategory.SURVIVAL,NEED_CLIENT}
     )
-    public static boolean dbSlabsGotBrokenRespectively = false; 
+    public static boolean separateSlabBreaking = false; 
     @Rule(
             desc = "",
             category = {RuleCategory.SURVIVAL}
     )
-    public static boolean standardizePlayerDropInventoryOnDeath = false; 
+    public static boolean normalizePlayerLootSpread = false; 
     @Rule(
             desc = "可能需要按F3 + A来看出变化。理论上能在1.17主世界启用3D生物群系。将于1.18移除。",
             category = {RuleCategory.FEATURE,NEED_CLIENT,RuleCategory.EXPERIMENTAL}
