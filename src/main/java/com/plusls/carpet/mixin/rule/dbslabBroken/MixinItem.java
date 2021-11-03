@@ -21,7 +21,7 @@ import net.minecraft.block.enums.SlabType;
 public class MixinItem {
 
     @Shadow
-    private final MinecraftClient client;
+    private  MinecraftClient client;
 
     @Inject(method = "breakBlock", at = @At("HEAD"), cancellable = true)
     public void canMine(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
