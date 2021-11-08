@@ -32,6 +32,9 @@ public class MixinItem {
         if (!(((ClientPlayerInteractionManager) (Object) this).getCurrentGameMode().isSurvivalLike())) {
             return;
         }
+        if(!client.player.canHarvest(state)){
+            return;
+        }
         if ((state.getBlock() instanceof SlabBlock) && (state.get(SlabBlock.TYPE) == SlabType.DOUBLE)) {
             cir.setReturnValue(false);
         }

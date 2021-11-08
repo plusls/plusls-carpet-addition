@@ -29,6 +29,9 @@ public class MixinDbslab extends Block {
 	}
 
 	public float calcBlockBreakingDelta(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
+		if (!player.canHarvest(state)) {
+			return super.calcBlockBreakingDelta(state, player, world, pos);
+		}
 		return super.calcBlockBreakingDelta(state, player, world, pos)
 				* (PcaSettings.separateSlabBreaking ? 2.0f : 1.0f);
 	}
