@@ -14,14 +14,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameMode;
 import net.minecraft.block.enums.SlabType;
 
 @Mixin(ClientPlayerInteractionManager.class)
 public class MixinItem {
 
     @Shadow
-    private  MinecraftClient client;
+    private MinecraftClient client;
 
     @Inject(method = "breakBlock", at = @At("HEAD"), cancellable = true)
     public void canMine(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
@@ -30,7 +29,7 @@ public class MixinItem {
         }
         ClientWorld world = client.world;
         BlockState state = world.getBlockState(pos);
-        if (((ClientPlayerInteractionManager) (Object) this).getCurrentGameMode() == GameMode.CREATIVE) {
+        if (!(((ClientPlayerInteractionManager) (Object) this).getCurrentGameMode().isSurvivalLike())) {
             return;
         }
         if ((state.getBlock() instanceof SlabBlock) && (state.get(SlabBlock.TYPE) == SlabType.DOUBLE)) {

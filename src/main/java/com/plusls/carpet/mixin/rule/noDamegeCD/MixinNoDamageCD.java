@@ -13,16 +13,16 @@ import net.minecraft.entity.LivingEntity;
 @Mixin(LivingEntity.class)
 public class MixinNoDamageCD {
 
-	
-	@Shadow protected float lastDamageTaken;
-	
-	@Redirect(method ="damage", at = @At(value = "FIELD",  target = "Lnet/minecraft/entity/LivingEntity;lastDamageTaken:F", opcode = Opcodes.GETFIELD))
+	@Shadow
+	protected float lastDamageTaken;
+
+	@Redirect(method = "damage", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/LivingEntity;lastDamageTaken:F", opcode = Opcodes.GETFIELD))
 	public float injected(LivingEntity lEntity) {
-		
-		if(PcaSettings.noDamegeCD){
+
+		if (PcaSettings.noDamegeCD) {
 			return 0.0f;
 		}
 		return lastDamageTaken;
 
-    }
+	}
 }

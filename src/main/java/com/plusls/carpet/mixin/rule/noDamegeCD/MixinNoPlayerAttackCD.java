@@ -8,13 +8,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.entity.player.PlayerEntity;
+
 @Mixin(PlayerEntity.class)
 public class MixinNoPlayerAttackCD {
 
-	@Inject(method ="getAttackCooldownProgress", at = @At("HEAD"), cancellable = true)
-	public void injected(float z,CallbackInfoReturnable<Float> cir) {
-		if(PcaSettings.noPlayerAttackCD){
+	@Inject(method = "getAttackCooldownProgress", at = @At("HEAD"), cancellable = true)
+	public void injected(float z, CallbackInfoReturnable<Float> cir) {
+		if (PcaSettings.noPlayerAttackCD) {
 			cir.setReturnValue(1.0f);
 		}
-    }
+	}
 }

@@ -1,7 +1,5 @@
 package com.plusls.carpet.mixin.rule.dbslabBroken;
 
-
-
 import com.plusls.carpet.PcaSettings;
 
 import org.jetbrains.annotations.Nullable;
@@ -27,16 +25,19 @@ import net.minecraft.world.World;
 public class MixinDbslab extends Block {
 
 	public MixinDbslab(Settings settings) {
-		super(settings);	
+		super(settings);
 	}
 
 	public float calcBlockBreakingDelta(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
-		return super.calcBlockBreakingDelta( state,  player,  world,  pos)*(PcaSettings.separateSlabBreaking?2.0f:1.0f);
+		return super.calcBlockBreakingDelta(state, player, world, pos)
+				* (PcaSettings.separateSlabBreaking ? 2.0f : 1.0f);
 	}
+
 	public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state,
 			@Nullable BlockEntity blockEntity, ItemStack stack) {
-		if (PcaSettings.separateSlabBreaking && state.get(SlabBlock.TYPE) == net.minecraft.block.enums.SlabType.DOUBLE) {
-			world.setBlockState(pos, Blocks.BARRIER.getDefaultState(),Block.SKIP_LIGHTING_UPDATES,0);
+		if (PcaSettings.separateSlabBreaking
+				&& state.get(SlabBlock.TYPE) == net.minecraft.block.enums.SlabType.DOUBLE) {
+			world.setBlockState(pos, Blocks.BARRIER.getDefaultState(), Block.SKIP_LIGHTING_UPDATES, 0);
 			float f = player.getPitch();
 			float g = player.getYaw();
 			Vec3d lv = player.getEyePos();
@@ -52,7 +53,7 @@ public class MixinDbslab extends Block {
 			BlockHitResult blres = world.raycast(new RaycastContext(lv, lv2, RaycastContext.ShapeType.OUTLINE,
 					RaycastContext.FluidHandling.NONE, player));
 			boolean t = blres.getPos().y > 0.5 + pos.getY();
-			//System.out.println(blres.getPos().y);
+			// System.out.println(blres.getPos().y);
 
 			world.setBlockState(pos, state.with(SlabBlock.TYPE,
 					(!t) ? net.minecraft.block.enums.SlabType.TOP : net.minecraft.block.enums.SlabType.BOTTOM));
