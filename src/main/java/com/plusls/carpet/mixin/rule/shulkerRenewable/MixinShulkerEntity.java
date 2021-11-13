@@ -27,18 +27,17 @@ public abstract class MixinShulkerEntity extends GolemEntity implements Monster,
     @Final
     @Shadow
     protected static TrackedData<Byte> COLOR;
+    private boolean tp = false;
+
+    protected MixinShulkerEntity(EntityType<? extends GolemEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
     @Shadow
     protected abstract boolean isClosed();
 
     @Shadow
     protected abstract boolean tryTeleport();
-
-    protected MixinShulkerEntity(EntityType<? extends GolemEntity> entityType, World world) {
-        super(entityType, world);
-    }
-
-    private boolean tp = false;
 
     private void spawnNewShulker() {
         Vec3d lv = getPos();
@@ -81,11 +80,6 @@ public abstract class MixinShulkerEntity extends GolemEntity implements Monster,
         }
     }
 
-    @Override
-    public void setColor(DyeColor color) {
-        this.dataTracker.set(COLOR, (byte) color.getId());
-    }
-
     @Nullable
     @Override
     public DyeColor getColor() {
@@ -93,5 +87,10 @@ public abstract class MixinShulkerEntity extends GolemEntity implements Monster,
         if (b > 15)
             return null;
         return DyeColor.byId(b);
+    }
+
+    @Override
+    public void setColor(DyeColor color) {
+        this.dataTracker.set(COLOR, (byte) color.getId());
     }
 }
