@@ -1,7 +1,5 @@
 package com.plusls.carpet.mixin.rule.gravestone;
 
-import com.plusls.carpet.PcaSettings;
-import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PlayerSkullBlock;
 import net.minecraft.block.entity.BlockEntity;
