@@ -19,13 +19,13 @@ import java.util.List;
 public class GlassBottleDispenserBehavior extends MyFallibleItemDispenserBehavior {
     private final ItemDispenserBehavior fallbackBehavior = new ItemDispenserBehavior();
 
+    public GlassBottleDispenserBehavior(DispenserBehavior oldDispenserBehavior) {
+        super(oldDispenserBehavior);
+    }
+
     public static void init() {
         DispenserBlock.registerBehavior(Items.GLASS_BOTTLE,
                 new GlassBottleDispenserBehavior(DispenserBlock.BEHAVIORS.get(Items.GLASS_BOTTLE)));
-    }
-
-    public GlassBottleDispenserBehavior(DispenserBehavior oldDispenserBehavior) {
-        super(oldDispenserBehavior);
     }
 
     private ItemStack replaceItem(BlockPointer pointer, ItemStack oldItem, ItemStack newItem) {

@@ -25,13 +25,6 @@ public abstract class MixinBeehiveBlockEntity extends BlockEntity implements Tic
         super(type);
     }
 
-    @Inject(method = "tryReleaseBee", at = @At(value = "RETURN"))
-    public void postTryReleaseBee(BlockState state, BeehiveBlockEntity.BeeState beeState, CallbackInfoReturnable<List<Entity>> cir) {
-        if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this) && cir.getReturnValue() != null) {
-            PcaMod.LOGGER.debug("update BeehiveBlockEntity: {}", this.pos);
-        }
-    }
-
     @Inject(method = "tickBees", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;remove()V", shift = At.Shift.AFTER))
     public void postTickBees(CallbackInfo ci) {
         if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
@@ -39,6 +32,12 @@ public abstract class MixinBeehiveBlockEntity extends BlockEntity implements Tic
         }
     }
 
+    @Inject(method = "tryReleaseBee", at = @At(value = "RETURN"))
+    public void postTryReleaseBee(BlockState state, BeehiveBlockEntity.BeeState beeState, CallbackInfoReturnable<List<Entity>> cir) {
+        if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this) && cir.getReturnValue() != null) {
+            PcaMod.LOGGER.debug("update BeehiveBlockEntity: {}", this.pos);
+        }
+    }
 
     @Inject(method = "fromTag", at = @At(value = "RETURN"))
     public void postFromTag(BlockState state, NbtCompound tag, CallbackInfo ci) {
