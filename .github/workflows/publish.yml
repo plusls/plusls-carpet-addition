@@ -27,6 +27,9 @@ jobs:
       - name: make gradle wrapper executable
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
+      - name: Set pre_release
+        run: |
+          sed -i "s/pre_release=alpha/pre_release=/g" gradle.properties
       - name: build
         run: ./gradlew build
       - name: Find correct JAR

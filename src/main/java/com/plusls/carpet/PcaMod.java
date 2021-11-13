@@ -11,26 +11,17 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.jetbrains.annotations.Nullable;
 
 
 public class PcaMod implements CarpetExtension, ModInitializer {
-    public static final String MODID = "pca";
-    public static final Logger LOGGER = LogManager.getLogger("PcAMod");
     @Nullable
     public static MinecraftServer server = null;
 
     static {
         CarpetServer.manageExtension(new PcaMod());
-    }
-
-    public static Identifier id(String id) {
-        return new Identifier(MODID, id);
     }
 
     @Override
@@ -51,9 +42,9 @@ public class PcaMod implements CarpetExtension, ModInitializer {
                     }
                 } else if (currentRuleState.name.equals("pcaDebug")) {
                     if (currentRuleState.getBoolValue()) {
-                        Configurator.setLevel(LOGGER.getName(), Level.toLevel("DEBUG"));
+                        Configurator.setLevel(ModInfo.LOGGER.getName(), Level.toLevel("DEBUG"));
                     } else {
-                        Configurator.setLevel(LOGGER.getName(), Level.toLevel("INFO"));
+                        Configurator.setLevel(ModInfo.LOGGER.getName(), Level.toLevel("INFO"));
                     }
                 }
             }
@@ -72,7 +63,7 @@ public class PcaMod implements CarpetExtension, ModInitializer {
         FlipCooldown.init();
         PcaMod.server = server;
         if (PcaSettings.pcaDebug) {
-            Configurator.setLevel(LOGGER.getName(), Level.toLevel("DEBUG"));
+            Configurator.setLevel(ModInfo.LOGGER.getName(), Level.toLevel("DEBUG"));
         }
     }
 

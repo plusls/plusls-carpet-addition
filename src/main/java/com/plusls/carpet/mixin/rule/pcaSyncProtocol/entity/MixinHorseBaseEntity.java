@@ -1,6 +1,6 @@
 package com.plusls.carpet.mixin.rule.pcaSyncProtocol.entity;
 
-import com.plusls.carpet.PcaMod;
+import com.plusls.carpet.ModInfo;
 import com.plusls.carpet.PcaSettings;
 import com.plusls.carpet.network.PcaSyncProtocol;
 import net.minecraft.entity.EntityType;
@@ -24,7 +24,7 @@ public abstract class MixinHorseBaseEntity extends AnimalEntity implements Inven
     @Inject(method = "onInvChange", at = @At(value = "HEAD"))
     private void updateEntity(Inventory sender, CallbackInfo ci) {
         if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncEntityToClient(this)) {
-            PcaMod.LOGGER.debug("update HorseBaseEntity inventory: onInventoryChanged.");
+            ModInfo.LOGGER.debug("update HorseBaseEntity inventory: onInventoryChanged.");
         }
     }
 }
