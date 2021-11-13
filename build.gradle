@@ -19,7 +19,7 @@ String real_version = "${project.mod_version}"
 
 String getGitMetadata() {
     String ret = grgit.head().abbreviatedId
-    if (!grgit.status().clean) {
+    if (!grgit.status().clean && project.pre_release == "alpha") {
         ret = new Date().format('yyyyMMdd.HHmmss') + ".dirty." + ret
     }
     return ret

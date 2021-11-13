@@ -1,6 +1,6 @@
 package com.plusls.carpet.mixin.rule.pcaSyncProtocol.entity;
 
-import com.plusls.carpet.PcaMod;
+import com.plusls.carpet.ModInfo;
 import com.plusls.carpet.PcaSettings;
 import com.plusls.carpet.network.PcaSyncProtocol;
 import net.minecraft.entity.EntityType;
@@ -42,7 +42,7 @@ public abstract class MixinMerchantEntity extends PassiveEntity implements Npc, 
     @Override
     public void onInvChange(Inventory inventory) {
         if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncEntityToClient(this)) {
-            PcaMod.LOGGER.debug("update villager inventory: onInventoryChanged.");
+            ModInfo.LOGGER.debug("update villager inventory: onInventoryChanged.");
         }
     }
 }

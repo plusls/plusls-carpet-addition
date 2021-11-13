@@ -1,6 +1,6 @@
 package com.plusls.carpet.mixin.rule.pcaSyncProtocol.block;
 
-import com.plusls.carpet.PcaMod;
+import com.plusls.carpet.ModInfo;
 import com.plusls.carpet.PcaSettings;
 import com.plusls.carpet.network.PcaSyncProtocol;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
@@ -28,7 +28,7 @@ public abstract class MixinAbstractFurnaceBlockEntityLithumHopperFix extends Loc
     //@Inject(method = "markDirty", at = @At(value = "HEAD"), remap = false)
     public void preMarkDirty(CallbackInfo ci) {
         if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
-            PcaMod.LOGGER.debug("update AbstractFurnaceBlockEntity: {}", this.pos);
+            ModInfo.LOGGER.debug("update AbstractFurnaceBlockEntity: {}", this.pos);
         }
     }
 }
