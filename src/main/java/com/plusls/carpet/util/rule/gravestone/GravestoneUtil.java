@@ -1,6 +1,6 @@
 package com.plusls.carpet.util.rule.gravestone;
 
-import com.plusls.carpet.PcaMod;
+import com.plusls.carpet.ModInfo;
 import com.plusls.carpet.PcaSettings;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.block.BlockState;
@@ -139,7 +139,7 @@ public class GravestoneUtil {
 
             // avoid setblockstate fail.
             while (!world.setBlockState(pos, graveBlock)) {
-                PcaMod.LOGGER.warn(String.format("set gravestone at %d %d %d fail, try again.",
+                ModInfo.LOGGER.warn(String.format("set gravestone at %d %d %d fail, try again.",
                         pos.getX(), pos.getY(), pos.getZ()));
             }
             SkullBlockEntity graveEntity = (SkullBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos));
