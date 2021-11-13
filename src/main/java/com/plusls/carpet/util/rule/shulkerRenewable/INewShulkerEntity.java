@@ -4,8 +4,8 @@ import net.minecraft.util.DyeColor;
 import org.jetbrains.annotations.Nullable;
 
 public interface INewShulkerEntity {
-    public void setColor(DyeColor color);
-
     @Nullable
     public DyeColor getColor();
+
+    public void setColor(DyeColor color);
 }

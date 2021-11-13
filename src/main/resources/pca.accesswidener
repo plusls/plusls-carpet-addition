@@ -1,5 +1,4 @@
 accessWidener v1 named
-accessible class net/minecraft/block/entity/BeehiveBlockEntity$Bee
 accessible method net/minecraft/entity/player/PlayerEntity vanishCursedItems ()V
 accessible field net/minecraft/block/DispenserBlock BEHAVIORS Ljava/util/Map;
 accessible field net/minecraft/entity/ExperienceOrbEntity amount I
