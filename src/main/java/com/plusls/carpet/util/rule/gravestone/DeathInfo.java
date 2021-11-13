@@ -17,14 +17,6 @@ public class DeathInfo {
         this.inventory = inv;
     }
 
-    public CompoundTag toTag() {
-        CompoundTag tag = new CompoundTag();
-        tag.putLong("DeathTime", this.deathTime);
-        tag.putInt("XP", this.xp);
-        tag.put("Items", toNbtList(this.inventory));
-        return tag;
-    }
-
     public static DeathInfo fromTag(CompoundTag tag) {
         long deathTime = tag.getLong("DeathTime");
         int xp = tag.getInt("XP");
@@ -33,7 +25,6 @@ public class DeathInfo {
         readNbtList(inventory, tag.getList("Items", 10));
         return new DeathInfo(deathTime, xp, inventory);
     }
-
 
     public static void readNbtList(ArrayList<ItemStack> inventory, ListTag nbtList) {
         for (int i = 0; i < nbtList.size(); ++i) {
@@ -54,5 +45,13 @@ public class DeathInfo {
         }
 
         return nbtList;
+    }
+
+    public CompoundTag toTag() {
+        CompoundTag tag = new CompoundTag();
+        tag.putLong("DeathTime", this.deathTime);
+        tag.putInt("XP", this.xp);
+        tag.put("Items", toNbtList(this.inventory));
+        return tag;
     }
 }

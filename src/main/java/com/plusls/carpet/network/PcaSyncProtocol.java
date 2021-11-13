@@ -37,11 +37,25 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class PcaSyncProtocol {
 
+    public static final ReentrantLock lock = new ReentrantLock(true);
+    public static final ReentrantLock pairLock = new ReentrantLock(true);
     // 发送包
     private static final Identifier ENABLE_PCA_SYNC_PROTOCOL = PcaMod.id("enable_pca_sync_protocol");
     private static final Identifier DISABLE_PCA_SYNC_PROTOCOL = PcaMod.id("disable_pca_sync_protocol");
     private static final Identifier UPDATE_ENTITY = PcaMod.id("update_entity");
     private static final Identifier UPDATE_BLOCK_ENTITY = PcaMod.id("update_block_entity");
+    // 响应包
+    private static final Identifier SYNC_BLOCK_ENTITY = PcaMod.id("sync_block_entity");
+    private static final Identifier SYNC_ENTITY = PcaMod.id("sync_entity");
+    private static final Identifier CANCEL_SYNC_BLOCK_ENTITY = PcaMod.id("cancel_sync_block_entity");
+    private static final Identifier CANCEL_SYNC_ENTITY = PcaMod.id("cancel_sync_entity");
+    private static final Map<ServerPlayerEntity, Pair<Identifier, BlockPos>> playerWatchBlockPos = new HashMap<>();
+    private static final Map<ServerPlayerEntity, Pair<Identifier, Entity>> playerWatchEntity = new HashMap<>();
+    private static final Map<Pair<Identifier, BlockPos>, Set<ServerPlayerEntity>> blockPosWatchPlayerSet = new HashMap<>();
+    private static final Map<Pair<Identifier, Entity>, Set<ServerPlayerEntity>> entityWatchPlayerSet = new HashMap<>();
+    private static final Set<ServerPlayerEntity> playerSet = new HashSet<>();
+    private static final MutablePair<Identifier, Entity> identifierEntityPair = new MutablePair<>();
+    private static final MutablePair<Identifier, BlockPos> identifierBlockPosPair = new MutablePair<>();
 
     // 通知客户端服务器已启用 PcaSyncProtocol
     public static void enablePcaSyncProtocol(@NotNull ServerPlayerEntity player) {
@@ -91,21 +105,6 @@ public class PcaSyncProtocol {
         buf.writeCompoundTag(blockEntity.toTag(new CompoundTag()));
         ServerPlayNetworking.send(player, UPDATE_BLOCK_ENTITY, buf);
     }
-
-
-    // 响应包
-    private static final Identifier SYNC_BLOCK_ENTITY = PcaMod.id("sync_block_entity");
-    private static final Identifier SYNC_ENTITY = PcaMod.id("sync_entity");
-    private static final Identifier CANCEL_SYNC_BLOCK_ENTITY = PcaMod.id("cancel_sync_block_entity");
-    private static final Identifier CANCEL_SYNC_ENTITY = PcaMod.id("cancel_sync_entity");
-
-    private static final Map<ServerPlayerEntity, Pair<Identifier, BlockPos>> playerWatchBlockPos = new HashMap<>();
-    private static final Map<ServerPlayerEntity, Pair<Identifier, Entity>> playerWatchEntity = new HashMap<>();
-
-    private static final Map<Pair<Identifier, BlockPos>, Set<ServerPlayerEntity>> blockPosWatchPlayerSet = new HashMap<>();
-    private static final Map<Pair<Identifier, Entity>, Set<ServerPlayerEntity>> entityWatchPlayerSet = new HashMap<>();
-    private static final Set<ServerPlayerEntity> playerSet = new HashSet<>();
-    public static final ReentrantLock lock = new ReentrantLock(true);
 
     public static void init() {
         ServerPlayNetworking.registerGlobalReceiver(SYNC_BLOCK_ENTITY, PcaSyncProtocol::syncBlockEntityHandler);
@@ -254,10 +253,6 @@ public class PcaSyncProtocol {
         }
     }
 
-    private static final MutablePair<Identifier, Entity> identifierEntityPair = new MutablePair<>();
-    private static final MutablePair<Identifier, BlockPos> identifierBlockPosPair = new MutablePair<>();
-    public static final ReentrantLock pairLock = new ReentrantLock(true);
-
     private static MutablePair<Identifier, Entity> getIdentifierEntityPair(Identifier identifier, Entity entity) {
         pairLock.lock();
         identifierEntityPair.setLeft(identifier);
@@ -275,11 +270,13 @@ public class PcaSyncProtocol {
     }
 
     // 工具
-    private static @Nullable Set<ServerPlayerEntity> getWatchPlayerList(@NotNull Entity entity) {
+    private static @Nullable
+    Set<ServerPlayerEntity> getWatchPlayerList(@NotNull Entity entity) {
         return entityWatchPlayerSet.get(getIdentifierEntityPair(DimensionType.getId(entity.getEntityWorld().getDimension().getType()), entity));
     }
 
-    private static @Nullable Set<ServerPlayerEntity> getWatchPlayerList(@NotNull World world, @NotNull BlockPos blockPos) {
+    private static @Nullable
+    Set<ServerPlayerEntity> getWatchPlayerList(@NotNull World world, @NotNull BlockPos blockPos) {
         return blockPosWatchPlayerSet.get(getIdentifierBlockPosPair(DimensionType.getId(world.getDimension().getType()), blockPos));
     }
 

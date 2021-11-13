@@ -26,12 +26,12 @@ public class MixinServerPlayerInteractionManager {
     @Shadow
     protected ServerWorld world;
 
-    @Inject(method = "processBlockBreakingAction", at=@At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerInteractionManager;finishMining(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/network/packet/c2s/play/PlayerActionC2SPacket$Action;Ljava/lang/String;)V", ordinal = 1), cancellable = true)
+    @Inject(method = "processBlockBreakingAction", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerInteractionManager;finishMining(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/network/packet/c2s/play/PlayerActionC2SPacket$Action;Ljava/lang/String;)V", ordinal = 1), cancellable = true)
     private void checkOperationCountPerTick(BlockPos pos, PlayerActionC2SPacket.Action action, Direction direction, int worldHeight, CallbackInfo ci) {
         if (!PcaSettings.playerOperationLimiter) {
             return;
         }
-        SafeServerPlayerEntity safeServerPlayerEntity = (SafeServerPlayerEntity)player;
+        SafeServerPlayerEntity safeServerPlayerEntity = (SafeServerPlayerEntity) player;
         safeServerPlayerEntity.addInstaBreakCountPerTick();
         if (!safeServerPlayerEntity.allowOperation()) {
             this.player.networkHandler.sendPacket(new PlayerActionResponseS2CPacket(pos, this.world.getBlockState(pos), action, false, "insta mine"));

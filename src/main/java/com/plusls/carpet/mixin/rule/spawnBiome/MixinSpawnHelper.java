@@ -44,7 +44,6 @@ public class MixinSpawnHelper {
     }
 
 
-
     private static List<Biome.SpawnEntry> modifyBiome(ChunkGenerator<?> chunkGenerator, EntityCategory category, BlockPos pos) {
         if (PcaSettings.spawnBiome != PcaSettings.PCA_SPAWN_BIOME.DEFAULT) {
             if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.DESERT) {

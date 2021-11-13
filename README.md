@@ -1,5 +1,12 @@
 # plusls carpet addition
 
+[![Issues](https://img.shields.io/github/issues/plusls/plusls-carpet-addition?style=flat-square)](https://github.com/plusls/plusls-carpet-addition/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/plusls/plusls-carpet-addition?style=flat-square)](https://github.com/plusls/plusls-carpet-addition/pulls)
+[![Java CI with gradle](https://img.shields.io/github/workflow/status/plusls/plusls-carpet-addition/build?label=Build&style=flat-square)](https://github.com/plusls/plusls-carpet-addition/actions/workflows/build.yml)
+[![Publish Release](https://img.shields.io/github/workflow/status/plusls/plusls-carpet-addition/Publish%20Release?label=Publish%20Release&style=flat-square)](https://github.com/plusls/plusls-carpet-addition/actions/workflows/publish.yml)
+[![Release](https://img.shields.io/github/v/release/plusls/plusls-carpet-addition?include_prereleases&style=flat-square)](https://github.com/plusls/plusls-carpet-addition/releases)
+[![Github Release Downloads](https://img.shields.io/github/downloads/plusls/plusls-carpet-addition/total?label=Github%20Release%20Downloads&style=flat-square)](https://github.com/plusls/plusls-carpet-addition/releases)
+
 这是一个 [Carpet mod](https://github.com/gnembon/fabric-carpet) (fabric-carpet) 的扩展 mod，包含了不少~~NotVanilla的~~有意思的功能以及特性
 
 跟同 Minecraft 版本的 carpet mod 一起使用即可。尽可能地使用较新的 carpet mod
