@@ -22,18 +22,14 @@ public class PcaSettings {
     public static final String PCA = "PCA";
     public static final String PROTOCOL = "protocol";
     public static final String NEED_CLIENT = "need_client";
-
+    final public static int INT_DISABLE = 114514;
+    public static final String xaeroWorldNameNone = "#none";
     // protocol
     @Rule(
             desc = "Support sync entity and blockEntity from server",
             category = {PCA, PROTOCOL}
     )
     public static boolean pcaSyncProtocol = false;
-
-    public enum PCA_SYNC_PLAYER_ENTITY_OPTIONS {
-        NOBODY, BOT, OPS, OPS_AND_SELF, EVERYONE
-    }
-
     @Rule(
             desc = "Which player entity can be sync",
             extra = {
@@ -46,7 +42,6 @@ public class PcaSettings {
             category = {PCA, PROTOCOL}
     )
     public static PCA_SYNC_PLAYER_ENTITY_OPTIONS pcaSyncPlayerEntity = PCA_SYNC_PLAYER_ENTITY_OPTIONS.OPS;
-
     // feature
     @Rule(
             desc = "Empty shulker boxes stack",
@@ -57,13 +52,11 @@ public class PcaSettings {
             category = {PCA, RuleCategory.FEATURE, NEED_CLIENT}
     )
     public static boolean emptyShulkerBoxStack = false;
-
     @Rule(
             desc = "Dyes can be used on shulker boxes, empty potion will clean color",
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean useDyeOnShulkerBox = false;
-
     @Rule(
             desc = "Players can flip and rotate blocks when holding Totem Of Undying",
             extra = {
@@ -74,9 +67,6 @@ public class PcaSettings {
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean flippingTotemOfUndying = false;
-
-    final public static int INT_DISABLE = 114514;
-
     @Rule(
             desc = "spawn Y Max, 114514 to close",
             category = {PCA, RuleCategory.FEATURE}
@@ -88,30 +78,21 @@ public class PcaSettings {
             category = {PCA, RuleCategory.FEATURE}
     )
     public static int spawnYMin = INT_DISABLE;
-
-    public enum PCA_SPAWN_BIOME {
-        DEFAULT, DESERT, PLAINS
-    }
-
     @Rule(
             desc = "spawn biome",
             category = {PCA, RuleCategory.FEATURE}
     )
     public static PCA_SPAWN_BIOME spawnBiome = PCA_SPAWN_BIOME.DEFAULT;
-
     @Rule(
             desc = "quick leaf decay",
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean quickLeafDecay = false;
-
     @Rule(
             desc = "place gravestone after player dead.",
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean gravestone = false;
-
-    public static final String xaeroWorldNameNone = "#none";
     @Rule(
             desc = "set xaero world name to sync word id to xaerominimap, \"#none\" is disable.",
             category = {PCA, PROTOCOL},
@@ -119,59 +100,58 @@ public class PcaSettings {
             options = {xaeroWorldNameNone}
     )
     public static String xaeroWorldName = xaeroWorldNameNone;
-
     @Rule(
             desc = "Villagers are attracted by emerald block.",
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean villagersAttractedByEmeraldBlock = false;
-
     @Rule(
             desc = "Leash villagers and mobs by lead.",
             category = {PCA, RuleCategory.FEATURE, NEED_CLIENT}
     )
     public static boolean superLead = false;
-
     @Rule(
             desc = "Allow anvil level cost above 40 (If the client is not installed mod, it will be too expensive but can be used in practice).",
             category = {PCA, RuleCategory.FEATURE, NEED_CLIENT}
     )
     public static boolean avoidAnvilTooExpensive = false;
-
     @Rule(
             desc = "Allow use bone meal in cactus, sugar cane, chorus flower.",
             category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
     )
     public static boolean powerfulBoneMeal = false;
-
     @Rule(
             desc = "World will switch to night when player sleep during the day.",
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean sleepingDuringTheDay = false;
-
     @Rule(
             desc = "Dispenser can fix iron golem.",
             category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
     )
     public static boolean dispenserFixIronGolem = false;
-
     @Rule(
             desc = "Dispenser use bottle to collect xp.",
             category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
     )
     public static boolean dispenserCollectXp = false;
-
     @Rule(
             desc = "One tick player can place 2 block, insta break 1 block, can't do it at the same tick",
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean playerOperationLimiter = false;
-
     // debug
     @Rule(
             desc = "pcaDebug mode",
             category = {PCA}
     )
     public static boolean pcaDebug = false;
+
+    public enum PCA_SYNC_PLAYER_ENTITY_OPTIONS {
+        NOBODY, BOT, OPS, OPS_AND_SELF, EVERYONE
+    }
+
+    public enum PCA_SPAWN_BIOME {
+        DEFAULT, DESERT, PLAINS
+    }
 }

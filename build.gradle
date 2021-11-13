@@ -1,96 +1,83 @@
 plugins {
-    id 'fabric-loom' version '0.8-SNAPSHOT'
-    id 'maven-publish'
+    id('fabric-loom').version('0.10-SNAPSHOT')
+    id('maven-publish')
+    id('org.ajoberstar.grgit').version('4.1.0')
 }
+
+if (project.java_version == "16") {
+    sourceCompatibility = JavaVersion.VERSION_16
+    targetCompatibility = JavaVersion.VERSION_16
+} else if (project.java_version == "8") {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+} else {
+    throw new GradleException("wrong java_version")
+}
+
+String real_version = "${project.mod_version}"
+
+
+String getGitMetadata() {
+    String ret = grgit.head().abbreviatedId
+    if (!grgit.status().clean) {
+        ret = new Date().format('yyyyMMdd.HHmmss') + ".dirty." + ret
+    }
+    return ret
+}
+
+if (project.pre_release != "") {
+    real_version += "-${project.pre_release}+" + getGitMetadata()
+}
+
+version = "${project.minecraft_version}-${real_version}" as Object
+
+group = project.maven_group
+
 
 repositories {
     maven {
         url "https://www.cursemaven.com"
     }
-    maven {
-        url 'https://masa.dy.fi/maven'
-    }
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
-
-archivesBaseName = project.archives_base_name
-version = "${project.minecraft_version}-${project.mod_version}"
-group = project.maven_group
-
 dependencies {
-    // To change the versions see the gradle.properties file
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-    // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    minecraft("com.mojang:minecraft:${project.minecraft_version}")
+    mappings("net.fabricmc:yarn:${project.minecraft_version}+build.${project.yarn_mappings}:v2")
+    modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
 
     // fabric-carpet
-    modImplementation "curse.maven:carpet-349239:${project.carpet_core_version}"
+    modImplementation("curse.maven:carpet-349239:${project.carpet_core_version}")
 
     // multiconnect
-    modImplementation "net.earthcomputer.multiconnect:multiconnect-api:${project.multiconnect_version}"
-    include "net.earthcomputer.multiconnect:multiconnect-api:${project.multiconnect_version}"
-    // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-    // You may need to force-disable transitiveness on them.
+    modImplementation("net.earthcomputer.multiconnect:multiconnect-api:${project.multiconnect_version}")
+    include("net.earthcomputer.multiconnect:multiconnect-api:${project.multiconnect_version}")
 }
 
 loom {
-    accessWidener "src/main/resources/pca.accesswidener"
+    accessWidenerPath.set(file("src/main/resources/pca.accesswidener"))
 }
 
 processResources {
-    inputs.property "version", project.version
-
+    inputs.property("version", real_version)
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand(["version": real_version])
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
-    // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
     it.options.encoding = "UTF-8"
-
-    // Minecraft 1.17 (21w19a) upwards uses Java 16.
-    it.options.release = 16
-}
-
-java {
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
-    withSourcesJar()
+    if (project.java_version == "16") {
+        it.options.release.set(16)
+    } else if (project.java_version == "8") {
+        it.options.release.set(8)
+    } else {
+        throw new GradleException("wrong java_version")
+    }
 }
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
-    }
-}
-
-// configure the maven publication
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-        }
-    }
-
-    // Select the repositories you want to publish to
-    // To publish to maven local, no extra repositories are necessary. Just use the task `publishToMavenLocal`.
-    repositories {
-        // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+        rename({ return "${it}_${project.archives_base_name}" })
     }
 }

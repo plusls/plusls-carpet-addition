@@ -18,12 +18,12 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(DyeItem.class)
 public abstract class MixinDyeItem extends Item {
-    @Shadow
-    public abstract DyeColor getColor();
-
     public MixinDyeItem(Settings settings) {
         super(settings);
     }
+
+    @Shadow
+    public abstract DyeColor getColor();
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
