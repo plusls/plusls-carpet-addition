@@ -29,9 +29,14 @@ jobs:
         run: chmod +x ./gradlew
       - name: build
         run: ./gradlew build
+      - name: Find correct JAR
+        id: findjar
+        run: |
+          output="$(find build/libs/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
+          echo "::set-output name=jarname::$output"
       - name: Upload assets to GitHub
         uses: AButler/upload-release-assets@v2.0
         if: ${{ runner.os == 'Linux' && matrix.java == '16' }}
         with:
-          files: 'build/libs/*;LICENSE'
+          files: build/libs/${{ steps.findjar.outputs.jarname }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}

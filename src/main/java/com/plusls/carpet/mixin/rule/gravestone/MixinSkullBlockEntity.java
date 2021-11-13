@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SkullBlockEntity.class)
 public class MixinSkullBlockEntity implements MySkullBlockEntity {
@@ -33,7 +32,7 @@ public class MixinSkullBlockEntity implements MySkullBlockEntity {
     }
 
     @Inject(method = "writeNbt", at = @At(value = "RETURN"))
-    private void postWriteNbt(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir) {
+    private void postWriteNbt(NbtCompound nbt, CallbackInfo ci) {
         if (deathInfo != null) {
             nbt.put("DeathInfo", deathInfo.toTag());
         }

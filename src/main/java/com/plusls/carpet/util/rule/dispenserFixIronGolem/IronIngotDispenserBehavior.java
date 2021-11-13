@@ -17,13 +17,13 @@ import java.util.List;
 
 public class IronIngotDispenserBehavior extends MyFallibleItemDispenserBehavior {
 
+    public IronIngotDispenserBehavior(DispenserBehavior oldDispenserBehavior) {
+        super(oldDispenserBehavior);
+    }
+
     public static void init() {
         DispenserBlock.registerBehavior(Items.IRON_INGOT,
                 new IronIngotDispenserBehavior(DispenserBlock.BEHAVIORS.get(Items.IRON_INGOT)));
-    }
-
-    public IronIngotDispenserBehavior(DispenserBehavior oldDispenserBehavior) {
-        super(oldDispenserBehavior);
     }
 
     @Override
