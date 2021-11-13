@@ -1,6 +1,6 @@
 package com.plusls.carpet.util.rule.gravestone;
 
-import com.plusls.carpet.PcaMod;
+import com.plusls.carpet.ModInfo;
 import com.plusls.carpet.PcaSettings;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.block.BlockState;
@@ -9,8 +9,10 @@ import net.minecraft.block.entity.SkullBlockEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.AutomaticItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.ServerTask;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
@@ -35,6 +37,12 @@ public class GravestoneUtil {
     private static void deathHandle(ServerPlayerEntity player) {
         World world = player.world;
         if (PcaSettings.gravestone && !world.getGameRules().getBoolean(GameRules.KEEP_INVENTORY)) {
+            for (Hand hand : Hand.values()) {
+                ItemStack itemStack = player.getStackInHand(hand);
+                if (itemStack.getItem() == Items.TOTEM_OF_UNDYING) {
+                    return;
+                }
+            }
             player.vanishCursedItems();
             SimpleInventory inventory = new SimpleInventory(PLAYER_INVENTORY_SIZE);
             for (ItemStack itemStack : player.inventory.main) {
@@ -139,7 +147,7 @@ public class GravestoneUtil {
 
             // avoid setblockstate fail.
             while (!world.setBlockState(pos, graveBlock)) {
-                PcaMod.LOGGER.warn(String.format("set gravestone at %d %d %d fail, try again.",
+                ModInfo.LOGGER.warn(String.format("set gravestone at %d %d %d fail, try again.",
                         pos.getX(), pos.getY(), pos.getZ()));
             }
             SkullBlockEntity graveEntity = (SkullBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos));

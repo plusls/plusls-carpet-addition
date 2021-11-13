@@ -1,6 +1,6 @@
 package com.plusls.carpet.mixin.rule.pcaSyncProtocol.block;
 
-import com.plusls.carpet.PcaMod;
+import com.plusls.carpet.ModInfo;
 import com.plusls.carpet.PcaSettings;
 import com.plusls.carpet.network.PcaSyncProtocol;
 import net.minecraft.block.BlockState;
@@ -28,21 +28,21 @@ public abstract class MixinBeehiveBlockEntity extends BlockEntity implements Tic
     @Inject(method = "tickBees", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;remove()V", shift = At.Shift.AFTER))
     public void postTickBees(CallbackInfo ci) {
         if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
-            PcaMod.LOGGER.debug("update BeehiveBlockEntity: {}", this.pos);
+            ModInfo.LOGGER.debug("update BeehiveBlockEntity: {}", this.pos);
         }
     }
 
     @Inject(method = "tryReleaseBee", at = @At(value = "RETURN"))
     public void postTryReleaseBee(BlockState state, BeehiveBlockEntity.BeeState beeState, CallbackInfoReturnable<List<Entity>> cir) {
         if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this) && cir.getReturnValue() != null) {
-            PcaMod.LOGGER.debug("update BeehiveBlockEntity: {}", this.pos);
+            ModInfo.LOGGER.debug("update BeehiveBlockEntity: {}", this.pos);
         }
     }
 
     @Inject(method = "fromTag", at = @At(value = "RETURN"))
     public void postFromTag(BlockState state, NbtCompound tag, CallbackInfo ci) {
         if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
-            PcaMod.LOGGER.debug("update BeehiveBlockEntity: {}", this.pos);
+            ModInfo.LOGGER.debug("update BeehiveBlockEntity: {}", this.pos);
         }
     }
 
@@ -50,7 +50,7 @@ public abstract class MixinBeehiveBlockEntity extends BlockEntity implements Tic
             target = "Lnet/minecraft/entity/Entity;remove()V", ordinal = 0))
     public void postEnterHive(Entity entity, boolean hasNectar, int ticksInHive, CallbackInfo ci) {
         if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
-            PcaMod.LOGGER.debug("update BeehiveBlockEntity: {}", this.pos);
+            ModInfo.LOGGER.debug("update BeehiveBlockEntity: {}", this.pos);
         }
     }
 }
