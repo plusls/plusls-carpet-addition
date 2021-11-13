@@ -18,6 +18,7 @@
     "rule.pcaSyncProtocol.block.MixinBeehiveBlockEntity",
     "rule.pcaSyncProtocol.block.MixinBrewingStandBlockEntity",
     "rule.pcaSyncProtocol.block.MixinChestBlockEntity",
+    "rule.pcaSyncProtocol.block.MixinComparatorBlockEntity",
     "rule.pcaSyncProtocol.block.MixinDispenserBlockEntity",
     "rule.pcaSyncProtocol.block.MixinHopperBlockEntity",
     "rule.pcaSyncProtocol.block.MixinShulkerBoxBlockEntity",
