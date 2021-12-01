@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.plusls.carpet.mixin",
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_8",
   "plugin": "com.plusls.carpet.PcaMixinPlugin",
   "mixins": [
     "MixinSettingsManager",
