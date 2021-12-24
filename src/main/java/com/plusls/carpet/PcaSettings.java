@@ -140,6 +140,12 @@ public class PcaSettings {
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean playerOperationLimiter = false;
+    @Rule(
+            desc = "Player can sit down when fast sneak 3 times.",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean playerSit = false;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",
