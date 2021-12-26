@@ -145,6 +145,21 @@ public class PcaSettings {
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean playerSit = false;
+    @Rule(
+            desc = "Use dispenser to auto trade with villager",
+            extra = {
+                    "If EMERALD_BLOCK under the dispenser, it will trade once",
+                    "If DIAMOND_BLOCK under the dispenser, it will trade all",
+                    "Trade offer depend on redstone power."
+            },
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
+    )
+    public static boolean autoTrade = false;
+    @Rule(
+            desc = "Use spectral arrow to shoot villager to force restock.",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean forceRestock = false;
 
     // debug
     @Rule(

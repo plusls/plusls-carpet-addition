@@ -52,6 +52,13 @@
   "rule.playerOperationLimiter.desc": "每 gt 玩家可以放置 2 个方块，秒破 1 个方块，这两个操作每 gt 只能做一种（用于防人肉盾构机和玩家自动破基岩 mod）",
   "rule.playerSit.name": "玩家坐下",
   "rule.playerSit.desc": "在快速潜行 3 次后玩家可以坐下",
+  "rule.autoTrade.name": "自动交易",
+  "rule.autoTrade.desc": "使用发射器和村民自动交易",
+  "rule.autoTrade.extra.0": "如果发射器下面是绿宝石块，则交易一次",
+  "rule.autoTrade.extra.1": "如果发射器下面是钻石块，则尽可能的交易",
+  "rule.autoTrade.extra.2": "交易的条目取决于红石信号强度",
+  "rule.forceRestock.name": "强制补货",
+  "rule.forceRestock.desc": "使用光灵箭射村民来强制补货",
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }
