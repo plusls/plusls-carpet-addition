@@ -30,7 +30,7 @@ public abstract class MixinAnvilScreenHandler extends ForgingScreenHandler {
     private ItemStack setItemStack(ItemStack itemStack) {
         ItemStack inputStack = this.input.getStack(0);
         if (PcaSettings.avoidAnvilTooExpensive && itemStack.isEmpty() && !inputStack.isEmpty() &&
-                (this.input.getStack(1) != ItemStack.EMPTY ||
+                (!this.input.getStack(1).isEmpty() ||
                         (StringUtils.isBlank(this.newItemName) && inputStack.hasCustomName()) ||
                         (!StringUtils.isBlank(this.newItemName) && !this.newItemName.equals(inputStack.getName().getString())))) {
             return inputStack.copy();
