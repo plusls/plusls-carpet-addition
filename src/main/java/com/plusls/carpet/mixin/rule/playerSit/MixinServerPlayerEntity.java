@@ -15,11 +15,10 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(ServerPlayerEntity.class)
 public abstract class MixinServerPlayerEntity extends PlayerEntity {
-    private int sneakTimes = 0;
-    private long lastSneakTime = 0;
-
     @Shadow
     public ServerPlayNetworkHandler networkHandler;
+    private int sneakTimes = 0;
+    private long lastSneakTime = 0;
 
     public MixinServerPlayerEntity(World world, BlockPos pos, float yaw, GameProfile profile) {
         super(world, pos, yaw, profile);

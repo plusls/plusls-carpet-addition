@@ -16,26 +16,25 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ArmorStandEntity.class)
 public abstract class MixinArmorStandEntity extends LivingEntity implements SitEntity {
-    @Shadow
-    protected abstract void setMarker(boolean marker);
-
     private boolean sitEntity = false;
 
     protected MixinArmorStandEntity(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
+    @Shadow
+    protected abstract void setMarker(boolean marker);
+
+    @Override
+    public boolean isSitEntity() {
+        return sitEntity;
+    }
 
     @Override
     public void setSitEntity(boolean isSitEntity) {
         this.sitEntity = isSitEntity;
         this.setMarker(isSitEntity);
         this.setInvisible(isSitEntity);
-    }
-
-    @Override
-    public boolean isSitEntity() {
-        return sitEntity;
     }
 
     @Override
