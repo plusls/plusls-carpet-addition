@@ -20,7 +20,7 @@ public abstract class MixinSpectralArrowEntity extends PersistentProjectileEntit
     }
     @Inject(method = "onHit", at=@At(value = "RETURN"))
     private void forceRestock(LivingEntity target, CallbackInfo ci) {
-        if (PcaSettings.forceRestock && target instanceof MerchantEntity merchantEntity) {
+        if (PcaSettings.forceRestock && !target.world.isClient && target instanceof MerchantEntity merchantEntity) {
             for(TradeOffer tradeOffer : merchantEntity.getOffers()) {
                 tradeOffer.resetUses();
             }
