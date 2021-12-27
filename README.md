@@ -17,7 +17,7 @@
 
 fabric-api >= 0.39.2
 
-carpet >= 1.4.45+v210811 
+carpet >= 1.4.45+v210811
 
 ## 索引
 
@@ -41,6 +41,9 @@ carpet >= 1.4.45+v210811
 - [发射器修复铁傀儡](#发射器修复铁傀儡-dispenserFixIronGolem)
 - [发射器收集经验](#发射器收集经验-dispenserCollectXp)
 - [玩家操作限制器](#玩家操作限制器-playerOperationLimiter)
+- [玩家坐下](#玩家坐下-playerSit)
+- [自动交易](#自动交易-autoTrade)
+- [强制补货](#强制补货-forceRestock)
 - [PCA 调试模式](#PCA-调试模式-pcaDebug)
 
 ## 规则列表
@@ -167,7 +170,6 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 
 ![break_gravestone.gif](./docs/break_gravestone.gif)
 
-
 ### Xaero 小地图世界名 (xaeroWorldName)
 
 设置 Xaero 世界名来同步世界 ID，“#none”表示不同步
@@ -248,7 +250,41 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 默认值: `false`
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`
-  
+
+### 玩家坐下 (playerSit)
+
+在快速潜行 3 次后玩家可以坐下
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
+
+### 自动交易 (autoTrade)
+
+使用发射器和村民自动交易
+
+如果发射器下面是绿宝石块，则交易一次
+
+如果发射器下面是钻石块，则尽可能的交易
+
+交易的条目取决于红石信号强度
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`， `dispenser`
+
+### 强制补货 (forceRestock)
+
+使用光灵箭射村民来强制补货
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
+
+
 ### PCA 调试模式 (pcaDebug)
 
 开启后会打印调试信息

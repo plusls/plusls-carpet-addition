@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         # Use these Java versions
-        java: [ 16 ]
+        java: [ 17 ]
         # and run on both Linux and Windows
         os: [ ubuntu-20.04 ]
     runs-on: ${{ matrix.os }}
@@ -32,9 +32,15 @@ jobs:
           sed -i "s/pre_release=alpha/pre_release=beta/g" gradle.properties
       - name: build
         run: ./gradlew build
+      - name: Find correct JAR
+        id: findjar
+        if: ${{ runner.os == 'Linux' && matrix.java == '17' }}
+        run: |
+          output="$(find build/libs/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
+          echo "::set-output name=jarname::$output"
       - name: capture build artifacts
-        if: ${{ runner.os == 'Linux' && matrix.java == '16' }} # Only upload artifacts built from LTS java on one OS
+        if: ${{ runner.os == 'Linux' && matrix.java == '17' }}
         uses: actions/upload-artifact@v2
         with:
-          name: Artifacts
-          path: build/libs/
+          name: ${{ steps.findjar.outputs.jarname }}
+          path: build/libs/${{ steps.findjar.outputs.jarname }}
