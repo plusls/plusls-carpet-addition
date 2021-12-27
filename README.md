@@ -24,6 +24,9 @@ fabric-api >= 0.39.2
 - [PCA 同步协议](#PCA-同步协议-pcaSyncProtocol)
 - [PCA 同步协议可同步玩家数据](#PCA-同步协议可同步玩家数据-pcaSyncPlayerEntity)
 - [空潜影盒可堆叠](#空潜影盒可堆叠-emptyShulkerBoxStack)
+- [潜影贝可再生](#潜影贝可再生-shulkerRenewable)
+- [潜影盒快速拆包](#潜影盒快速拆包-shulkerBoxQuickUnpack)
+- [铁轨不被液体破坏](#铁轨不被液体破坏-railNoBrokenByFluid)
 - [潜影盒使用染料染色](#潜影盒使用染料染色-useDyeOnShulkerBox)
 - [不死图腾扳手](#不死图腾扳手-flippingTotemOfUndying)
 - [刷怪的最大Y值](#刷怪的最大Y值-spawnYMax)
@@ -94,6 +97,33 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 默认值: `false`
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`, `need_client`
+
+### 潜影贝可再生 (shulkerRenewable)
+
+本功能移植自 1.17
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`, `experimental`
+
+### 潜影盒快速拆包 (shulkerBoxQuickUnpack)
+
+物品状态下的潜影盒在被摧毁时，盒中的物品会自动掉落，来自 1.17
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`, `experimental`
+
+### 铁轨不被液体破坏 (railNoBrokenByFluid)
+
+1.17 引入了含水铁轨，考虑到改动可能会比较大，因此只引入了其不被液体破坏的特性
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`, `experimental`
 
 ### 潜影盒使用染料染色 (useDyeOnShulkerBox)
 
