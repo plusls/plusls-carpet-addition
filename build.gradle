@@ -4,40 +4,27 @@ plugins {
     id('org.ajoberstar.grgit').version('4.1.0')
 }
 
-if (project.java_version == "16") {
-    sourceCompatibility = JavaVersion.VERSION_16
-    targetCompatibility = JavaVersion.VERSION_16
-} else if (project.java_version == "8") {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-} else {
-    throw new GradleException("wrong java_version")
-}
-
+setSourceCompatibility(JavaVersion.toVersion(project.java_version))
+setTargetCompatibility(JavaVersion.toVersion(project.java_version))
 String real_version = "${project.mod_version}"
 
-
-String getGitMetadata() {
-    String ret = grgit.head().abbreviatedId
-    if (!grgit.status().clean && project.pre_release == "alpha") {
-        ret = new Date().format('yyyyMMdd.HHmmss') + ".dirty." + ret
+if (project.pre_release as String != "") {
+    real_version += "-${project.pre_release}+"
+    if (project.pre_release as String == "alpha" && !grgit.status().clean) {
+        real_version += new Date().format("yyyyMMdd.HHmmss") + ".dirty." + grgit.head().abbreviatedId
+    } else {
+        real_version += grgit.head().abbreviatedId
     }
-    return ret
 }
 
-if (project.pre_release != "") {
-    real_version += "-${project.pre_release}+" + getGitMetadata()
-}
-
-version = "${project.minecraft_version}-${real_version}" as Object
-
-group = project.maven_group
-
-
+setArchivesBaseName("${project.archives_base_name}-${project.minecraft_version}")
+setVersion(real_version)
+setGroup(project.maven_group)
 repositories {
     maven {
         url "https://www.cursemaven.com"
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -64,13 +51,7 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
-    if (project.java_version == "16") {
-        it.options.release.set(16)
-    } else if (project.java_version == "8") {
-        it.options.release.set(8)
-    } else {
-        throw new GradleException("wrong java_version")
-    }
+    it.options.release.set(Integer.parseInt(project.java_version as String))
 }
 
 jar {
