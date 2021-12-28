@@ -18,6 +18,7 @@ import com.plusls.carpet.util.rule.sleepingDuringTheDay.SleepUtil;
 import net.earthcomputer.multiconnect.api.MultiConnectAPI;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
@@ -35,6 +36,7 @@ import java.util.Objects;
 
 
 public class PcaMod implements CarpetExtension, ModInitializer, ClientModInitializer {
+    public static final boolean tisCarpetLoaded = FabricLoader.getInstance().isModLoaded("carpet-tis-addition");
     @Nullable
     public static MinecraftServer server = null;
 

@@ -1,6 +1,7 @@
 package com.plusls.carpet.network;
 
 import carpet.patches.EntityPlayerMPFake;
+import carpettisaddition.CarpetTISAdditionSettings;
 import com.plusls.carpet.ModInfo;
 import com.plusls.carpet.PcaMod;
 import com.plusls.carpet.PcaSettings;
@@ -8,7 +9,9 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.ChestType;
@@ -22,6 +25,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.MutablePair;
@@ -163,14 +167,25 @@ public class PcaSyncProtocol {
         clearPlayerWatchData(player);
         ModInfo.LOGGER.debug("{} watch blockpos {}: {}", player.getName().asString(), pos, blockState);
 
+        BlockEntity blockEntityAdj = null;
         // 不是单个箱子则需要更新隔壁箱子
-        if (blockState.getBlock() instanceof ChestBlock && blockState.get(ChestBlock.CHEST_TYPE) != ChestType.SINGLE) {
-            BlockPos posAdj = pos.offset(ChestBlock.getFacing(blockState));
-            // The method in World now checks that the caller is from the same thread...
-            BlockEntity blockEntityAdj = world.getWorldChunk(posAdj).getBlockEntity(posAdj);
-            if (blockEntityAdj != null) {
-                updateBlockEntity(player, blockEntityAdj);
+        if (blockState.getBlock() instanceof ChestBlock) {
+            if (blockState.get(ChestBlock.CHEST_TYPE) != ChestType.SINGLE) {
+                BlockPos posAdj = pos.offset(ChestBlock.getFacing(blockState));
+                // The method in World now checks that the caller is from the same thread...
+                blockEntityAdj = world.getWorldChunk(posAdj).getBlockEntity(posAdj);
             }
+        } else if (PcaMod.tisCarpetLoaded && CarpetTISAdditionSettings.largeBarrel && blockState.isOf(Blocks.BARREL)) {
+            Direction directionOpposite = blockState.get(BarrelBlock.FACING).getOpposite();
+            BlockPos posAdj = pos.offset(directionOpposite);
+            BlockState blockStateAdj = world.getBlockState(posAdj);
+            if (blockStateAdj.isOf(Blocks.BARREL) && blockStateAdj.get(BarrelBlock.FACING) == directionOpposite) {
+                blockEntityAdj = world.getWorldChunk(posAdj).getBlockEntity(posAdj);
+            }
+        }
+
+        if (blockEntityAdj != null) {
+            updateBlockEntity(player, blockEntityAdj);
         }
 
         // 本来想判断一下 blockState 类型做个白名单的，考虑到 client 已经做了判断就不在服务端做判断了
@@ -302,18 +317,28 @@ public class PcaSyncProtocol {
             lock.lock();
             Set<ServerPlayerEntity> playerList = getWatchPlayerList(world, blockEntity.getPos());
 
-            if (blockState.getBlock() instanceof ChestBlock && blockState.get(ChestBlock.CHEST_TYPE) != ChestType.SINGLE) {
-                // 如果是一个大箱子需要特殊处理
-                // 上面不用 isOf 是为了考虑到陷阱箱的情况，陷阱箱继承自箱子
-                BlockPos posAdj = pos.offset(ChestBlock.getFacing(blockState));
+            Set<ServerPlayerEntity> playerListAdj = null;
+
+            if (blockState.getBlock() instanceof ChestBlock) {
+                if (blockState.get(ChestBlock.CHEST_TYPE) != ChestType.SINGLE) {
+                    // 如果是一个大箱子需要特殊处理
+                    // 上面不用 isOf 是为了考虑到陷阱箱的情况，陷阱箱继承自箱子
+                    BlockPos posAdj = pos.offset(ChestBlock.getFacing(blockState));
+                    playerListAdj = getWatchPlayerList(world, posAdj);
+                }
+            } else if (PcaMod.tisCarpetLoaded && CarpetTISAdditionSettings.largeBarrel && blockState.isOf(Blocks.BARREL)) {
+                Direction directionOpposite = blockState.get(BarrelBlock.FACING).getOpposite();
+                BlockPos posAdj = pos.offset(directionOpposite);
+                BlockState blockStateAdj = world.getBlockState(posAdj);
+                if (blockStateAdj.isOf(Blocks.BARREL) && blockStateAdj.get(BarrelBlock.FACING) == directionOpposite) {
+                    playerListAdj = getWatchPlayerList(world, posAdj);
+                }
+            }
+            if (playerListAdj != null) {
                 if (playerList == null) {
-                    playerList = getWatchPlayerList(world, posAdj);
+                    playerList = playerListAdj;
                 } else {
-                    Set<ServerPlayerEntity> playerListAdj = getWatchPlayerList(world, posAdj);
-                    // 如果左右箱子都有人在 watch，则需要 merge watch set
-                    if (playerListAdj != null) {
-                        playerList.addAll(playerListAdj);
-                    }
+                    playerList.addAll(playerListAdj);
                 }
             }
 
