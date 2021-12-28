@@ -53,7 +53,6 @@ public class PcaSyncProtocol {
     private static final Map<ServerPlayerEntity, Pair<Identifier, Entity>> playerWatchEntity = new HashMap<>();
     private static final Map<Pair<Identifier, BlockPos>, Set<ServerPlayerEntity>> blockPosWatchPlayerSet = new HashMap<>();
     private static final Map<Pair<Identifier, Entity>, Set<ServerPlayerEntity>> entityWatchPlayerSet = new HashMap<>();
-    private static final Set<ServerPlayerEntity> playerSet = new HashSet<>();
     private static final MutablePair<Identifier, Entity> identifierEntityPair = new MutablePair<>();
     private static final MutablePair<Identifier, BlockPos> identifierBlockPosPair = new MutablePair<>();
 
@@ -118,9 +117,6 @@ public class PcaSyncProtocol {
     private static void onDisconnect(ServerPlayNetworkHandler serverPlayNetworkHandler, MinecraftServer minecraftServer) {
         if (PcaSettings.pcaSyncProtocol) {
             ModInfo.LOGGER.debug("onDisconnect remove: {}", serverPlayNetworkHandler.player.getName().asString());
-            lock.lock();
-            playerSet.remove(serverPlayNetworkHandler.player);
-            lock.unlock();
         }
     }
 
@@ -188,7 +184,6 @@ public class PcaSyncProtocol {
 
         Pair<Identifier, BlockPos> pair = new ImmutablePair<>(player.getEntityWorld().getRegistryKey().getValue(), pos);
         lock.lock();
-        playerSet.add(player);
         playerWatchBlockPos.put(player, pair);
         if (!blockPosWatchPlayerSet.containsKey(pair)) {
             blockPosWatchPlayerSet.put(pair, new HashSet<>());
@@ -243,7 +238,6 @@ public class PcaSyncProtocol {
 
             Pair<Identifier, Entity> pair = new ImmutablePair<>(entity.getEntityWorld().getRegistryKey().getValue(), entity);
             lock.lock();
-            playerSet.add(player);
             playerWatchEntity.put(player, pair);
             if (!entityWatchPlayerSet.containsKey(pair)) {
                 entityWatchPlayerSet.put(pair, new HashSet<>());
@@ -369,11 +363,12 @@ public class PcaSyncProtocol {
         playerWatchEntity.clear();
         blockPosWatchPlayerSet.clear();
         entityWatchPlayerSet.clear();
-        for (ServerPlayerEntity player : playerSet) {
-            disablePcaSyncProtocol(player);
-        }
-        playerSet.clear();
         lock.unlock();
+        if (PcaMod.server != null) {
+            for (ServerPlayerEntity player : PcaMod.server.getPlayerManager().getPlayerList()) {
+                disablePcaSyncProtocol(player);
+            }
+        }
     }
 
     // 启用 PcaSyncProtocol
