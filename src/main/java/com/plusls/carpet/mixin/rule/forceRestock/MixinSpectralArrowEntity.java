@@ -18,10 +18,11 @@ public abstract class MixinSpectralArrowEntity extends PersistentProjectileEntit
     protected MixinSpectralArrowEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
-    @Inject(method = "onHit", at=@At(value = "RETURN"))
+
+    @Inject(method = "onHit", at = @At(value = "RETURN"))
     private void forceRestock(LivingEntity target, CallbackInfo ci) {
         if (PcaSettings.forceRestock && !target.world.isClient && target instanceof MerchantEntity merchantEntity) {
-            for(TradeOffer tradeOffer : merchantEntity.getOffers()) {
+            for (TradeOffer tradeOffer : merchantEntity.getOffers()) {
                 tradeOffer.resetUses();
             }
             // make villager happy ~
