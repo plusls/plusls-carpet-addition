@@ -160,6 +160,11 @@ public class PcaSettings {
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean forceRestock = false;
+    @Rule(
+            desc = "Only in nether, throw the diamond equipment with 1 durability to lava fluid to get netherite equipment.",
+            category = {PCA, RuleCategory.FEATURE}
+    )
+    public static boolean renewableNetheriteEquip = false;
 
     // debug
     @Rule(
