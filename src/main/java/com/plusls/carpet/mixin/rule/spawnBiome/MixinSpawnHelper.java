@@ -27,6 +27,8 @@ public class MixinSpawnHelper {
             } else if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.PLAINS) {
                 // BuiltinBiomes
                 biome = BuiltinRegistries.BIOME.get(BiomeKeys.PLAINS);
+            } else if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.THE_END) {
+                biome = BuiltinRegistries.BIOME.get(BiomeKeys.THE_END);
             }
         }
         return chunkGenerator.getEntitySpawnList(biome, accessor, group, pos);
