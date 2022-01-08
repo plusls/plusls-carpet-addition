@@ -1,7 +1,7 @@
 package com.plusls.carpet.network;
 
+import carpet.CarpetServer;
 import carpet.patches.EntityPlayerMPFake;
-import carpettisaddition.CarpetTISAdditionSettings;
 import com.plusls.carpet.ModInfo;
 import com.plusls.carpet.PcaMod;
 import com.plusls.carpet.PcaSettings;
@@ -175,7 +175,7 @@ public class PcaSyncProtocol {
                 // The method in World now checks that the caller is from the same thread...
                 blockEntityAdj = world.getWorldChunk(posAdj).getBlockEntity(posAdj);
             }
-        } else if (PcaMod.tisCarpetLoaded && CarpetTISAdditionSettings.largeBarrel && blockState.isOf(Blocks.BARREL)) {
+        } else if (PcaMod.tisCarpetLoaded && blockState.isOf(Blocks.BARREL) && CarpetServer.settingsManager.getRule("largeBarrel").getBoolValue()) {
             Direction directionOpposite = blockState.get(BarrelBlock.FACING).getOpposite();
             BlockPos posAdj = pos.offset(directionOpposite);
             BlockState blockStateAdj = world.getBlockState(posAdj);
@@ -240,9 +240,7 @@ public class PcaSyncProtocol {
                             entity != player) {
                         return;
                     }
-                } else if (PcaSettings.pcaSyncPlayerEntity == PcaSettings.PCA_SYNC_PLAYER_ENTITY_OPTIONS.EVERYONE) {
-
-                } else {
+                } else if (PcaSettings.pcaSyncPlayerEntity != PcaSettings.PCA_SYNC_PLAYER_ENTITY_OPTIONS.EVERYONE) {
                     // wtf????
                     ModInfo.LOGGER.warn("syncEntityHandler wtf???");
                     return;
@@ -326,7 +324,7 @@ public class PcaSyncProtocol {
                     BlockPos posAdj = pos.offset(ChestBlock.getFacing(blockState));
                     playerListAdj = getWatchPlayerList(world, posAdj);
                 }
-            } else if (PcaMod.tisCarpetLoaded && CarpetTISAdditionSettings.largeBarrel && blockState.isOf(Blocks.BARREL)) {
+            } else if (PcaMod.tisCarpetLoaded && blockState.isOf(Blocks.BARREL) && CarpetServer.settingsManager.getRule("largeBarrel").getBoolValue()) {
                 Direction directionOpposite = blockState.get(BarrelBlock.FACING).getOpposite();
                 BlockPos posAdj = pos.offset(directionOpposite);
                 BlockState blockStateAdj = world.getBlockState(posAdj);

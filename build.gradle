@@ -35,7 +35,6 @@ dependencies {
 
     // fabric-carpet
     modImplementation("curse.maven:carpet-349239:${project.carpet_core_version}")
-    modImplementation("curse.maven:carpet-tis-addition-397510:${project.tis_carpet_version}")
     // multiconnect
     modImplementation("net.earthcomputer.multiconnect:multiconnect-api:${project.multiconnect_version}")
     include("net.earthcomputer.multiconnect:multiconnect-api:${project.multiconnect_version}")
