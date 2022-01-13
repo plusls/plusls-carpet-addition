@@ -38,6 +38,7 @@
     "rule.powerBoneMeal.MixinBoneMealItem",
     "rule.quickLeafDecay.MixinLeavesBlock",
     "rule.railNoBrokenByFluid.MixinFlowableFluid",
+    "rule.renewableNetherite.MixinItemEntity",
     "rule.shulkerBoxQuickUnpack.MixinItemEntity",
     "rule.shulkerRenewable.MixinShulkerEntity",
     "rule.sleepingDuringTheDay.MixinServerWorld",

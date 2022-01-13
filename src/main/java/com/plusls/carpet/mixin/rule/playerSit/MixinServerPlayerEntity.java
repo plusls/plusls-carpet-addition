@@ -26,7 +26,7 @@ public abstract class MixinServerPlayerEntity extends PlayerEntity {
 
     @Override
     public void setSneaking(boolean sneaking) {
-        if (!PcaSettings.playerSit) {
+        if (!PcaSettings.playerSit || (sneaking && this.isSneaking())) {
             super.setSneaking(sneaking);
             return;
         }

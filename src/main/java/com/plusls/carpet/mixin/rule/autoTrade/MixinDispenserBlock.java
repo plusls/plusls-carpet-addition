@@ -87,6 +87,9 @@ public class MixinDispenserBlock {
         }
 
         int tradeId = world.getReceivedRedstonePower(pos);
+        if (tradeId == 0) {
+            return;
+        }
         TradeOffer offer = offerList.get(tradeId > offerList.size() ? offerList.size() - 1 : tradeId - 1);
         ItemStack firstItemStack = offer.getAdjustedFirstBuyItem();
         ItemStack secondItemStack = offer.getSecondBuyItem();

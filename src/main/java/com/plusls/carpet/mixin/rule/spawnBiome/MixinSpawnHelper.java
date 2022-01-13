@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BuiltinBiomes;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -24,10 +24,12 @@ public class MixinSpawnHelper {
     private static List<SpawnSettings.SpawnEntry> modifyBiome(ChunkGenerator chunkGenerator, Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos) {
         if (PcaSettings.spawnBiome != PcaSettings.PCA_SPAWN_BIOME.DEFAULT) {
             if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.DESERT) {
-                biome = BuiltinRegistries.BIOME.get(BuiltinBiomes.fromRawId(2));
+                biome = BuiltinRegistries.BIOME.get(BiomeKeys.DESERT);
             } else if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.PLAINS) {
                 // BuiltinBiomes
-                biome = BuiltinRegistries.BIOME.get(BuiltinBiomes.fromRawId(1));
+                biome = BuiltinRegistries.BIOME.get(BiomeKeys.PLAINS);
+            } else if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.THE_END) {
+                biome = BuiltinRegistries.BIOME.get(BiomeKeys.THE_END);
             }
         }
         return chunkGenerator.getEntitySpawnList(biome, accessor, group, pos);
