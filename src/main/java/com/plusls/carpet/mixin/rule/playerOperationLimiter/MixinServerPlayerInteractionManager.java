@@ -8,7 +8,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,6 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ServerPlayerInteractionManager.class)
 public class MixinServerPlayerInteractionManager {
 
+    private static final String INSTA_MINE_REASON = "insta mine";
+
     @Final
     @Shadow
     protected ServerPlayerEntity player;
@@ -26,15 +27,15 @@ public class MixinServerPlayerInteractionManager {
     @Shadow
     protected ServerWorld world;
 
-    @Inject(method = "processBlockBreakingAction", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerInteractionManager;finishMining(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/network/packet/c2s/play/PlayerActionC2SPacket$Action;Ljava/lang/String;)V", ordinal = 1), cancellable = true)
-    private void checkOperationCountPerTick(BlockPos pos, PlayerActionC2SPacket.Action action, Direction direction, int worldHeight, CallbackInfo ci) {
-        if (!PcaSettings.playerOperationLimiter) {
+    @Inject(method = "finishMining", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V", ordinal = 0), cancellable = true)
+    private void checkOperationCountPerTick(BlockPos pos, PlayerActionC2SPacket.Action action, String reason, CallbackInfo ci) {
+        if (!PcaSettings.playerOperationLimiter || !reason.equals(INSTA_MINE_REASON)) {
             return;
         }
         SafeServerPlayerEntity safeServerPlayerEntity = (SafeServerPlayerEntity) player;
         safeServerPlayerEntity.addInstaBreakCountPerTick();
         if (!safeServerPlayerEntity.allowOperation()) {
-            this.player.networkHandler.sendPacket(new PlayerActionResponseS2CPacket(pos, this.world.getBlockState(pos), action, false, "insta mine"));
+            this.player.networkHandler.sendPacket(new PlayerActionResponseS2CPacket(pos, this.world.getBlockState(pos), action, false, reason));
             ci.cancel();
         }
     }
