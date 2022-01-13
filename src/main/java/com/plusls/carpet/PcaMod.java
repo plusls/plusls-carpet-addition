@@ -8,6 +8,7 @@ import com.plusls.carpet.util.rule.dispenserCollectXp.GlassBottleDispenserBehavi
 import com.plusls.carpet.util.rule.dispenserFixIronGolem.IronIngotDispenserBehavior;
 import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -17,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class PcaMod implements CarpetExtension, ModInitializer {
+    public static final boolean tisCarpetLoaded = FabricLoader.getInstance().isModLoaded("carpet-tis-addition");
     @Nullable
     public static MinecraftServer server = null;
 

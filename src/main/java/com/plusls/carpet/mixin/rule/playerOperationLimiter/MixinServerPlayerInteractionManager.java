@@ -8,7 +8,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,8 +23,8 @@ public class MixinServerPlayerInteractionManager {
     @Shadow
     public ServerWorld world;
 
-    @Inject(method = "method_14263", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerInteractionManager;method_21717(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/network/packet/c2s/play/PlayerActionC2SPacket$Action;)V", ordinal = 1), cancellable = true)
-    private void checkOperationCountPerTick(BlockPos blockPos, PlayerActionC2SPacket.Action action, Direction direction, int i, CallbackInfo ci) {
+    @Inject(method = "method_21717", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V", ordinal = 0), cancellable = true)
+    private void checkOperationCountPerTick(BlockPos blockPos, PlayerActionC2SPacket.Action action, CallbackInfo ci) {
         if (!PcaSettings.playerOperationLimiter) {
             return;
         }
