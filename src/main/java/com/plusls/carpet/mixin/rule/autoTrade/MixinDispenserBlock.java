@@ -30,6 +30,36 @@ import java.util.List;
 public class MixinDispenserBlock {
     private static final ItemDispenserBehavior itemDispenserBehavior = new ItemDispenserBehavior();
 
+    private static void depleteItemInInventory(ItemStack itemStack, Inventory inventory) {
+        Item item = itemStack.getItem();
+        for (int i = 0; !itemStack.isEmpty() && i < inventory.size(); ++i) {
+            ItemStack tmpItemStack = inventory.getStack(i);
+            if (!tmpItemStack.isEmpty() && tmpItemStack.isOf(item)) {
+                int count = Math.min(itemStack.getCount(), tmpItemStack.getCount());
+                itemStack.setCount(itemStack.getCount() - count);
+                tmpItemStack.setCount(tmpItemStack.getCount() - count);
+            }
+        }
+    }
+
+    private static ItemStack getItemFromInventory(ItemStack itemStack, Inventory inventory) {
+        if (itemStack.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+        Item item = itemStack.getItem();
+        ItemStack ret = new ItemStack(item, 0);
+        for (int i = 0; i < inventory.size(); ++i) {
+            ItemStack tmpStack = inventory.getStack(i);
+            if (!tmpStack.isEmpty() && tmpStack.isOf(item)) {
+                ret.setCount(Math.min(tmpStack.getCount() + ret.getCount(), ret.getMaxCount()));
+                if (ret.getCount() == ret.getMaxCount()) {
+                    break;
+                }
+            }
+        }
+        return ret;
+    }
+
     @Inject(method = "dispense", at = @At(value = "HEAD"), cancellable = true)
     private void autoTrade(ServerWorld world, BlockPos pos, CallbackInfo ci) {
         if (!PcaSettings.autoTrade) {
@@ -57,6 +87,9 @@ public class MixinDispenserBlock {
         }
 
         int tradeId = world.getReceivedRedstonePower(pos);
+        if (tradeId == 0) {
+            return;
+        }
         TradeOffer offer = offerList.get(tradeId > offerList.size() ? offerList.size() - 1 : tradeId - 1);
         ItemStack firstItemStack = offer.getAdjustedFirstBuyItem();
         ItemStack secondItemStack = offer.getSecondBuyItem();
@@ -99,36 +132,6 @@ public class MixinDispenserBlock {
         if (success) {
             ci.cancel();
         }
-    }
-
-    private static void depleteItemInInventory(ItemStack itemStack, Inventory inventory) {
-        Item item = itemStack.getItem();
-        for (int i = 0; !itemStack.isEmpty() && i < inventory.size(); ++i) {
-            ItemStack tmpItemStack = inventory.getStack(i);
-            if (!tmpItemStack.isEmpty() && tmpItemStack.isOf(item)) {
-                int count = Math.min(itemStack.getCount(), tmpItemStack.getCount());
-                itemStack.setCount(itemStack.getCount() - count);
-                tmpItemStack.setCount(tmpItemStack.getCount() - count);
-            }
-        }
-    }
-
-    private static ItemStack getItemFromInventory(ItemStack itemStack, Inventory inventory) {
-        if (itemStack.isEmpty()) {
-            return ItemStack.EMPTY;
-        }
-        Item item = itemStack.getItem();
-        ItemStack ret = new ItemStack(item, 0);
-        for (int i = 0; i < inventory.size(); ++i) {
-            ItemStack tmpStack = inventory.getStack(i);
-            if (!tmpStack.isEmpty() && tmpStack.isOf(item)) {
-                ret.setCount(Math.min(tmpStack.getCount() + ret.getCount(), ret.getMaxCount()));
-                if (ret.getCount() == ret.getMaxCount()) {
-                    break;
-                }
-            }
-        }
-        return ret;
     }
 
 }

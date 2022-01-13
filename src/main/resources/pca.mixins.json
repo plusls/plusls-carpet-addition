@@ -35,6 +35,7 @@
     "rule.playerSit.MixinServerPlayerEntity",
     "rule.powerBoneMeal.MixinBoneMealItem",
     "rule.quickLeafDecay.MixinLeavesBlock",
+    "rule.renewableNetherite.MixinItemEntity",
     "rule.sleepingDuringTheDay.MixinServerWorld",
     "rule.spawnBiome.MixinSpawnHelper",
     "rule.spawnYRange.MixinSpawnHelper",

@@ -18,13 +18,12 @@ public abstract class MixinVillagerEntity extends MerchantEntity implements MyVi
     @Shadow
     private boolean levelingUp;
 
-    @Shadow
-    protected abstract boolean canLevelUp();
-
-
     public MixinVillagerEntity(EntityType<? extends MerchantEntity> entityType, World world) {
         super(entityType, world);
     }
+
+    @Shadow
+    protected abstract boolean canLevelUp();
 
     public void tradeWithoutPlayer(TradeOffer offer) {
         this.experience += offer.getMerchantExperience();

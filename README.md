@@ -44,6 +44,7 @@ carpet >= 1.4.45+v210811
 - [玩家坐下](#玩家坐下-playerSit)
 - [自动交易](#自动交易-autoTrade)
 - [强制补货](#强制补货-forceRestock)
+- [可再生下界合金装备](#可再生下界合金装备-renewableNetheriteEquip)
 - [PCA 调试模式](#PCA-调试模式-pcaDebug)
 
 ## 规则列表
@@ -284,6 +285,14 @@ Carpet 默认实现的潜影盒可堆叠只能让潜影盒在地面上堆叠，�
 - 参考选项: `true`, `false`
 - 分类: `PCA`, `feature`
 
+### 可再生下界合金装备 (renewableNetheriteEquip)
+
+只有在下界时，将剩余耐久为 1 钻石装备扔进岩浆流体时将会产生下界合金装备
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `PCA`, `feature`
 
 ### PCA 调试模式 (pcaDebug)
 
