@@ -178,6 +178,6 @@ public class PcaSettings {
     }
 
     public enum PCA_SPAWN_BIOME {
-        DEFAULT, DESERT, PLAINS, THE_END
+        DEFAULT, DESERT, PLAINS, THE_END, NETHER_WASTES
     }
 }
