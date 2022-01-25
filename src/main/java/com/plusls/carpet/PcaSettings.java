@@ -166,6 +166,12 @@ public class PcaSettings {
     )
     public static boolean renewableNetheriteEquip = false;
 
+    @Rule(
+            desc = "When item pick up by player, item will freeze.",
+            category = {PCA, RuleCategory.CREATIVE}
+    )
+    public static boolean trackItemPickupByPlayer = false;
+
     // debug
     @Rule(
             desc = "pcaDebug mode",
