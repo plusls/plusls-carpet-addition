@@ -1,4 +1,5 @@
 {
+  "pca.message.pickup": "物品被 %s 在 [%.2f, %.2f, %.2f] 捡起，速度：[%.2f, %.2f, %.2f]",
   "category.PCA": "PCA",
   "category.protocol": "协议",
   "category.need_client": "需要客户端支持",
