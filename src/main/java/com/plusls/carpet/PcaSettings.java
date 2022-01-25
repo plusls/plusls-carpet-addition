@@ -172,6 +172,11 @@ public class PcaSettings {
     )
     public static boolean trackItemPickupByPlayer = false;
 
+    @Rule(
+            desc = "Creative Player No Direct Kill ArmorStand.",
+            category = {PCA, RuleCategory.CREATIVE}
+    )
+    public static boolean creativePlayerNoDirectKillArmorStand = false;
     // debug
     @Rule(
             desc = "pcaDebug mode",

@@ -8,6 +8,7 @@
     "rule.autoTrade.MixinDispenserBlock",
     "rule.autoTrade.MixinVillagerEntity",
     "rule.avoidAnvilTooExpensive.MixinAnvilScreenHandler",
+    "rule.creativePlayerNoDirectKillArmorStand.MixinArmorStandEntity",
     "rule.emptyShulkerBoxStack.MixinPlayerInventory",
     "rule.emptyShulkerBoxStack.MixinScreenHandler",
     "rule.emptyShulkerBoxStack.MixinSlot",

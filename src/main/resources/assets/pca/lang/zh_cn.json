@@ -64,6 +64,8 @@
   "rule.renewableNetheriteEquip.desc": "只有在下界时，将剩余耐久为 1 钻石装备扔进岩浆流体时将会产生下界合金装备",
   "rule.trackItemPickupByPlayer.name": "追踪被玩家吸附的物品",
   "rule.trackItemPickupByPlayer.desc": "物品被玩家吸附后会变成屏障方块悬浮在原位",
+  "rule.creativePlayerNoDirectKillArmorStand.name": "创造模式下盔甲架不会被玩家直接杀死",
+  "rule.creativePlayerNoDirectKillArmorStand.desc": "创造模式下盔甲架不会被玩家直接杀死",
   "rule.pcaDebug.name": "PCA调试模式",
   "rule.pcaDebug.desc": "打印更多调试信息"
 }
