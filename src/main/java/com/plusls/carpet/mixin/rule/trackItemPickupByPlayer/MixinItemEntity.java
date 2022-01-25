@@ -52,7 +52,7 @@ public abstract class MixinItemEntity extends Entity {
             if (trackItemPickupByPlayerCooldown == 0) {
                 PcaMod.server.getPlayerManager().broadcast(text, MessageType.CHAT, Util.NIL_UUID);
             }
-            trackItemPickupByPlayerCooldown = (trackItemPickupByPlayerCooldown + 1) % 10;
+            trackItemPickupByPlayerCooldown = (trackItemPickupByPlayerCooldown + 1) % 100;
             pickuped = true;
             this.setStack(new ItemStack(Items.BARRIER));
             this.setNoGravity(true);
