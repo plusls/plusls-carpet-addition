@@ -14,6 +14,7 @@ import com.plusls.carpet.util.rule.dispenserCollectXp.GlassBottleDispenserBehavi
 import com.plusls.carpet.util.rule.dispenserFixIronGolem.IronIngotDispenserBehavior;
 import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
 import com.plusls.carpet.util.rule.gravestone.GravestoneUtil;
+import com.plusls.carpet.util.rule.potionRecycle.PotionDispenserBehavior;
 import com.plusls.carpet.util.rule.sleepingDuringTheDay.SleepUtil;
 import net.earthcomputer.multiconnect.api.MultiConnectAPI;
 import net.fabricmc.api.ClientModInitializer;
@@ -130,6 +131,7 @@ public class PcaMod implements CarpetExtension, ModInitializer, ClientModInitial
         SleepUtil.init();
         IronIngotDispenserBehavior.init();
         GlassBottleDispenserBehavior.init();
+        PotionDispenserBehavior.init();
     }
 
     @Override

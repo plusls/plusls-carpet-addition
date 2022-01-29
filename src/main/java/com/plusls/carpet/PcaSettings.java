@@ -165,6 +165,11 @@ public class PcaSettings {
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean renewableNetheriteEquip = false;
+    @Rule(
+            desc = "Dispenser can clear potion to  cauldron.",
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
+    )
+    public static boolean potionRecycle = false;
 
     @Rule(
             desc = "When item pick up by player, item will freeze.",
