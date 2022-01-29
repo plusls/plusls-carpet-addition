@@ -29,11 +29,10 @@ public class MixinSpawnHelper {
                 biome = BuiltinRegistries.BIOME.get(BiomeKeys.PLAINS);
             } else if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.THE_END) {
                 biome = BuiltinRegistries.BIOME.get(BiomeKeys.THE_END);
+            } else if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.NETHER_WASTES) {
+                biome = BuiltinRegistries.BIOME.get(BiomeKeys.NETHER_WASTES);
             }
-             else if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.NETHER_WASTES) {
-                    biome = BuiltinRegistries.BIOME.get(BiomeKeys.NETHER_WASTES);
-                }
-            }
+        }
         return chunkGenerator.getEntitySpawnList(biome, accessor, group, pos);
     }
 }

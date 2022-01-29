@@ -23,15 +23,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ItemEntity.class)
 public abstract class MixinItemEntity extends Entity {
 
-    @Shadow
-    public abstract void tick();
-
     private boolean pickuped = false;
     private int trackItemPickupByPlayerCooldown = 0;
-
     public MixinItemEntity(EntityType<?> type, World world) {
         super(type, world);
     }
+
+    @Shadow
+    public abstract void tick();
 
     @Shadow
     public abstract void setStack(ItemStack stack);
