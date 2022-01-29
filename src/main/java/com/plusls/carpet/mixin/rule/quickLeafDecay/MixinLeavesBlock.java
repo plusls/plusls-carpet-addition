@@ -20,6 +20,7 @@ public abstract class MixinLeavesBlock extends Block {
         super(settings);
     }
 
+    @SuppressWarnings("deprecation")
     @Inject(method = "scheduledTick", at = @At("RETURN"))
     private void postScheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         if (PcaSettings.quickLeafDecay) {
