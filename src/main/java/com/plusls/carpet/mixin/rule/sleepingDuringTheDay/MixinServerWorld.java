@@ -24,7 +24,9 @@ public abstract class MixinServerWorld extends World implements StructureWorldAc
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;setTimeOfDay(J)V", ordinal = 0))
     void redirectSetTimeOfDay(ServerWorld world, long timeOfDay) {
         if (this.isDay() && PcaSettings.sleepingDuringTheDay) {
-            world.setTimeOfDay(13000);
+            long currentTime = this.properties.getTimeOfDay();
+            long currentDayTime = this.properties.getTimeOfDay() % 24000L;
+            world.setTimeOfDay(currentTime + 13000L - currentDayTime);
         } else {
             world.setTimeOfDay(timeOfDay);
         }
