@@ -3,6 +3,7 @@ package com.plusls.carpet.mixin.rule.sleepingDuringTheDay;
 import com.plusls.carpet.PcaSettings;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.profiler.Profiler;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.MutableWorldProperties;
 import net.minecraft.world.StructureWorldAccess;
@@ -16,8 +17,9 @@ import java.util.function.Supplier;
 
 @Mixin(ServerWorld.class)
 public abstract class MixinServerWorld extends World implements StructureWorldAccess {
-    protected MixinServerWorld(MutableWorldProperties properties, RegistryKey<World> registryRef, DimensionType dimensionType, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long seed) {
-        super(properties, registryRef, dimensionType, profiler, isClient, debugWorld, seed);
+
+    protected MixinServerWorld(MutableWorldProperties properties, RegistryKey<World> registryRef, RegistryEntry<DimensionType> registryEntry, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long seed) {
+        super(properties, registryRef, registryEntry, profiler, isClient, debugWorld, seed);
     }
 
     // 根据当前时间设置夜晚和白天
