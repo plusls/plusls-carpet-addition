@@ -183,7 +183,23 @@ public class PcaSettings {
             category = {PCA, RuleCategory.FEATURE}
     )
     public static boolean renewableNetheriteEquip = false;
+    @Rule(
+            desc = "Dispenser can clear potion to  cauldron.",
+            category = {PCA, RuleCategory.FEATURE, RuleCategory.DISPENSER}
+    )
+    public static boolean potionRecycle = false;
 
+    @Rule(
+            desc = "When item pick up by player, item will freeze.",
+            category = {PCA, RuleCategory.CREATIVE}
+    )
+    public static boolean trackItemPickupByPlayer = false;
+
+    @Rule(
+            desc = "Creative Player No Direct Kill ArmorStand.",
+            category = {PCA, RuleCategory.CREATIVE}
+    )
+    public static boolean creativePlayerNoDirectKillArmorStand = false;
     // debug
     @Rule(
             desc = "pcaDebug mode",
@@ -196,6 +212,6 @@ public class PcaSettings {
     }
 
     public enum PCA_SPAWN_BIOME {
-        DEFAULT, DESERT, PLAINS, THE_END
+        DEFAULT, DESERT, PLAINS, THE_END, NETHER_WASTES
     }
 }
