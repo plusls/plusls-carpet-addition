@@ -40,6 +40,8 @@ public class MixinSpawnHelper {
                 biome = Biomes.DESERT;
             } else if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.THE_END) {
                 biome = Biomes.THE_END;
+            } else if (PcaSettings.spawnBiome == PcaSettings.PCA_SPAWN_BIOME.NETHER_WASTES) {
+                biome = Biomes.NETHER;
             }
         }
         return biome.getEntitySpawnList(category);

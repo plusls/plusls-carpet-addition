@@ -1,0 +1,3 @@
+{
+  "pca.message.pickup": "Item pickup by %s at [%.2f, %.2f, %.2f], velocity: [%.2f, %.2f, %.2f]"
+}
