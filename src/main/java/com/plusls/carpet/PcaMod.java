@@ -11,6 +11,7 @@ import com.plusls.carpet.network.PcaSyncProtocol;
 import com.plusls.carpet.util.rule.dispenserCollectXp.GlassBottleDispenserBehavior;
 import com.plusls.carpet.util.rule.dispenserFixIronGolem.IronIngotDispenserBehavior;
 import com.plusls.carpet.util.rule.flippingTotemOfUndying.FlipCooldown;
+import com.plusls.carpet.util.rule.potionRecycle.PotionDispenserBehavior;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
@@ -120,5 +121,6 @@ public class PcaMod implements CarpetExtension, ModInitializer {
     public void onInitialize() {
         IronIngotDispenserBehavior.init();
         GlassBottleDispenserBehavior.init();
+        PotionDispenserBehavior.init();
     }
 }
