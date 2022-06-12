@@ -22,7 +22,7 @@ public abstract class MixinLeavesBlock extends Block {
 
     @SuppressWarnings("deprecation")
     @Inject(method = "scheduledTick", at = @At("RETURN"))
-    private void postScheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+    private void postScheduledTick(BlockState state, ServerWorld world, BlockPos pos, net.minecraft.util.math.random.Random random, CallbackInfo ci) {
         if (PcaSettings.quickLeafDecay) {
             this.randomTick(state, world, pos, random);
         }

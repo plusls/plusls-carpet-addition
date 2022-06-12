@@ -45,14 +45,14 @@ public class PotionDispenserBehavior extends MyFallibleItemDispenserBehavior {
                 } else {
                     world.setBlockState(faceBlockPos, faceBlockState.with(LeveledCauldronBlock.LEVEL, level + 1));
                     world.playSound(null, faceBlockPos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    world.emitGameEvent(GameEvent.FLUID_PLACE, faceBlockPos);
+                    world.emitGameEvent(null, GameEvent.FLUID_PLACE, faceBlockPos);
                     return new ItemStack(Items.GLASS_BOTTLE);
 
                 }
             } else if (faceBlockState.getBlock() == Blocks.CAULDRON) {
                 world.setBlockState(faceBlockPos, Blocks.WATER_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 1));
                 world.playSound(null, faceBlockPos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                world.emitGameEvent(GameEvent.FLUID_PLACE, faceBlockPos);
+                world.emitGameEvent(null, GameEvent.FLUID_PLACE, faceBlockPos);
                 return new ItemStack(Items.GLASS_BOTTLE);
             }
         }

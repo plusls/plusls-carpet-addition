@@ -63,12 +63,12 @@ public class PcaSyncProtocol {
     // 通知客户端服务器已启用 PcaSyncProtocol
     public static void enablePcaSyncProtocol(@NotNull ServerPlayerEntity player) {
         // 在这写如果是在 BC 端的情况下，ServerPlayNetworking.canSend 在这个时机调用会出现错误
-        ModInfo.LOGGER.debug("Try enablePcaSyncProtocol: {}", player.getName().asString());
+        ModInfo.LOGGER.debug("Try enablePcaSyncProtocol: {}", player.getName().getString());
         // bc 端比较奇怪，canSend 工作不正常
         // if (ServerPlayNetworking.canSend(player, ENABLE_PCA_SYNC_PROTOCOL)) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         ServerPlayNetworking.send(player, ENABLE_PCA_SYNC_PROTOCOL, buf);
-        ModInfo.LOGGER.debug("send enablePcaSyncProtocol to {}!", player.getName().asString());
+        ModInfo.LOGGER.debug("send enablePcaSyncProtocol to {}!", player.getName().getString());
         lock.lock();
         lock.unlock();
     }
@@ -77,7 +77,7 @@ public class PcaSyncProtocol {
     public static void disablePcaSyncProtocol(@NotNull ServerPlayerEntity player) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         ServerPlayNetworking.send(player, DISABLE_PCA_SYNC_PROTOCOL, buf);
-        ModInfo.LOGGER.debug("send disablePcaSyncProtocol to {}!", player.getName().asString());
+        ModInfo.LOGGER.debug("send disablePcaSyncProtocol to {}!", player.getName().getString());
     }
 
     // 通知客户端更新 Entity
@@ -120,7 +120,7 @@ public class PcaSyncProtocol {
 
     private static void onDisconnect(ServerPlayNetworkHandler serverPlayNetworkHandler, MinecraftServer minecraftServer) {
         if (PcaSettings.pcaSyncProtocol) {
-            ModInfo.LOGGER.debug("onDisconnect remove: {}", serverPlayNetworkHandler.player.getName().asString());
+            ModInfo.LOGGER.debug("onDisconnect remove: {}", serverPlayNetworkHandler.player.getName().getString());
         }
     }
 
@@ -137,7 +137,7 @@ public class PcaSyncProtocol {
         if (!PcaSettings.pcaSyncProtocol) {
             return;
         }
-        ModInfo.LOGGER.debug("{} cancel watch blockEntity.", player.getName().asString());
+        ModInfo.LOGGER.debug("{} cancel watch blockEntity.", player.getName().getString());
         PcaSyncProtocol.clearPlayerWatchBlock(player);
     }
 
@@ -148,7 +148,7 @@ public class PcaSyncProtocol {
         if (!PcaSettings.pcaSyncProtocol) {
             return;
         }
-        ModInfo.LOGGER.debug("{} cancel watch entity.", player.getName().asString());
+        ModInfo.LOGGER.debug("{} cancel watch entity.", player.getName().getString());
         PcaSyncProtocol.clearPlayerWatchEntity(player);
     }
 
@@ -165,7 +165,7 @@ public class PcaSyncProtocol {
         ServerWorld world = player.getWorld();
         BlockState blockState = world.getBlockState(pos);
         clearPlayerWatchData(player);
-        ModInfo.LOGGER.debug("{} watch blockpos {}: {}", player.getName().asString(), pos, blockState);
+        ModInfo.LOGGER.debug("{} watch blockpos {}: {}", player.getName().getString(), pos, blockState);
 
         BlockEntity blockEntityAdj = null;
         // 不是单个箱子则需要更新隔壁箱子
@@ -246,7 +246,7 @@ public class PcaSyncProtocol {
                     return;
                 }
             }
-            ModInfo.LOGGER.debug("{} watch entity {}: {}", player.getName().asString(), entityId, entity);
+            ModInfo.LOGGER.debug("{} watch entity {}: {}", player.getName().getString(), entityId, entity);
             updateEntity(player, entity);
 
             Pair<Identifier, Entity> pair = new ImmutablePair<>(entity.getEntityWorld().getRegistryKey().getValue(), entity);

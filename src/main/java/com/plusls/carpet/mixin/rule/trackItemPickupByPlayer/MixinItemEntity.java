@@ -9,10 +9,8 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.network.MessageType;
-import net.minecraft.text.LiteralText;
+import net.minecraft.network.message.MessageType;
 import net.minecraft.text.Text;
-import net.minecraft.util.Util;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,6 +23,7 @@ public abstract class MixinItemEntity extends Entity {
 
     private boolean pickuped = false;
     private int trackItemPickupByPlayerCooldown = 0;
+
     public MixinItemEntity(EntityType<?> type, World world) {
         super(type, world);
     }
@@ -45,11 +44,11 @@ public abstract class MixinItemEntity extends Entity {
     @Inject(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;insertStack(Lnet/minecraft/item/ItemStack;)Z", ordinal = 0), cancellable = true)
     private void checkPickup(PlayerEntity player, CallbackInfo ci) {
         if (!this.world.isClient() && PcaSettings.trackItemPickupByPlayer && PcaMod.server != null) {
-            Text text = new LiteralText(String.format(Translations.tr("pca.message.pickup"), player.getName().asString(),
+            Text text = Text.literal(String.format(Translations.tr("pca.message.pickup"), player.getName().getString(),
                     this.getX(), this.getY(), this.getZ(),
                     this.getVelocity().getX(), this.getVelocity().getY(), this.getVelocity().getZ()));
             if (trackItemPickupByPlayerCooldown == 0) {
-                PcaMod.server.getPlayerManager().broadcast(text, MessageType.CHAT, Util.NIL_UUID);
+                PcaMod.server.getPlayerManager().broadcast(text, MessageType.CHAT);
             }
             trackItemPickupByPlayerCooldown = (trackItemPickupByPlayerCooldown + 1) % 100;
             pickuped = true;
