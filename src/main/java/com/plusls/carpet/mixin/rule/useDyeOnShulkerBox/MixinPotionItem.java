@@ -14,6 +14,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
@@ -23,15 +26,21 @@ public abstract class MixinPotionItem extends Item {
         super(settings);
     }
 
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
+    @Inject(
+            method = "useOnBlock",
+            at = @At(
+                    value = "HEAD"
+            ),
+            cancellable = true
+    )
+    public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
         ItemStack itemStack = context.getStack();
         PlayerEntity player = context.getPlayer();
         if (!PcaSettings.useDyeOnShulkerBox ||
                 player == null ||
                 itemStack.getItem() != Items.POTION ||
                 PotionUtil.getPotion(itemStack) != Potions.WATER) {
-            return ActionResult.PASS;
+            return;
         }
         World world = context.getWorld();
         BlockPos pos = context.getBlockPos();
@@ -57,8 +66,7 @@ public abstract class MixinPotionItem extends Item {
                     }
                 }
             }
-            return ActionResult.success(world.isClient);
+            cir.setReturnValue(ActionResult.success(world.isClient));
         }
-        return ActionResult.PASS;
     }
 }
