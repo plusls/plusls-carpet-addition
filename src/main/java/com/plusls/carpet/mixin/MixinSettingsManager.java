@@ -1,6 +1,6 @@
 package com.plusls.carpet.mixin;
 
-import carpet.settings.SettingsManager;
+import carpet.api.settings.SettingsManager;
 import carpet.utils.Messenger;
 import carpet.utils.Translations;
 import com.plusls.carpet.ModInfo;
@@ -24,7 +24,7 @@ public class MixinSettingsManager {
             ),
             at = @At(
                     value = "INVOKE",
-                    target = "Lcarpet/settings/SettingsManager;getCategories()Ljava/lang/Iterable;",
+                    target = "Lcarpet/api/settings/SettingsManager;getCategories()Ljava/lang/Iterable;",
                     ordinal = 0
             ),
             remap = false
