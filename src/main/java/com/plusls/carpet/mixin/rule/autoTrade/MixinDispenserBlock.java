@@ -86,7 +86,7 @@ public class MixinDispenserBlock {
             return;
         }
 
-        int tradeId = world.getReceivedRedstonePower(pos);
+        int tradeId = Math.max(world.getReceivedRedstonePower(pos), world.getReceivedRedstonePower(pos.up()));
         if (tradeId == 0) {
             return;
         }
@@ -101,8 +101,7 @@ public class MixinDispenserBlock {
         if (!(blockEntity instanceof DispenserBlockEntity dispenserBlockEntity)) {
             return;
         }
-        boolean success = false;
-        while (!offer.isDisabled()) {
+	    while (!offer.isDisabled()) {
             ItemStack firstInventoryItemStack = getItemFromInventory(firstItemStack, dispenserBlockEntity);
             ItemStack secondInventoryItemStack = getItemFromInventory(secondItemStack, dispenserBlockEntity);
             int firstItemCount = firstInventoryItemStack.getCount();
@@ -120,7 +119,6 @@ public class MixinDispenserBlock {
                 if (merchantEntity instanceof MyVillagerEntity myVillagerEntity) {
                     myVillagerEntity.tradeWithoutPlayer(offer);
                 }
-                success = true;
             } else {
                 break;
             }
@@ -129,9 +127,7 @@ public class MixinDispenserBlock {
             }
         }
 
-        if (success) {
-            ci.cancel();
-        }
+	    ci.cancel();
     }
 
 }
