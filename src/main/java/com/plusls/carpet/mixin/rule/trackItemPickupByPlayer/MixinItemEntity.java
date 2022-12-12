@@ -48,7 +48,7 @@ public abstract class MixinItemEntity extends Entity {
                     this.getX(), this.getY(), this.getZ(),
                     this.getVelocity().getX(), this.getVelocity().getY(), this.getVelocity().getZ()));
             if (trackItemPickupByPlayerCooldown == 0) {
-                PcaMod.server.getPlayerManager().broadcast(text, MessageType.CHAT);
+                PcaMod.server.getPlayerManager().broadcast(text, true);
             }
             trackItemPickupByPlayerCooldown = (trackItemPickupByPlayerCooldown + 1) % 100;
             pickuped = true;

@@ -64,11 +64,6 @@ public abstract class MixinItemEntity extends Entity {
     @Shadow
     public abstract ItemStack getStack();
 
-
-    @Shadow
-    public abstract Packet<?> createSpawnPacket();
-
-
     @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ItemEntity;discard()V", ordinal = 0))
     private void checkDiamondEquip(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (!PcaSettings.renewableNetheriteEquip || this.world.isClient) {

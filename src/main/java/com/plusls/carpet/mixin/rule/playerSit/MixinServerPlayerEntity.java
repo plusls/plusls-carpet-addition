@@ -22,10 +22,9 @@ public abstract class MixinServerPlayerEntity extends PlayerEntity {
     private int sneakTimes = 0;
     private long lastSneakTime = 0;
 
-    public MixinServerPlayerEntity(World world, BlockPos pos, float yaw, GameProfile gameProfile, @Nullable PlayerPublicKey publicKey) {
-        super(world, pos, yaw, gameProfile, publicKey);
+    public MixinServerPlayerEntity(World world, BlockPos pos, float yaw, GameProfile gameProfile) {
+        super(world, pos, yaw, gameProfile);
     }
-
 
     @Override
     public void setSneaking(boolean sneaking) {
@@ -59,7 +58,7 @@ public abstract class MixinServerPlayerEntity extends PlayerEntity {
             // 同步潜行状态到客户端
             // 如果不同步的话客户端会认为仍在潜行，从而碰撞箱的高度会计算错误
             if (sneakTimes == 0 && this.networkHandler != null) {
-                this.networkHandler.sendPacket(new EntityTrackerUpdateS2CPacket(this.getId(), this.getDataTracker(), true));
+                this.networkHandler.sendPacket(new EntityTrackerUpdateS2CPacket(this.getId(), this.getDataTracker().getChangedEntries()));
             }
         }
     }
